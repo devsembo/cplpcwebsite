@@ -31,7 +31,7 @@ export default function Navbar() {
                             alt="CPLP Connect Logo"
                             width={100}
                             height={100}
-                            className="h-12 md:h-20 w-auto"
+                            className="h-20 md:h-24 w-auto"
                         />
                     </Link>
                 </div>

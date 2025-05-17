@@ -80,8 +80,8 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <h3 className="font-medium text-lg mb-1">Endereço</h3>
-                                            <p className="text-gray-600">Avenida da Liberdade, 110</p>
-                                            <p className="text-gray-600">1250-146 Lisboa, Portugal</p>
+                                            <p className="text-gray-600">Avenida do Bessa 130C</p>
+                                            <p className="text-gray-600">4100-012 Porto, Portugal</p>
                                         </div>
                                     </CardContent>
                                 </Card>
