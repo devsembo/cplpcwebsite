@@ -1,5 +1,5 @@
 'use client';
-import { ArrowRight, Check, Code, Users, Settings } from 'lucide-react';
+import { ArrowRight, Check, Code,  Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
