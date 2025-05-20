@@ -7,11 +7,6 @@ import Image from 'next/image';
 
 const partners = [
     {
-        name: 'AIMA Portugal',
-        image: '/aima.png',
-        alt: 'AIMA Portugal Logo',
-    },
-    {
         name: 'Governo de Angola',
         image: '/angola.png',
         alt: 'Governo de Angola Logo',

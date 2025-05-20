@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 
 
 export default function Projects() {
@@ -43,9 +44,6 @@ export default function Projects() {
                         <Button variant="ghost" className="hover:bg-blue-100">
                             Moçambique
                         </Button>
-                        <Button variant="ghost" className="hover:bg-blue-100">
-                            Cabo Verde
-                        </Button>
                     </div>
                 </div>
             </section>
@@ -53,7 +51,7 @@ export default function Projects() {
             {/* Projects Section */}
             <section className="py-20">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
                         {/* Project 1 */}
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
@@ -70,12 +68,16 @@ export default function Projects() {
                                     <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
                                         Moçambique
                                     </span>
-                                    <span className="text-xs text-gray-500">2023</span>
+                                    <span className="text-xs text-gray-500">2025</span>
+
                                 </div>
                                 <h3 className="text-xl font-semibold mb-2">Sistema de Gestão Documental Consular</h3>
                                 <p className="text-gray-600 mb-4">
                                     Implementação de uma plataforma digital para gestão e tramitação de processos para o consulado Geral de Moçambique no Porto.
                                 </p>
+                                <Badge variant="outline" className="text-xs font-medium text-white bg-orange-400 py-1 px-2 rounded-full">
+                                    Em Andamento
+                                </Badge>
                                 {/**
                                 <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
                                     Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
@@ -88,7 +90,7 @@ export default function Projects() {
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
                                 <Image
-                                    src="https://images.unsplash.com/photo-1573496130423-4516f84b4a4b?w=500&auto=format&fit=crop&q=80"
+                                    src="/sepe.jpg"
                                     alt="Portal de Serviços Públicos"
                                     width={500}
                                     height={300}
@@ -106,17 +108,17 @@ export default function Projects() {
                                 <p className="text-gray-600 mb-4">
                                     Desenvolvimento de portal integrado de serviços públicos para cidadãos angolanos.
                                 </p>
-                                <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
+                                <Link href="https://sepe.gov.ao/ao/" target="_blank" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
                                     Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
                                 </Link>
                             </CardContent>
                         </Card>
 
-                        {/* Project 3 */}
+                        {/* Project 3 
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
                                 <Image
-                                    src="https://images.unsplash.com/photo-1576670159802-838df0862be5?w=500&auto=format&fit=crop&q=80"
+                                    src="https://images.unsplash.com/photo-1573496130423-4516f84b4a4b?w=500&auto=format&fit=crop&q=80"
                                     alt="Sistema de Gestão Eleitoral"
                                     width={500}
                                     height={300}
@@ -139,8 +141,9 @@ export default function Projects() {
                                 </Link>
                             </CardContent>
                         </Card>
+                        */}
 
-                        {/* Project 4 */}
+                        {/* Project 4 
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
                                 <Image
@@ -167,8 +170,8 @@ export default function Projects() {
                                 </Link>
                             </CardContent>
                         </Card>
-
-                        {/* Project 5 */}
+*/}
+                        {/* Project 5 
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
                                 <Image
@@ -195,8 +198,8 @@ export default function Projects() {
                                 </Link>
                             </CardContent>
                         </Card>
-
-                        {/* Project 6 */}
+*/}
+                        {/* Project 6 
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
                                 <Image
@@ -223,9 +226,10 @@ export default function Projects() {
                                 </Link>
                             </CardContent>
                         </Card>
+                        */}
                     </div>
 
-                    {/* Pagination */}
+                    {/* Pagination 
                     <div className="flex justify-center mt-12">
                         <div className="flex items-center gap-2">
                             <Button variant="outline" size="icon" disabled>
@@ -239,6 +243,7 @@ export default function Projects() {
                             </Button>
                         </div>
                     </div>
+                    */}
                 </div>
             </section>
 

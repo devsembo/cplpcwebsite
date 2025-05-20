@@ -48,7 +48,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
             {/* Service 1 */}
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow max-w-sm">
               <CardContent className="p-6">
@@ -65,7 +65,7 @@ export default function Home() {
               </CardContent>
             </Card>
 
-            {/* Service 2 */}
+            {/* Service 2 
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow max-w-sm">
               <CardContent className="p-6">
                 <div className="h-14 w-14 rounded-full bg-blue-600/10 text-blue-600 flex items-center justify-center mb-5">
@@ -80,6 +80,7 @@ export default function Home() {
                 </Link>
               </CardContent>
             </Card>
+            */}
 
             {/* Service 3 */}
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow max-w-sm">
