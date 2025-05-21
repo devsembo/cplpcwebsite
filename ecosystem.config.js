@@ -9,7 +9,7 @@ module.exports = {
             user: "devsembo",                        
             host: "141.94.244.148",                          
             ref: "origin/main",                       
-            repo: "https://github.com/devsembo/cplpcwebsite.git", // Repositório Git
+            repo: "git@github.com:devsembo/cplpcwebsite.git", // Repositório Git
             path: "/var/www/cplpwebsite/",               // Caminho no servidor
             'post-deploy': 'npm install && npm run build && pm2 restart cplpconnect', // Comandos a serem executados após o deploy
         }
