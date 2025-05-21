@@ -77,10 +77,10 @@ export default function Footer() {
                         © {new Date().getFullYear()} CPLP Connect. Todos os direitos reservados.
                     </p>
                     <div className="mt-4 md:mt-0 flex gap-4">
-                        <Link href="/privacidade" className="text-gray-400 hover:text-white text-sm transition-colors">
+                        <Link href="/politica-privacidade" className="text-gray-400 hover:text-white text-sm transition-colors">
                             Política de Privacidade
                         </Link>
-                        <Link href="/termos" className="text-gray-400 hover:text-white text-sm transition-colors">
+                        <Link href="/termos-de-servico" className="text-gray-400 hover:text-white text-sm transition-colors">
                             Termos de Serviço
                         </Link>
                     </div>

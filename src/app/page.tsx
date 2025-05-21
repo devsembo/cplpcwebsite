@@ -1,5 +1,5 @@
 'use client';
-import { ArrowRight, Check, Code,  Settings } from 'lucide-react';
+import { ArrowRight, Check, Code, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
@@ -10,17 +10,17 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white py-20 md:py-32 ">
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white h-72  md:h-[45vh] md:py-20">
         <div className="absolute inset-0  bg-cover bg-center opacity-10"
           style={{
             backgroundImage: "url('/web.jpeg')", // substitui com o caminho real da imagem
           }}></div>
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in ">
               Soluções de Software Institucionais para a Comunidade CPLP
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 animate-slide-up">
+            <p className="text-xl md:text-2xl text-gray-300 mb-10 animate-slide-up hidden md:block">
               Transformando a governança digital com tecnologia inovadora e soluções personalizadas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
