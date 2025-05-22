@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white h-72  md:h-[45vh] md:py-20">
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white h-80  md:h-[45vh] md:py-20">
         <div className="absolute inset-0  bg-cover bg-center opacity-10"
           style={{
             backgroundImage: "url('/web.jpeg')", // substitui com o caminho real da imagem

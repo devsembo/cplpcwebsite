@@ -11,13 +11,14 @@ import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { enviarFeedback } from "@/services/api";
+import { AxiosError } from "axios";
 
 const schema = z.object({
     nome: z.string().min(2, "Nome muito curto"),
     email: z.string().email("E-mail inválido"),
+    telemovel: z.string().min(2, "Telemóvel é obrigatório"),
     pais: z.string().min(2, "Informe o país"),
     consulado: z.string().min(2, "Selecione um consulado"),
-    telemovel: z.number().min(2, "Selecione um consulado"),
     dificuldades: z.string().min(5, "Descreva suas dificuldades"),
     melhorias: z.string().min(5, "Sugestões de melhoria são importantes"),
 });
@@ -51,14 +52,34 @@ export default function FeedbackForm() {
 
     const onSubmit = async (data: FormData) => {
         try {
-            const response = await enviarFeedback(data);
-            if (response.ok) {
-                toast.success("Obrigado pelo seu feedback!");
-            } else {
-                throw new Error("Erro ao enviar o formulário.");
-            }
+            await enviarFeedback(data);
+
+            toast.success("Obrigado pelo seu feedback!", {
+                duration: 5000,
+                description: (
+                    <span style={{ color: "#ffcc00" }}>
+                        Seu feedback é muito importante para nós.
+                    </span>
+                ),
+                style: {
+                    backgroundColor: "green",
+                    color: "#fff",
+                },
+            });
         } catch (error) {
-            toast.error(`Ocorreu um erro. Tente novamente, ${error}`);
+            const axiosError = error as AxiosError<{ message?: string }>;
+            const mensagem =
+                axiosError.response?.data?.message || "Erro desconhecido. Tente novamente mais tarde.";
+
+            toast.error("Ocorreu um erro ao enviar o feedback", {
+                description: (
+                    <span style={{ color: "#ffcc00" }}>{mensagem}</span>
+                ),
+                style: {
+                    backgroundColor: "#531111",
+                    color: "#fff",
+                },
+            });
         }
     };
 
@@ -71,7 +92,7 @@ export default function FeedbackForm() {
                 <meta property="og:title" content="Questionário da Comunidade CPLP | CPLP CONNECT" />
                 <meta property="og:description" content="Contribua com sugestões e opiniões para melhorar os serviços consulares." />
                 <meta property="og:image" content="/cplp-comunity.png" />
-                <meta property="og:url" content="https://cplpconnect.pt/formulario-feedback" />
+                <meta property="og:url" content="https://cplpconnect.pt/eform" />
             </Head>
             <section
                 className="relative bg-cover bg-center bg-no-repeat h-80 sm:h-[30vh] "
@@ -129,9 +150,9 @@ export default function FeedbackForm() {
                             <div>
                                 <Label htmlFor="telemovel" className="block text-sm font-medium text-gray-700">Telemóvel</Label>
                                 <Input
-                                    type="email"
-                                    id="email"
-                                    {...register("email")}
+                                    type="telemoel"
+                                    id="telemovel"
+                                    {...register("telemovel")}
                                     placeholder="Digite o seu número de telemóvel"
                                     className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
                                 />
