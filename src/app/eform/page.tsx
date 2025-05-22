@@ -1,5 +1,5 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { useForm, } from "react-hook-form";
 import Head from "next/head";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { enviarFeedback } from "@/services/api";
 import { AxiosError } from "axios";
+import { useRouter } from "next/router";
 
 const schema = z.object({
     nome: z.string().min(2, "Nome muito curto"),
@@ -38,11 +39,13 @@ const consulados: Record<string, string[]> = {
 
 
 export default function FeedbackForm() {
+    const router = useRouter();
     const {
         register,
         handleSubmit,
         watch,
         setValue,
+        reset,
         formState: { errors, isSubmitting },
     } = useForm<FormData>({
         resolver: zodResolver(schema),
@@ -54,8 +57,9 @@ export default function FeedbackForm() {
         try {
             await enviarFeedback(data);
 
+            reset();
             toast.success("Obrigado pelo seu feedback!", {
-                duration: 5000,
+                duration: 3000,
                 description: (
                     <span style={{ color: "#ffcc00" }}>
                         Seu feedback é muito importante para nós.
@@ -66,6 +70,7 @@ export default function FeedbackForm() {
                     color: "#fff",
                 },
             });
+            router.push("/");
         } catch (error) {
             const axiosError = error as AxiosError<{ message?: string }>;
             const mensagem =
