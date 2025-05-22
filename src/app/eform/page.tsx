@@ -12,7 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { enviarFeedback } from "@/services/api";
 import { AxiosError } from "axios";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+
 
 const schema = z.object({
     nome: z.string().min(2, "Nome muito curto"),
@@ -39,7 +40,7 @@ const consulados: Record<string, string[]> = {
 
 
 export default function FeedbackForm() {
-    const router = useRouter();
+
     const {
         register,
         handleSubmit,
@@ -51,6 +52,7 @@ export default function FeedbackForm() {
         resolver: zodResolver(schema),
     });
 
+    const router = useRouter();
     const paisSelecionado = watch("pais") as keyof typeof consulados;
 
     const onSubmit = async (data: FormData) => {
