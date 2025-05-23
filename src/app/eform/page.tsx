@@ -102,9 +102,9 @@ export default function FeedbackForm() {
                 <meta property="og:url" content="https://cplpconnect.pt/eform" />
             </Head>
             <section
-                className="relative bg-cover bg-center bg-no-repeat h-80 sm:h-[30vh] "
+                className="relative bg-cover  bg-center bg-no-repeat h-80 sm:h-[30vh] "
                 style={{
-                    backgroundImage: "url('/cplp-comunity.png')",
+                    backgroundImage: "url('/CPLP_Logo.svg.png')",
                 }}
             >
                 {/* Overlay escuro */}

@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowRight } from "lucide-react";
+//import { ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 
@@ -86,7 +86,7 @@ export default function Projects() {
                             </CardContent>
                         </Card>
 
-                        {/* Project 2 */}
+                        {/* Project 2 
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">
                                 <Image
@@ -113,7 +113,7 @@ export default function Projects() {
                                 </Link>
                             </CardContent>
                         </Card>
-
+*/}
                         {/* Project 3 
                         <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
                             <div className="h-56 overflow-hidden">

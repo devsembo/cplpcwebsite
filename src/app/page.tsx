@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next/link';
 import Image from 'next/image';
-import TrustedPartnersSection from '@/components/Partners';
+//import TrustedPartnersSection from '@/components/Partners';
 
 export default function Home() {
   return (
@@ -35,8 +35,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Trusted By Section */}
+      {/* Trusted By Section 
       <TrustedPartnersSection />
+      */}
 
       {/* Services Section */}
       <section className="py-20">
