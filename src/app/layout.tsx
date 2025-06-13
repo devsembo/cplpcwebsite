@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
-import { Toaster } from "sonner";
-import CookieConsent from "@/components/CookieConsent";
+import LayoutWrapper from "@/components/LayoutWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,6 +12,7 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
 export const metadata: Metadata = {
   title: "CPLP CONNECT - A ponte entre cidadãos e serviços consulares",
   description:
@@ -40,7 +38,7 @@ export const metadata: Metadata = {
     siteName: "CPLP CONNECT",
     images: [
       {
-        url: "https://cplpconnect.pt/cplp-logo.png", // substitui se já tiver imagem
+        url: "https://cplpconnect.pt/cplp-logo.png",
         width: 1200,
         height: 630,
         alt: "CPLP CONNECT",
@@ -61,15 +59,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
-        <div className="flex flex-col min-h-screen">
-          <Navbar />
-          <main className="flex-1">
-            {children}
-          </main>
-          <CookieConsent />
-          <Toaster />
-          <Footer />
-        </div>
+        <LayoutWrapper>{children}</LayoutWrapper>
       </body>
     </html>
   );
