@@ -181,7 +181,7 @@ export default function FormularioTorneio() {
                 </div>
                 <p>A LAP EM PARCERIA COM A CPLP CONNECT</p>
                 <p className='text-justify mb-5'>
-                    Criam este  formulário para todos os cidadãos angolanos que desejam apoiar a nossa seleção nacional, para os distritos disponíveis no forumalário. <br /> Ao preencher este formulário, você estará contribuindo para o fortalecimento do nosso espírito esportivo e união nacional.
+                    Criam este  formulário para todos os cidadãos angolanos que desejam apoiar a nossa seleção nacional, para os distritos disponíveis no formalário. <br /> Ao preencher este formulário, você estará contribuindo para o fortalecimento do nosso espírito esportivo e união nacional.
                     <br />
                     <br />
                     <strong>Nota:</strong><span className='text-sm'> As informações fornecidas serão utilizadas exclusivamente para fins de organização do torneio e apoio à seleção. Agradecemos o seu interesse e participação!</span>
