@@ -147,7 +147,6 @@ export default function FormularioTorneio() {
             </Head>
             <div className="container mx-auto p-4 max-w-2xl">
 
-                <h1 className='text-2xl font-semibold text-justify my-5'>Formulario de presença e apoio a seleção Angolana</h1>
                 {/* Carrossel */}
                 <Carousel className="mb-8">
                     <CarouselContent>
@@ -164,7 +163,29 @@ export default function FormularioTorneio() {
                         ))}
                     </CarouselContent>
                 </Carousel>
-
+                <div className="text-center mb-6 flex">
+                    <Image
+                        src={"/torneio/lap_blue.png"}
+                        alt="CPLP Connect Logo"
+                        width={100}
+                        height={40}
+                        className="mb-4 mx-auto"
+                    />
+                    <Image
+                        src={"/cplp-logo.png"}
+                        alt="CPLP Connect Logo"
+                        width={100}
+                        height={40}
+                        className="mb-4 mx-auto"
+                    />
+                </div>
+                <p>A LAP EM PARCERIA COM A CPLP CONNECT</p>
+                <p className='text-justify mb-5'>
+                    Criam este  formulário para todos os cidadãos angolanos que desejam apoiar a nossa seleção nacional, para os distritos disponíveis no forumalário. <br /> Ao preencher este formulário, você estará contribuindo para o fortalecimento do nosso espírito esportivo e união nacional.
+                    <br />
+                    <br />
+                    <strong>Nota:</strong><span className='text-sm'> As informações fornecidas serão utilizadas exclusivamente para fins de organização do torneio e apoio à seleção. Agradecemos o seu interesse e participação!</span>
+                </p>
                 {/* Formulário */}
                 <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                     {/* Nome */}
