@@ -19,7 +19,6 @@ import autoTable from 'jspdf-autotable';
 import { AuthContext } from '@/contexts/AuthContext';
 import { api } from '@/services/api';
 
-// Interface para tipagem dos dados
 interface Apoio {
     nome: string;
     telemovel: string;
@@ -83,71 +82,107 @@ export default function DashboardPage() {
         toast.success('Exportação para PDF concluída!');
     };
 
-    const dadosFiltrados = apoios.filter((a) =>
-        a.nome.toLowerCase().includes(filtro.toLowerCase()) ||
-        a.distrito.toLowerCase().includes(filtro.toLowerCase())
+    const dadosFiltrados = apoios.filter(
+        (a) =>
+            a.nome.toLowerCase().includes(filtro.toLowerCase()) ||
+            a.distrito.toLowerCase().includes(filtro.toLowerCase())
     );
 
     if (!isAuthenticated) {
-        return null; // Ou redirecionar manualmente, mas o contexto já cuida disso
+        return null;
     }
 
     return (
-        <div className="p-4 md:p-6 max-w-7xl mx-auto">
-            <h1 className="text-2xl md:text-3xl font-bold mb-6">Lista de Apoiantes</h1>
-            <div className="flex flex-col md:flex-row items-center gap-4 mb-6">
+        <div className="p-4 sm:p-6 max-w-7xl mx-auto">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-bold mb-4">Lista de Apoiantes</h1>
+            <div className="flex flex-col gap-3 mb-4">
                 <Input
                     placeholder="Filtrar por nome ou distrito..."
                     value={filtro}
                     onChange={(e) => setFiltro(e.target.value)}
-                    className="w-full md:w-1/3"
+                    className="w-full text-sm"
                     aria-label="Filtrar apoiantes por nome ou distrito"
                 />
-                <div className="flex gap-2 w-full md:w-auto">
-                    <Button onClick={exportToExcel} className="w-full md:w-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    <Button onClick={exportToExcel} className="w-full text-sm">
                         Exportar Excel
                     </Button>
-                    <Button onClick={exportToPDF} className="w-full md:w-auto">
+                    <Button onClick={exportToPDF} className="w-full text-sm">
                         Exportar PDF
                     </Button>
-                    <Button onClick={signOut} variant="destructive" className="w-full md:w-auto">
+                    <Button onClick={signOut} variant="destructive" className="w-full text-sm">
                         Sair
                     </Button>
                 </div>
             </div>
             {loading ? (
-                <div className="text-center py-10">Carregando...</div>
+                <div className="text-center py-8 text-sm">Carregando...</div>
             ) : (
-                <Table className="w-full">
-                    <TableHeader>
-                        <TableRow>
-                            <TableHead className="w-[20%]">Nome</TableHead>
-                            <TableHead className="w-[20%]">Telemóvel</TableHead>
-                            <TableHead className="w-[20%]">Distrito</TableHead>
-                            <TableHead className="w-[20%]">Nome Líder</TableHead>
-                            <TableHead className="w-[20%]">Telemóvel Líder</TableHead>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                        {dadosFiltrados.length > 0 ? (
-                            dadosFiltrados.map((apoio, i) => (
-                                <TableRow key={i} className="hover:bg-gray-100">
-                                    <TableCell className="py-2">{apoio.nome}</TableCell>
-                                    <TableCell className="py-2">{apoio.telemovel}</TableCell>
-                                    <TableCell className="py-2">{apoio.distrito}</TableCell>
-                                    <TableCell className="py-2">{apoio.nomeLider}</TableCell>
-                                    <TableCell className="py-2">{apoio.telemovelLider}</TableCell>
-                                </TableRow>
-                            ))
-                        ) : (
+                <div className="overflow-x-auto">
+                    <Table className="w-full">
+                        <TableHeader className="hidden sm:table-header-group">
                             <TableRow>
-                                <TableCell colSpan={5} className="text-center py-4">
-                                    Nenhum resultado encontrado.
-                                </TableCell>
+                                <TableHead className="text-sm">Nome</TableHead>
+                                <TableHead className="text-sm">Telemóvel</TableHead>
+                                <TableHead className="text-sm">Distrito</TableHead>
+                                <TableHead className="text-sm">Nome Líder</TableHead>
+                                <TableHead className="text-sm">Telemóvel Líder</TableHead>
                             </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                        </TableHeader>
+                        <TableBody>
+                            {dadosFiltrados.length > 0 ? (
+                                dadosFiltrados.map((apoio, i) => (
+                                    <TableRow
+                                        key={i}
+                                        className="flex flex-col sm:table-row border-b sm:border-none py-4 sm:py-0"
+                                    >
+                                        <TableCell
+                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
+                                            data-label="Nome"
+                                        >
+                                            <span className="font-semibold sm:hidden">Nome:</span>
+                                            <span>{apoio.nome}</span>
+                                        </TableCell>
+                                        <TableCell
+                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
+                                            data-label="Telemóvel"
+                                        >
+                                            <span className="font-semibold sm:hidden">Telemóvel:</span>
+                                            <span>{apoio.telemovel}</span>
+                                        </TableCell>
+                                        <TableCell
+                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
+                                            data-label="Distrito"
+                                        >
+                                            <span className="font-semibold sm:hidden">Distrito:</span>
+                                            <span>{apoio.distrito}</span>
+                                        </TableCell>
+                                        <TableCell
+                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
+                                            data-label="Nome Líder"
+                                        >
+                                            <span className="font-semibold sm:hidden">Nome Líder:</span>
+                                            <span>{apoio.nomeLider}</span>
+                                        </TableCell>
+                                        <TableCell
+                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
+                                            data-label="Telemóvel Líder"
+                                        >
+                                            <span className="font-semibold sm:hidden">Telemóvel Líder:</span>
+                                            <span>{apoio.telemovelLider}</span>
+                                        </TableCell>
+                                    </TableRow>
+                                ))
+                            ) : (
+                                <TableRow>
+                                    <TableCell colSpan={5} className="text-center py-4 text-sm">
+                                        Nenhum resultado encontrado.
+                                    </TableCell>
+                                </TableRow>
+                            )}
+                        </TableBody>
+                    </Table>
+                </div>
             )}
         </div>
     );
