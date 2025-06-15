@@ -87,12 +87,6 @@ export default function LoginPage() {
                             )}
                         />
 
-                        <div className="text-right">
-                            <a href="/recuperar-senha" className="text-sm text-blue-600 hover:underline">
-                                Esqueceu a senha?
-                            </a>
-                        </div>
-
                         <Button type="submit" disabled={loading} className="w-full">
                             {loading ? 'A entrar...' : 'Entrar'}
                         </Button>

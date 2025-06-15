@@ -20,14 +20,18 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
     return (
         <div className="flex flex-col min-h-screen">
             {!hideNavbarFooter && <Navbar />}
-            {hideNavbarFooter && (<AuthProvider>
+
+            {hideNavbarFooter ? (
+                <AuthProvider>
+                    <div className="flex-1 flex items-center justify-center">
+                        <main className="flex-1">{children}</main>
+                    </div>
+                </AuthProvider>
+            ) : (
                 <div className="flex-1 flex items-center justify-center">
                     <main className="flex-1">{children}</main>
                 </div>
-            </AuthProvider>)}
-            <div className="flex-1 flex items-center justify-center">
-                <main className="flex-1">{children}</main>
-            </div>
+            )}
 
             {!hideNavbarFooter && <CookieConsent />}
             <Toaster />
