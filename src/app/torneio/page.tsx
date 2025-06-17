@@ -65,7 +65,7 @@ export default function FormularioTorneio() {
             distrito: 'Aveiro'
         },
         {
-            nome: 'Domingas',
+            nome: 'Domingas Silva',
             telemovel: '920449002',
             distrito: 'Aveiro - AEA'
         },
