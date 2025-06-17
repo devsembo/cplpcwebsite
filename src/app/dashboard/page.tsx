@@ -23,8 +23,6 @@ interface Apoio {
     nome: string;
     telemovel: string;
     distrito: string;
-    nomeLider: string;
-    telemovelLider: string;
 }
 
 export default function DashboardPage() {
@@ -68,13 +66,11 @@ export default function DashboardPage() {
     const exportToPDF = () => {
         const doc = new jsPDF();
         autoTable(doc, {
-            head: [['Nome', 'Telemóvel', 'Distrito', 'Líder', 'Telemóvel Líder']],
+            head: [['Nome', 'Telemóvel', 'Distrito']],
             body: apoios.map((a) => [
                 a.nome,
                 a.telemovel,
                 a.distrito,
-                a.nomeLider,
-                a.telemovelLider,
             ]),
             styles: { overflow: 'linebreak' },
         });
@@ -125,8 +121,6 @@ export default function DashboardPage() {
                                 <TableHead className="text-sm">Nome</TableHead>
                                 <TableHead className="text-sm">Telemóvel</TableHead>
                                 <TableHead className="text-sm">Distrito</TableHead>
-                                <TableHead className="text-sm">Nome Líder</TableHead>
-                                <TableHead className="text-sm">Telemóvel Líder</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -156,20 +150,6 @@ export default function DashboardPage() {
                                         >
                                             <span className="font-semibold sm:hidden">Distrito:</span>
                                             <span>{apoio.distrito}</span>
-                                        </TableCell>
-                                        <TableCell
-                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
-                                            data-label="Nome Líder"
-                                        >
-                                            <span className="font-semibold sm:hidden">Nome Líder:</span>
-                                            <span>{apoio.nomeLider}</span>
-                                        </TableCell>
-                                        <TableCell
-                                            className="flex items-center justify-between sm:table-cell py-1 sm:py-2 text-sm"
-                                            data-label="Telemóvel Líder"
-                                        >
-                                            <span className="font-semibold sm:hidden">Telemóvel Líder:</span>
-                                            <span>{apoio.telemovelLider}</span>
                                         </TableCell>
                                     </TableRow>
                                 ))

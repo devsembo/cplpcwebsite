@@ -93,7 +93,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <h3 className="font-medium text-lg mb-1">Telefone</h3>
-                                            <p className="text-gray-600">+351 923 382 195</p>
+                                            <p className="text-gray-600">+351 935 254 355</p>
                                         </div>
                                     </CardContent>
                                 </Card>

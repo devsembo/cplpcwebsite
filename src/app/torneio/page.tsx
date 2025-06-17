@@ -46,7 +46,7 @@ export default function FormularioTorneio() {
 
     const distritoSelecionado = useWatch({ control, name: 'distrito' });
 
-    const distritos = ['Aveiro', 'Braga', 'Bragança', 'Coimbra', 'Vila Real'];
+    const distritos = ['Aveiro', 'Aveiro - AEA', 'Braga', 'Bragança', 'Coimbra', 'Vila Real'];
 
     const lideres = [
         {
@@ -63,6 +63,11 @@ export default function FormularioTorneio() {
             nome: 'Francisco Cassandra',
             telemovel: '928043384',
             distrito: 'Aveiro'
+        },
+        {
+            nome: 'Domingas',
+            telemovel: '920449002',
+            distrito: 'Aveiro - AEA'
         },
         {
             nome: 'Lírio Francisco',
