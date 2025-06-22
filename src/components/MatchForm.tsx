@@ -54,7 +54,7 @@ export default function MatchForm() {
             await api.post("/api/partidas", {
                 homeCountry,
                 awayCountry,
-                dateTime, // Será convertido para 'date' no backend
+                dateTime,
             });
             setMessage("Partida criada com sucesso! ");
             setHomeCountry("");
@@ -76,9 +76,15 @@ export default function MatchForm() {
                             <SelectValue placeholder="Seleção da Casa" />
                         </SelectTrigger>
                         <SelectContent>
-                            {Object.entries(countryFlags).map(([country, flag]) => (
+                            {Object.entries(countryFlags).map(([country]) => (
                                 <SelectItem key={country} value={country} className="text-xs sm:text-sm">
-                                    {flag} {country}
+                                    <Image
+                                        src={getFlagSrc(country)}
+                                        alt={`Bandeira de ${country}`}
+                                        width={24}
+                                        height={16}
+                                        className="rounded-sm"
+                                    />
                                 </SelectItem>
                             ))}
                         </SelectContent>
