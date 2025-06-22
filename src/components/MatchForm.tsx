@@ -84,7 +84,8 @@ export default function MatchForm() {
                                         width={24}
                                         height={16}
                                         className="rounded-sm"
-                                    />{country}
+                                    />
+                                    {country.charAt(0).toUpperCase() + country.slice(1)}
                                 </SelectItem>
                             ))}
                         </SelectContent>
