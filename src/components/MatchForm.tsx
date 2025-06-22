@@ -22,10 +22,10 @@ const countryFlags: { [key: string]: string } = {
     "cabo verde": "cv.png",
     "guine bissau": "gw.png",
     "sao tome e principe": "stp.png",
-    brasil: "br.png",
+    brasil: "brazil.png",
     portugal: "pt.png",
-    mocambique: "mz.png",
-    "timor-leste": "tl.png",
+    mocambique: "moz.png",
+    "timor-leste": "timor.png",
 };
 
 function getFlagSrc(countryName: string) {
@@ -54,7 +54,7 @@ export default function MatchForm() {
             await api.post("/api/partidas", {
                 homeCountry,
                 awayCountry,
-                dateTime,
+                dateTime, // Será convertido para 'date' no backend
             });
             setMessage("Partida criada com sucesso! ");
             setHomeCountry("");
@@ -84,7 +84,7 @@ export default function MatchForm() {
                                         width={24}
                                         height={16}
                                         className="rounded-sm"
-                                    />
+                                    />{country}
                                 </SelectItem>
                             ))}
                         </SelectContent>
