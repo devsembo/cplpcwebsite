@@ -1,4 +1,5 @@
-//import { getServerSession } from "next-auth";
+'use client';
+import { useEffect, useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PlayerForm from "@/components/PlayerForm";
@@ -8,17 +9,23 @@ import EventForm from "@/components/EventForm";
 import StatsTable from "@/components/StatsTable";
 import { api } from "@/services/api";
 
-export default async function TournamentDashboard() {
+export default function TournamentDashboard() {
+    const [topScorers, setTopScorers] = useState([]);
+    const [gameResults, setGameResults] = useState([]);
 
-    // Carrega dados iniciais via API
-    const [topScorersRes, gameResultsRes] = await Promise.all([
-        api.get('/api/marcadores'),
-        api.get('/api/jogos'),
-        api.get('/api/resultados'),
-    ]);
+    useEffect(() => {
+        const fetchData = async () => {
+            const [scorers, games] = await Promise.all([
+                api.get('/api/marcadores'),
+                api.get('/api/jogos'),
+                api.get('/api/resultados'),
+            ]);
+            setTopScorers(scorers.data.data);
+            setGameResults(games.data.data);
+        };
 
-    const topScorers = topScorersRes.data.data;
-    const gameResults = gameResultsRes.data.data;
+        fetchData();
+    }, []);
 
     return (
         <div className="container mx-auto py-2 px-2 sm:px-4 sm:py-4 md:px-6 md:py-6">
