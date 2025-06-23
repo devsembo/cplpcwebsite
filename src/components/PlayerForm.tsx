@@ -14,7 +14,7 @@ function normalizeCountryKey(name: string) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "") // remove acentos
-        .replace(/-/g, " ") // se usar espaços no objeto
+        .replace(/-/g, " ") 
         .trim();
 }
 

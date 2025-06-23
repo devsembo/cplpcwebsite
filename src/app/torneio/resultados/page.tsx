@@ -38,6 +38,7 @@ function normalizeCountryKey(name: string) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
+        //.replace(/-/g, " ")
         .trim();
 }
 
@@ -46,10 +47,10 @@ const countryFlags: { [key: string]: string } = {
     "cabo verde": "cv.png",
     "guine bissau": "gw.png",
     "sao tome e principe": "stp.png",
+    "timor-leste": "tl.png",
     brasil: "brazil.png",
     portugal: "pt.png",
-    mocambique: "mz.png",
-    "timor-leste": "timor.png",
+    mocambique: "moz.png",
 };
 
 function getFlagSrc(countryName: string) {
@@ -58,13 +59,10 @@ function getFlagSrc(countryName: string) {
     return fileName ? `/torneio/países/${fileName}` : "/países/default.png";
 }
 
-
-const isFutureGame = (gameDate: string, gameTime: string) => {
-    const [day, month, year] = gameDate.split('/').map(Number);
-    const [hours, minutes] = gameTime.split(':').map(Number);
-    const gameDateTime = new Date(year, month - 1, day, hours, minutes); // month is 0-indexed
-    const now = new Date("2025-06-23T13:32:00Z"); // Current date and time: June 23, 2025, 13:32 UTC
-    return gameDateTime > now;
+const isFutureGame = (dateISO: string) => {
+    const gameDate = new Date(dateISO); // já inclui data + hora
+    const now = new Date(); // data/hora atual
+    return gameDate > now;
 };
 
 
@@ -85,8 +83,8 @@ export default function ResultsPage() {
                 ]);
 
                 setTopScorers(marcadoresRes.data);
-                console.log(marcadoresRes.data)
                 setUpcomingGames(jogosRes.data.data);
+                console.log(jogosRes.data.data)
                 setResults(resultadosRes.data.data);
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
@@ -99,10 +97,8 @@ export default function ResultsPage() {
     }, []);
 
     const filteredUpcomingGames = Array.isArray(upcomingGames)
-        ? upcomingGames.filter((game) => isFutureGame(game.date, game.time))
+        ? upcomingGames.filter((game) => isFutureGame(game.date))
         : [];
-
-
 
     return (
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6 mt-12">
@@ -151,7 +147,7 @@ export default function ResultsPage() {
                                                             width={8}
                                                             height={5}
                                                         />
-                                                        {game.homeCountry}
+                                                        {game.homeCountry.charAt(0).toUpperCase() + game.homeCountry.slice(1)}
                                                     </TableCell>
 
                                                     <TableCell className="px-2 py-1">
@@ -216,7 +212,7 @@ export default function ResultsPage() {
                                                             width={8}
                                                             height={5}
                                                         />
-                                                        {game.homeCountry}
+                                                        {game.homeCountry.charAt(0).toUpperCase() + game.homeCountry.slice(1)}
                                                     </TableCell>
                                                     <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
                                                         <Image
@@ -226,7 +222,7 @@ export default function ResultsPage() {
                                                             width={8}
                                                             height={5}
                                                         />
-                                                        {game.awayCountry}
+                                                        {game.awayCountry.charAt(0).toUpperCase() + game.awayCountry.slice(1)}
                                                     </TableCell>
                                                 </TableRow>
                                             ))
