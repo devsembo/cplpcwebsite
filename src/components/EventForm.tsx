@@ -34,7 +34,7 @@ export default function EventForm({ games }: EventFormProps) {
         setLoading(true);
         try {
             await api.post("/api/eventos", {
-                gameId: Number(gameId),
+                gameId: gameId,
                 minute,
                 half: Number(half),
                 player,
