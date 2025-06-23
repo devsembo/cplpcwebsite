@@ -19,7 +19,7 @@ function normalizeCountryKey(name: string) {
 }
 
 const countryFlags: { [key: string]: string } = {
-    angola: "ao.png",
+    ngola: "ao.png",
     "cabo verde": "cv.png",
     "guine bissau": "gw.png",
     "sao tome e principe": "stp.png",
@@ -39,7 +39,7 @@ function getFlagSrc(countryName: string) {
 export default function PlayerForm() {
     const [name, setName] = useState("");
     const [country, setCountry] = useState("");
-    const [goals, setGoals] = useState('');
+    const [goals, setGoals] = useState(1);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
@@ -51,7 +51,7 @@ export default function PlayerForm() {
             setMessage("Jogador criado com sucesso!");
             setName("");
             setCountry("");
-            setGoals('golos');
+            setGoals(2);
         } catch {
             setMessage("Erro ao criar jogador.");
         } finally {
@@ -90,7 +90,7 @@ export default function PlayerForm() {
                 type="number"
                 placeholder="Gols (opcional)"
                 value={goals}
-                onChange={(e) => setGoals((e.target.value))}
+                onChange={(e) => setGoals(Number(e.target.value))}
                 min={0}
             />
             <Button type="submit" disabled={loading}>
