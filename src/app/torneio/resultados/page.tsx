@@ -254,7 +254,7 @@ export default function ResultsPage() {
                                             topScorers.map((scorer) => (
                                                 <TableRow key={scorer.id}>
                                                     <TableCell className="text-sm px-2 py-1">{scorer.name}</TableCell>
-                                                    <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
+                                                    <TableCell className="text-sm px-2 py-1 ">
                                                         <Image
                                                             src={getFlagSrc(scorer.country)}
                                                             alt={scorer.country}
