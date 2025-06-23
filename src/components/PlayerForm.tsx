@@ -5,8 +5,20 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { api } from "@/services/api";
+import Image from "next/image";
 
-const countryFlags = {
+
+
+function normalizeCountryKey(name: string) {
+    return name
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "") // remove acentos
+        .replace(/-/g, " ") // se usar espaços no objeto
+        .trim();
+}
+
+const countryFlags: { [key: string]: string } = {
     angola: "ao.png",
     "cabo verde": "cv.png",
     "guine bissau": "gw.png",
@@ -16,6 +28,13 @@ const countryFlags = {
     mocambique: "mz.png",
     "timor-leste": "timor.png",
 };
+
+
+function getFlagSrc(countryName: string) {
+    const key = normalizeCountryKey(countryName);
+    const fileName = countryFlags[key];
+    return fileName ? `/torneio/países/${fileName}` : "/países/default.png";
+}
 
 export default function PlayerForm() {
     const [name, setName] = useState("");
@@ -53,9 +72,16 @@ export default function PlayerForm() {
                     <SelectValue placeholder="Selecione o país" />
                 </SelectTrigger>
                 <SelectContent>
-                    {Object.entries(countryFlags).map(([country, flag]) => (
+                    {Object.entries(countryFlags).map(([country]) => (
                         <SelectItem key={country} value={country}>
-                            {flag} {country}
+                            <Image
+                                src={getFlagSrc(country)}
+                                alt={`Bandeira de ${country}`}
+                                width={24}
+                                height={16}
+                                className="rounded-sm"
+                            />
+                            {country.charAt(0).toUpperCase() + country.slice(1)}
                         </SelectItem>
                     ))}
                 </SelectContent>
