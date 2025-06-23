@@ -13,7 +13,6 @@ function normalizeCountryKey(name: string) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "") // remove acentos
-        .replace(/-/g, " ") // se usar espaços no objeto
         .trim();
 }
 
@@ -25,7 +24,7 @@ const countryFlags: { [key: string]: string } = {
     brasil: "brazil.png",
     portugal: "pt.png",
     mocambique: "moz.png",
-    "timor-leste": "timor.png",
+    "timor-leste": "tl.png",
 };
 
 function getFlagSrc(countryName: string) {

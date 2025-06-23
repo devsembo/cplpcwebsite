@@ -7,14 +7,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { api } from "@/services/api";
 import Image from "next/image";
 
-
-
 function normalizeCountryKey(name: string) {
     return name
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "") // remove acentos
-        .replace(/-/g, " ") 
         .trim();
 }
 
@@ -26,7 +23,7 @@ const countryFlags: { [key: string]: string } = {
     brasil: "brazil.png",
     portugal: "pt.png",
     mocambique: "mz.png",
-    "timor-leste": "timor.png",
+    "timor-leste": "tl.png",
 };
 
 
@@ -39,7 +36,7 @@ function getFlagSrc(countryName: string) {
 export default function PlayerForm() {
     const [name, setName] = useState("");
     const [country, setCountry] = useState("");
-    const [goals, setGoals] = useState(1);
+    const [goals, setGoals] = useState(0);
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState("");
 
@@ -51,7 +48,7 @@ export default function PlayerForm() {
             setMessage("Jogador criado com sucesso!");
             setName("");
             setCountry("");
-            setGoals(2);
+            setGoals(0);
         } catch {
             setMessage("Erro ao criar jogador.");
         } finally {
