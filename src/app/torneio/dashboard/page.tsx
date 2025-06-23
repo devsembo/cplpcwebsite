@@ -106,7 +106,7 @@ export default function TournamentDashboard() {
                                     <CardTitle className="text-lg sm:text-xl lg:text-2xl">Estatísticas do Torneio</CardTitle>
                                 </CardHeader>
                                 <CardContent className="p-4 sm:p-5 lg:p-6 overflow-y-auto">
-                                    <StatsTable topScorers={topScorers} />
+                                    <StatsTable />
                                 </CardContent>
                             </Card>
                         </TabsContent>
