@@ -19,7 +19,7 @@ function normalizeCountryKey(name: string) {
 }
 
 const countryFlags: { [key: string]: string } = {
-    ngola: "ao.png",
+    angola: "ao.png",
     "cabo verde": "cv.png",
     "guine bissau": "gw.png",
     "sao tome e principe": "stp.png",
