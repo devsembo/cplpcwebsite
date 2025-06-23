@@ -185,8 +185,8 @@ export default function ResultsPage() {
                                         <TableRow>
                                             <TableHead className="text-sm px-1 sm:px-2">Data</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2">Hora</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 sm:table-cell">Seleção de Casa</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 sm:table-cell">Seleção de Fora</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2">Seleção de Casa</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2">Seleção de Fora</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
