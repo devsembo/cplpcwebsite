@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent,   } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import { api } from "@/services/api";
@@ -14,7 +14,7 @@ interface ApiGameEvent {
     half: number;
     player: string;
     country: "home" | "away";
-    eventType: "goal" | "yellow" | "red" | "substitution" | "offside" | "penalty_missed" | "assist"| "mvp";
+    eventType: "goal" | "yellow" | "red" | "substitution" | "offside" | "penalty_missed" | "assist" | "mvp";
     description?: string;
     assist?: string;
 }
@@ -42,10 +42,10 @@ const countryFlags: { [key: string]: string } = {
     "cabo verde": "cv.png",
     "guine bissau": "gw.png",
     "sao tome e principe": "stp.png",
-    brasil: "br.png",
+    brasil: "brazil.png",
     portugal: "pt.png",
     mocambique: "mz.png",
-    "timor-leste": "tl.png",
+    "timor-leste": "timor.png",
 };
 
 function getFlagSrc(countryName: string) {
@@ -79,11 +79,10 @@ export default function GameSummary() {
                         half: e.half,
                         player: e.player,
                         country: e.country?.toLowerCase() as "home" | "away",
-                        eventType: e.eventType.toLowerCase() as "goal" | "yellow" | "red" | "substitution" | "offside" | "penalty_missed" | "assist",
+                        eventType: e.eventType.toLowerCase() as "goal" | "yellow" | "red" | "substitution" | "offside" | "penalty_missed" | "assist" | "mvp",
                         description: e.description,
                         assist: e.assist,
                     })).sort((a: ApiGameEvent, b: ApiGameEvent) => {
-                        // Sort by half and then minute
                         if (a.half !== b.half) return a.half - b.half;
                         return parseInt(a.minute) - parseInt(b.minute);
                     }),
@@ -99,8 +98,8 @@ export default function GameSummary() {
         fetchGameDetails();
     }, [id]);
 
-    if (loading) return <div className="text-center p-4">Carregando...</div>;
-    if (!gameDetails) return <div className="text-center p-4">Jogo não encontrado</div>;
+    if (loading) return <div className="text-center p-2 sm:p-4">Carregando...</div>;
+    if (!gameDetails) return <div className="text-center p-2 sm:p-4">Jogo não encontrado</div>;
 
     const { homeCountry, awayCountry, homeScore, awayScore, date, events } = gameDetails;
 
@@ -109,16 +108,16 @@ export default function GameSummary() {
     const awayEvents = events.filter((e) => e.country === "away");
 
     return (
-        <div className="max-w-4xl mt-20 mx-auto min-h-screen p-4">
-            <div className="text-center mb-6">
-                <div className="text-sm text-muted-foreground">{date}</div>
-                <div className="text-3xl font-bold my-2 flex items-center justify-center space-x-2">
+        <div className="max-w-4xl mx-auto px-2 sm:px-4 md:px-6 py-2 sm:py-4 md:py-6">
+            <div className="text-center mb-4 sm:mb-6">
+                <div className="text-xs sm:text-sm text-muted-foreground">{date}</div>
+                <div className="text-2xl sm:text-3xl font-bold my-2 flex items-center justify-center space-x-2">
                     <Image
                         src={getFlagSrc(homeCountry)}
                         alt={homeCountry}
-                        className="inline-block w-6 h-4 object-contain"
-                        width={6}
-                        height={8}
+                        className="inline-block w-6 h-4 sm:w-8 sm:h-5 object-contain"
+                        width={8}
+                        height={5}
                     />
                     <span>{homeCountry} {homeScore}</span>
                     <span>-</span>
@@ -126,37 +125,39 @@ export default function GameSummary() {
                     <Image
                         src={getFlagSrc(awayCountry)}
                         alt={awayCountry}
-                        className="inline-block w-6 h-4 object-contain"
-                        width={6}
-                        height={8}
+                        className="inline-block w-6 h-4 sm:w-8 sm:h-5 object-contain"
+                        width={8}
+                        height={5}
                     />
                 </div>
-                <div className="text-xs uppercase tracking-widest text-green-500">Terminado</div>
+                <div className="text-xs sm:text-sm uppercase tracking-widest text-green-500">Terminado</div>
             </div>
 
-            <Tabs defaultValue="summary" className="w-full">
-                <TabsList className="flex justify-around">
-                    <TabsTrigger value="summary">Sumário</TabsTrigger>
-                    <TabsTrigger value="stats">Estatísticas</TabsTrigger>
-                    <TabsTrigger value="players">Jogadores</TabsTrigger>
-                    <TabsTrigger value="report">Relatório</TabsTrigger>
-                </TabsList>
 
-                <TabsContent value="summary">
-                    <Card className="mt-16">
-                        <CardContent className="p-4">
-                            <ScrollArea className="h-96 pr-2">
-                                {/* Display events side by side with half separation */}
-                                <div className="grid grid-cols-2 gap-4">
+            <Tabs defaultValue="summary" className="w-full">
+                {/**
+                <TabsList className="flex flex-row gap-2 sm:gap-4 mb-4 sticky top-0 z-50 bg-white shadow-sm">
+                    <TabsTrigger value="summary" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Sumário</TabsTrigger>
+                    <TabsTrigger value="stats" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Estatísticas</TabsTrigger>
+                    <TabsTrigger value="players" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Jogadores</TabsTrigger>
+                    <TabsTrigger value="report" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Relatório</TabsTrigger>
+                </TabsList>
+                 */}
+
+                <TabsContent value="summary" className="pt-4 sm:pt-6">
+                    <Card className="mt-4 sm:mt-6">
+                        <CardContent className="p-2 sm:p-4">
+                            <ScrollArea className="h-[60vh] sm:h-[50vh] md:h-[40vh] pr-2">
+                                <div className="grid grid-cols-2 gap-2 sm:gap-4">
                                     <div>
-                                        <h3 className="text-sm font-semibold mb-2 text-center">{homeCountry}</h3>
+                                        <h3 className="text-sm sm:text-base font-semibold mb-2 text-center">{homeCountry}</h3>
                                         {homeEvents.length > 0 && (
                                             <>
-                                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                                    <h4 className="text-xs font-medium text-gray-500">1ª Parte</h4>
+                                                <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-gray-200">
+                                                    <h4 className="text-xs sm:text-sm font-medium text-gray-500">1ª Parte</h4>
                                                     {homeEvents.filter((e) => e.half === 1).map((event) => (
-                                                        <div key={event.id} className="flex items-center mb-2">
-                                                            <span className="text-xs w-12 text-muted-foreground">{event.minute}</span>
+                                                        <div key={event.id} className="flex items-center mb-1 sm:mb-2">
+                                                            <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
                                                             <span className="font-medium">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
@@ -169,19 +170,19 @@ export default function GameSummary() {
                                                                 {" "}{event.player}
                                                             </span>
                                                             {event.description && (
-                                                                <div className="text-xs text-muted-foreground ml-2">{event.description}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">{event.description}</div>
                                                             )}
                                                             {event.assist && (
-                                                                <div className="text-xs text-muted-foreground ml-2">Assistência: {event.assist}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">Assistência: {event.assist}</div>
                                                             )}
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                                    <h4 className="text-xs font-medium text-gray-500">2ª Parte</h4>
+                                                <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-gray-200">
+                                                    <h4 className="text-xs sm:text-sm font-medium text-gray-500">2ª Parte</h4>
                                                     {homeEvents.filter((e) => e.half === 2).map((event) => (
-                                                        <div key={event.id} className="flex items-center mb-2">
-                                                            <span className="text-xs w-12 text-muted-foreground">{event.minute}</span>
+                                                        <div key={event.id} className="flex items-center mb-1 sm:mb-2">
+                                                            <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
                                                             <span className="font-medium">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
@@ -194,10 +195,10 @@ export default function GameSummary() {
                                                                 {" "}{event.player}
                                                             </span>
                                                             {event.description && (
-                                                                <div className="text-xs text-muted-foreground ml-2">{event.description}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">{event.description}</div>
                                                             )}
                                                             {event.assist && (
-                                                                <div className="text-xs text-muted-foreground ml-2">Assistência: {event.assist}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">Assistência: {event.assist}</div>
                                                             )}
                                                         </div>
                                                     ))}
@@ -206,14 +207,14 @@ export default function GameSummary() {
                                         )}
                                     </div>
                                     <div>
-                                        <h3 className="text-sm font-semibold mb-2 text-center">{awayCountry}</h3>
+                                        <h3 className="text-sm sm:text-base font-semibold mb-2 text-center">{awayCountry}</h3>
                                         {awayEvents.length > 0 && (
                                             <>
-                                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                                    <h4 className="text-xs font-medium text-gray-500">1ª Parte</h4>
+                                                <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-gray-200">
+                                                    <h4 className="text-xs sm:text-sm font-medium text-gray-500">1ª Parte</h4>
                                                     {awayEvents.filter((e) => e.half === 1).map((event) => (
-                                                        <div key={event.id} className="flex items-center mb-2">
-                                                            <span className="text-xs w-12 text-muted-foreground">{event.minute}</span>
+                                                        <div key={event.id} className="flex items-center mb-1 sm:mb-2">
+                                                            <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
                                                             <span className="font-medium">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
@@ -226,19 +227,19 @@ export default function GameSummary() {
                                                                 {" "}{event.player}
                                                             </span>
                                                             {event.description && (
-                                                                <div className="text-xs text-muted-foreground ml-2">{event.description}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">{event.description}</div>
                                                             )}
                                                             {event.assist && (
-                                                                <div className="text-xs text-muted-foreground ml-2">Assistência: {event.assist}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">Assistência: {event.assist}</div>
                                                             )}
                                                         </div>
                                                     ))}
                                                 </div>
-                                                <div className="mt-4 pt-4 border-t border-gray-200">
-                                                    <h4 className="text-xs font-medium text-gray-500">2ª Parte</h4>
+                                                <div className="mt-2 sm:mt-4 pt-2 sm:pt-4 border-t border-gray-200">
+                                                    <h4 className="text-xs sm:text-sm font-medium text-gray-500">2ª Parte</h4>
                                                     {awayEvents.filter((e) => e.half === 2).map((event) => (
-                                                        <div key={event.id} className="flex items-center mb-2">
-                                                            <span className="text-xs w-12 text-muted-foreground">{event.minute}</span>
+                                                        <div key={event.id} className="flex items-center mb-1 sm:mb-2">
+                                                            <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
                                                             <span className="font-medium">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
@@ -251,10 +252,10 @@ export default function GameSummary() {
                                                                 {" "}{event.player}
                                                             </span>
                                                             {event.description && (
-                                                                <div className="text-xs text-muted-foreground ml-2">{event.description}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">{event.description}</div>
                                                             )}
                                                             {event.assist && (
-                                                                <div className="text-xs text-muted-foreground ml-2">Assistência: {event.assist}</div>
+                                                                <div className="text-xs sm:text-sm text-muted-foreground ml-1 sm:ml-2">Assistência: {event.assist}</div>
                                                             )}
                                                         </div>
                                                     ))}
@@ -269,20 +270,20 @@ export default function GameSummary() {
                 </TabsContent>
 
                 <TabsContent value="stats">
-                    <Card className="mt-4">
-                        <CardContent className="p-4 text-center text-muted-foreground">Estatísticas (por implementar)</CardContent>
+                    <Card className="mt-4 sm:mt-6">
+                        <CardContent className="p-2 sm:p-4 text-center text-muted-foreground">Estatísticas (por implementar)</CardContent>
                     </Card>
                 </TabsContent>
 
                 <TabsContent value="players">
-                    <Card className="mt-4">
-                        <CardContent className="p-4 text-center text-muted-foreground">Jogadores (por implementar)</CardContent>
+                    <Card className="mt-4 sm:mt-6">
+                        <CardContent className="p-2 sm:p-4 text-center text-muted-foreground">Jogadores (por implementar)</CardContent>
                     </Card>
                 </TabsContent>
 
                 <TabsContent value="report">
-                    <Card className="mt-4">
-                        <CardContent className="p-4 text-center text-muted-foreground">Relatório do jogo (por implementar)</CardContent>
+                    <Card className="mt-4 sm:mt-6">
+                        <CardContent className="p-2 sm:p-4 text-center text-muted-foreground">Relatório do jogo (por implementar)</CardContent>
                     </Card>
                 </TabsContent>
             </Tabs>

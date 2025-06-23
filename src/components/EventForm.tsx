@@ -24,6 +24,7 @@ export default function EventForm({ games }: EventFormProps) {
     const [player, setPlayer] = useState("");
     const [team, setTeam] = useState("");
     const [eventType, setEventType] = useState("");
+    const [countryside, setCountrySide] = useState("");
     const [description, setDescription] = useState("");
     const [assist, setAssist] = useState("");
     const [loading, setLoading] = useState(false);
@@ -52,7 +53,7 @@ export default function EventForm({ games }: EventFormProps) {
             setEventType("");
             setDescription("");
             setAssist("");
-        } catch  {
+        } catch {
             setMessage("Erro ao registrar evento.");
         } finally {
             setLoading(false);
@@ -62,8 +63,7 @@ export default function EventForm({ games }: EventFormProps) {
     return (
         <div className="container mx-auto py-2 px-2 sm:px-4 sm:py-4 md:px-6 md:py-6">
             <Card className="mb-4 sm:mb-6 md:mb-8">
-
-                <CardContent className="p-4 sm:p-6">
+                <CardContent className="p-3 sm:p-6">
                     <form onSubmit={handleSubmit} className="space-y-4">
                         <Select value={gameId} onValueChange={setGameId} required>
                             <SelectTrigger className="text-xs sm:text-sm">
@@ -122,6 +122,15 @@ export default function EventForm({ games }: EventFormProps) {
                                 <SelectItem value="yellow" className="text-xs sm:text-sm">cartão Amarelo</SelectItem>
                                 <SelectItem value="red" className="text-xs sm:text-sm">Cartão Vermelho</SelectItem>
                                 <SelectItem value="mvp" className="text-xs sm:text-sm">MVP da Partida</SelectItem>
+                            </SelectContent>
+                        </Select>
+                        <Select value={countryside} onValueChange={setCountrySide} required>
+                            <SelectTrigger className="text-xs sm:text-sm">
+                                <SelectValue placeholder="Selecione o lado" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="home" className="text-xs sm:text-sm">Casa</SelectItem>
+                                <SelectItem value="away" className="text-xs sm:text-sm">Fora</SelectItem>
                             </SelectContent>
                         </Select>
                         <Input
