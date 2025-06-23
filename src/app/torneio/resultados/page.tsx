@@ -203,7 +203,7 @@ export default function ResultsPage() {
                                                 <TableRow key={game.id}>
                                                     <TableCell className="text-sm px-2 py-1">{new Date(game.date).toLocaleDateString("pt-PT")}</TableCell>
                                                     <TableCell className="text-sm px-2 py-1">{game.time}</TableCell>
-                                                    <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
+                                                    <TableCell className="text-sm px-2 py-1">
                                                         <Image
                                                             src={getFlagSrc(game.homeCountry)}
                                                             alt={game.homeCountry}
@@ -213,7 +213,7 @@ export default function ResultsPage() {
                                                         />
                                                         {game.homeCountry.charAt(0).toUpperCase() + game.homeCountry.slice(1)}
                                                     </TableCell>
-                                                    <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
+                                                    <TableCell className="text-sm px-2 py-1 ">
                                                         <Image
                                                             src={getFlagSrc(game.awayCountry)}
                                                             alt={game.awayCountry}
