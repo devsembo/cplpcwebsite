@@ -29,7 +29,6 @@ type UpcomingGame = {
 type TopScorer = {
     id: number;
     name: string;
-    team: string;
     country: string;
     goals: number;
 };
@@ -39,7 +38,6 @@ function normalizeCountryKey(name: string) {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")
-        .replace(/-/g, " ")
         .trim();
 }
 
@@ -51,7 +49,7 @@ const countryFlags: { [key: string]: string } = {
     brasil: "brazil.png",
     portugal: "pt.png",
     mocambique: "mz.png",
-    "timor-leste": "timo.png",
+    "timor-leste": "timor.png",
 };
 
 function getFlagSrc(countryName: string) {
@@ -70,12 +68,13 @@ export default function ResultsPage() {
         const fetchData = async () => {
             try {
                 const [marcadoresRes, jogosRes, resultadosRes] = await Promise.all([
-                    api.get('/api/marcadores'),
+                    api.get('/api/jogadores'),
                     api.get('/api/jogos'),
                     api.get('/api/resultados'),
                 ]);
 
-                setTopScorers(marcadoresRes.data.data);
+                setTopScorers(marcadoresRes.data);
+                console.log(marcadoresRes.data)
                 setUpcomingGames(jogosRes.data.data);
                 setResults(resultadosRes.data.data);
             } catch (error) {
@@ -89,17 +88,17 @@ export default function ResultsPage() {
     }, []);
 
     return (
-        <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6 max-w-7xl">
-            <Card className="mb-4 sm:mb-6 md:mb-8">
+        <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6">
+            <Card className="mb-4 sm:mb-6 md:mb-8 w-[95%] mx-auto">
                 <CardHeader className="p-2 sm:p-4">
                     <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold">Resultados e Jogos</CardTitle>
                 </CardHeader>
                 <CardContent className="p-2 sm:p-4">
                     <Tabs defaultValue="results" className="w-full">
                         <TabsList className="flex flex-row  sm:flex-row gap-1 mb-4 sticky top-0 z-50 bg-white shadow-sm max-w-[95%] mx-auto">
-                            <TabsTrigger value="results" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Resultados</TabsTrigger>
-                            <TabsTrigger value="upcoming" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Jogos Futuros</TabsTrigger>
-                            <TabsTrigger value="scorers" className="w-full sm:w-auto text-sm sm:text-base py-2 px-3">Melhores Marcadores</TabsTrigger>
+                            <TabsTrigger value="results" className="w-full sm:w-auto text-sm sm:text-base py-2 px-1">Resultados</TabsTrigger>
+                            <TabsTrigger value="upcoming" className="w-full sm:w-auto text-sm sm:text-base py-2 px-1">Jogos Futuros</TabsTrigger>
+                            <TabsTrigger value="scorers" className="w-full sm:w-auto text-sm sm:text-base py-2 px-1">Melhores Marcadores</TabsTrigger>
                         </TabsList>
 
                         <TabsContent value="results" className="pt-4 sm:pt-6">
@@ -108,9 +107,9 @@ export default function ResultsPage() {
                                     <TableHeader>
                                         <TableRow>
                                             <TableHead className="text-sm px-1 sm:px-2">Data</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 hidden sm:table-cell">Equipa Casa</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2  sm:table-cell">Equipa Casa</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2">Resultado</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 hidden sm:table-cell">Equipa Fora</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2  sm:table-cell">Equipa Fora</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2">Ações</TableHead>
                                         </TableRow>
                                     </TableHeader>
@@ -172,8 +171,8 @@ export default function ResultsPage() {
                                         <TableRow>
                                             <TableHead className="text-sm px-1 sm:px-2">Data</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2">Hora</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 hidden sm:table-cell">Seleção de Casa</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 hidden sm:table-cell">Seleção de Fora</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2 sm:table-cell">Seleção de Casa</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2 sm:table-cell">Seleção de Fora</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
@@ -224,8 +223,7 @@ export default function ResultsPage() {
                                     <TableHeader>
                                         <TableRow>
                                             <TableHead className="text-sm px-1 sm:px-2">Nome</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2">Equipa</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2 hidden sm:table-cell">País</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2 ">País</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2">Golos</TableHead>
                                         </TableRow>
                                     </TableHeader>
@@ -242,7 +240,6 @@ export default function ResultsPage() {
                                             topScorers.map((scorer) => (
                                                 <TableRow key={scorer.id}>
                                                     <TableCell className="text-sm px-2 py-1">{scorer.name}</TableCell>
-                                                    <TableCell className="text-sm px-2 py-1">{scorer.team}</TableCell>
                                                     <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
                                                         <Image
                                                             src={getFlagSrc(scorer.country)}

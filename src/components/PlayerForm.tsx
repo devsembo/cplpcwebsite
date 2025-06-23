@@ -7,14 +7,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { api } from "@/services/api";
 
 const countryFlags = {
-    Angola: "🇦🇴",
-    "Cabo Verde": "🇨🇻",
-    "Guiné-Bissau": "🇬🇼",
-    "São Tomé e Príncipe": "🇸🇹",
-    Brasil: "🇧🇷",
-    Portugal: "🇵🇹",
-    Moçambique: "🇲🇿",
-    "Timor-Leste": "🇹🇱",
+    angola: "ao.png",
+    "cabo verde": "cv.png",
+    "guine bissau": "gw.png",
+    "sao tome e principe": "stp.png",
+    brasil: "brazil.png",
+    portugal: "pt.png",
+    mocambique: "mz.png",
+    "timor-leste": "timor.png",
 };
 
 export default function PlayerForm() {
