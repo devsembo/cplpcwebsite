@@ -136,6 +136,15 @@ export default function GameSummary() {
                     </span>
                 </div>
                 <div className="text-xs sm:text-sm uppercase tracking-widest text-green-500">Terminado</div>
+                <div className="flex flex-col items-center">
+                    <p className="text-sm font-semibold">In Partneship:</p>
+                    <Image
+                        src={'/torneio/lap_blue.png'}
+                        alt="Lços angolas no porto logo"
+                        width={60}
+                        height={40}
+                    />
+                </div>
             </div>
 
 
@@ -149,8 +158,8 @@ export default function GameSummary() {
                 </TabsList>
                  */}
 
-                <TabsContent value="summary" className="pt-4 sm:pt-6">
-                    <Card className="mt-4 sm:mt-6">
+                <TabsContent value="summary" className="pt-2 sm:pt-4">
+                    <Card className="mt-2 sm:mt-4">
                         <CardContent className="p-2 sm:p-4">
                             <ScrollArea className="h-[60vh] sm:h-[50vh] md:h-[40vh] pr-2">
                                 <div className="grid grid-cols-2 gap-2 sm:gap-4">

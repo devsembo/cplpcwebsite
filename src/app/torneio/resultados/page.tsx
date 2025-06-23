@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Badge } from "@/components/ui/badge";
 import { api } from "@/services/api";
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 type GameResult = {
     id: string;
@@ -72,6 +71,7 @@ export default function ResultsPage() {
     const [upcomingGames, setUpcomingGames] = useState<UpcomingGame[]>([]);
     const [topScorers, setTopScorers] = useState<TopScorer[]>([]);
     const [loading, setLoading] = useState(true);
+    const router = useRouter();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -103,8 +103,18 @@ export default function ResultsPage() {
     return (
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6 mt-12">
             <Card className="mb-4 sm:mb-6 md:mb-8 w-[95%] mx-auto">
-                <CardHeader className="p-2 sm:p-4">
+                <CardHeader className="p-2 sm:p-4 flex flex-row  justify-between">
                     <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold">Resultados e Jogos</CardTitle>
+                    <div className="flex flex-col items-center">
+                        <Image
+                            src={'/torneio/lap_blue.png'}
+                            alt="Lços angolas no porto logo"
+                            width={60}
+                            height={40}
+                        />
+                    </div>
+
+
                 </CardHeader>
                 <CardContent className="p-2 sm:p-4">
                     <Tabs defaultValue="results" className="w-full">
@@ -119,11 +129,10 @@ export default function ResultsPage() {
                                 <Table className="w-full min-w-[320px]">
                                     <TableHeader>
                                         <TableRow>
-                                            <TableHead className="text-sm px-1 sm:px-2">Data</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2  sm:table-cell">Equipa Casa</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2 hidden sm:table-cell">Data</TableHead>
+                                            <TableHead className="text-sm px-1 sm:px-2  ">Equipa Casa</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2">Resultado</TableHead>
                                             <TableHead className="text-sm px-1 sm:px-2  sm:table-cell">Equipa Fora</TableHead>
-                                            <TableHead className="text-sm px-1 sm:px-2">Ações</TableHead>
                                         </TableRow>
                                     </TableHeader>
                                     <TableBody>
@@ -137,8 +146,12 @@ export default function ResultsPage() {
                                             </TableRow>
                                         ) : (
                                             results.map((game) => (
-                                                <TableRow key={game.id} className="hover:bg-gray-100">
-                                                    <TableCell className="text-sm px-2 py-1">{new Date(game.date).toLocaleDateString("pt-PT")}</TableCell>
+                                                <TableRow
+                                                    key={game.id}
+                                                    className="hover:bg-gray-100 cursor-pointer"
+                                                    onClick={() => router.push(`/torneio/resultados/${game.id}`)}
+                                                >
+                                                    <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">{new Date(game.date).toLocaleDateString("pt-PT")}</TableCell>
                                                     <TableCell className="text-sm px-2 py-1 ">
                                                         <Image
                                                             src={getFlagSrc(game.homeCountry)}
@@ -163,13 +176,6 @@ export default function ResultsPage() {
                                                             height={5}
                                                         />
                                                         {game.awayCountry}
-                                                    </TableCell>
-                                                    <TableCell className="text-sm px-2 py-1">
-                                                        <Link href={`/torneio/resultados/${game.id}`}>
-                                                            <Button className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
-                                                                Ver Detalhes
-                                                            </Button>
-                                                        </Link>
                                                     </TableCell>
                                                 </TableRow>
                                             ))
