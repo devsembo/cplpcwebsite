@@ -58,6 +58,17 @@ function getFlagSrc(countryName: string) {
     return fileName ? `/torneio/países/${fileName}` : "/países/default.png";
 }
 
+
+const isFutureGame = (gameDate: string, gameTime: string) => {
+    const [day, month, year] = gameDate.split('/').map(Number);
+    const [hours, minutes] = gameTime.split(':').map(Number);
+    const gameDateTime = new Date(year, month - 1, day, hours, minutes); // month is 0-indexed
+    const now = new Date("2025-06-23T13:32:00Z"); // Current date and time: June 23, 2025, 13:32 UTC
+    return gameDateTime > now;
+};
+
+
+
 export default function ResultsPage() {
     const [results, setResults] = useState<GameResult[]>([]);
     const [upcomingGames, setUpcomingGames] = useState<UpcomingGame[]>([]);
@@ -86,6 +97,12 @@ export default function ResultsPage() {
 
         fetchData();
     }, []);
+
+    const filteredUpcomingGames = Array.isArray(upcomingGames)
+        ? upcomingGames.filter((game) => isFutureGame(game.date, game.time))
+        : [];
+
+
 
     return (
         <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6 mt-12">
@@ -136,11 +153,11 @@ export default function ResultsPage() {
                                                         />
                                                         {game.homeCountry}
                                                     </TableCell>
-                                                    
+
                                                     <TableCell className="px-2 py-1">
                                                         <Badge variant="secondary" className="text-sm">{`${game.homeScore} - ${game.awayScore}`}</Badge>
                                                     </TableCell>
-                                                    
+
                                                     <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
                                                         <Image
                                                             src={getFlagSrc(game.awayCountry)}
@@ -182,12 +199,12 @@ export default function ResultsPage() {
                                             <TableRow>
                                                 <TableCell colSpan={4} className="text-center text-sm px-2 py-2">Carregando...</TableCell>
                                             </TableRow>
-                                        ) : upcomingGames.length === 0 ? (
+                                        ) : filteredUpcomingGames.length === 0 ? (
                                             <TableRow>
                                                 <TableCell colSpan={4} className="text-center text-sm px-2 py-2">Sem jogos futuros disponíveis</TableCell>
                                             </TableRow>
                                         ) : (
-                                            upcomingGames.map((game) => (
+                                            filteredUpcomingGames.map((game) => (
                                                 <TableRow key={game.id}>
                                                     <TableCell className="text-sm px-2 py-1">{new Date(game.date).toLocaleDateString("pt-PT")}</TableCell>
                                                     <TableCell className="text-sm px-2 py-1">{game.time}</TableCell>
