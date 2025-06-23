@@ -8,6 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Badge } from "@/components/ui/badge";
 import { api } from "@/services/api";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 type GameResult = {
     id: string;
@@ -138,7 +139,7 @@ export default function ResultsPage() {
                                             results.map((game) => (
                                                 <TableRow key={game.id} className="hover:bg-gray-100">
                                                     <TableCell className="text-sm px-2 py-1">{new Date(game.date).toLocaleDateString("pt-PT")}</TableCell>
-                                                    <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
+                                                    <TableCell className="text-sm px-2 py-1 ">
                                                         <Image
                                                             src={getFlagSrc(game.homeCountry)}
                                                             alt={game.homeCountry}
@@ -153,7 +154,7 @@ export default function ResultsPage() {
                                                         <Badge variant="secondary" className="text-sm">{`${game.homeScore} - ${game.awayScore}`}</Badge>
                                                     </TableCell>
 
-                                                    <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
+                                                    <TableCell className="text-sm px-2 py-1">
                                                         <Image
                                                             src={getFlagSrc(game.awayCountry)}
                                                             alt={game.awayCountry}
@@ -165,9 +166,9 @@ export default function ResultsPage() {
                                                     </TableCell>
                                                     <TableCell className="text-sm px-2 py-1">
                                                         <Link href={`/torneio/resultados/${game.id}`}>
-                                                            <button className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
+                                                            <Button className="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">
                                                                 Ver Detalhes
-                                                            </button>
+                                                            </Button>
                                                         </Link>
                                                     </TableCell>
                                                 </TableRow>
