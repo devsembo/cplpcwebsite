@@ -88,7 +88,7 @@ export default function ResultsPage() {
     }, []);
 
     return (
-        <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6">
+        <div className="container mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-2 sm:py-4 md:py-6 mt-12">
             <Card className="mb-4 sm:mb-6 md:mb-8 w-[95%] mx-auto">
                 <CardHeader className="p-2 sm:p-4">
                     <CardTitle className="text-xl sm:text-2xl md:text-3xl font-bold">Resultados e Jogos</CardTitle>
