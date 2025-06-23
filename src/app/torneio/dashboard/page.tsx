@@ -10,7 +10,6 @@ import StatsTable from "@/components/StatsTable";
 import { api } from "@/services/api";
 
 export default function TournamentDashboard() {
-    const [topScorers, setTopScorers] = useState([]);
     const [gameResults, setGameResults] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -18,12 +17,9 @@ export default function TournamentDashboard() {
         const fetchData = async () => {
             setIsLoading(true);
             try {
-                const [scorers, games] = await Promise.all([
-                    api.get('/api/marcadores'),
+                const [games] = await Promise.all([
                     api.get('/api/jogos'),
-                    api.get('/api/resultados'),
                 ]);
-                setTopScorers(scorers.data.data);
                 setGameResults(games.data.data);
             } catch (error) {
                 console.error('Error fetching data:', error);
