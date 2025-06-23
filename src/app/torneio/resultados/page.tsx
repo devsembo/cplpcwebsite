@@ -136,9 +136,11 @@ export default function ResultsPage() {
                                                         />
                                                         {game.homeCountry}
                                                     </TableCell>
+                                                    
                                                     <TableCell className="px-2 py-1">
                                                         <Badge variant="secondary" className="text-sm">{`${game.homeScore} - ${game.awayScore}`}</Badge>
                                                     </TableCell>
+                                                    
                                                     <TableCell className="text-sm px-2 py-1 hidden sm:table-cell">
                                                         <Image
                                                             src={getFlagSrc(game.awayCountry)}

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardContent } from "@/components/ui/card";
-import { Tabs, TabsContent,   } from "@/components/ui/tabs";
+import { Tabs, TabsContent, } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Image from "next/image";
 import { api } from "@/services/api";
@@ -111,24 +111,30 @@ export default function GameSummary() {
         <div className="max-w-4xl mx-auto px-2 sm:px-4 md:px-6 py-2 sm:py-4 md:py-6">
             <div className="text-center mb-4 sm:mb-6">
                 <div className="text-xs sm:text-sm text-muted-foreground">{date}</div>
-                <div className="text-2xl sm:text-3xl font-bold my-2 flex items-center justify-center space-x-2">
-                    <Image
-                        src={getFlagSrc(homeCountry)}
-                        alt={homeCountry}
-                        className="inline-block w-6 h-4 sm:w-8 sm:h-5 object-contain"
-                        width={8}
-                        height={5}
-                    />
-                    <span>{homeCountry} {homeScore}</span>
-                    <span>-</span>
-                    <span>{awayScore} {awayCountry}</span>
-                    <Image
-                        src={getFlagSrc(awayCountry)}
-                        alt={awayCountry}
-                        className="inline-block w-6 h-4 sm:w-8 sm:h-5 object-contain"
-                        width={8}
-                        height={5}
-                    />
+                <div className="text-xl xs:text-2xl sm:text-3xl font-bold my-2 flex flex-row sm:flex-row items-center justify-center gap-2 xs:gap-4 sm:gap-6 md:gap-9">
+                    <span className="flex items-center">
+                        <Image
+                            src={getFlagSrc(homeCountry)}
+                            alt={homeCountry}
+                            className="inline-block w-5 h-3 xs:w-6 xs:h-4 sm:w-8 sm:h-5 object-contain"
+                            width={8}
+                            height={5}
+                        />
+                        {homeCountry}
+                    </span>
+                    <span className="flex flex-row items-center text-base xs:text-lg sm:text-xl gap-1 xs:gap-2 sm:gap-3">
+                        {homeScore} - {awayScore}
+                    </span>
+                    <span className="flex items-center ">
+                        {awayCountry}
+                        <Image
+                            src={getFlagSrc(awayCountry)}
+                            alt={awayCountry}
+                            className="inline-block w-5 h-3 xs:w-6 xs:h-4 sm:w-8 sm:h-5 object-contain"
+                            width={8}
+                            height={5}
+                        />
+                    </span>
                 </div>
                 <div className="text-xs sm:text-sm uppercase tracking-widest text-green-500">Terminado</div>
             </div>
