@@ -79,9 +79,8 @@ export default function Contact() {
                                             <MapPin className="h-5 w-5" />
                                         </div>
                                         <div>
-                                            <h3 className="font-medium text-lg mb-1">Endereço</h3>
-                                            <p className="text-gray-600">Avenida do Bessa 130C</p>
-                                            <p className="text-gray-600">4100-012 Porto, Portugal</p>
+                                            <p className="text-gray-600">Porto Portugal</p>
+                                            <p className="text-gray-600">4100-012</p>
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -93,7 +92,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <h3 className="font-medium text-lg mb-1">Telefone</h3>
-                                            <p className="text-gray-600">+351 935 254 355</p>
+                                            <p className="text-gray-600">+351 923 382 195</p>
                                         </div>
                                     </CardContent>
                                 </Card>
