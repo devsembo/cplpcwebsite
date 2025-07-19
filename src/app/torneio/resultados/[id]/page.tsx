@@ -172,7 +172,7 @@ export default function GameSummary() {
                                                     {homeEvents.filter((e) => e.half === 1).map((event) => (
                                                         <div key={event.id} className="flex items-center mb-1 sm:mb-2">
                                                             <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
-                                                            <span className="font-medium">
+                                                            <span className="font-normal">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
                                                                 {event.eventType === "red" && "🟥"}
@@ -197,7 +197,7 @@ export default function GameSummary() {
                                                     {homeEvents.filter((e) => e.half === 2).map((event) => (
                                                         <div key={event.id} className="flex items-center mb-1 sm:mb-2">
                                                             <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
-                                                            <span className="font-medium">
+                                                            <span className="font-normal">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
                                                                 {event.eventType === "red" && "🟥"}
@@ -229,7 +229,7 @@ export default function GameSummary() {
                                                     {awayEvents.filter((e) => e.half === 1).map((event) => (
                                                         <div key={event.id} className="flex items-center mb-1 sm:mb-2">
                                                             <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
-                                                            <span className="font-medium">
+                                                            <span className="font-normal">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
                                                                 {event.eventType === "red" && "🟥"}
@@ -254,7 +254,7 @@ export default function GameSummary() {
                                                     {awayEvents.filter((e) => e.half === 2).map((event) => (
                                                         <div key={event.id} className="flex items-center mb-1 sm:mb-2">
                                                             <span className="text-xs sm:text-sm w-12 text-muted-foreground">{event.minute}</span>
-                                                            <span className="font-medium">
+                                                            <span className="font-normal">
                                                                 {event.eventType === "goal" && "⚽"}
                                                                 {event.eventType === "yellow" && "🟨"}
                                                                 {event.eventType === "red" && "🟥"}
