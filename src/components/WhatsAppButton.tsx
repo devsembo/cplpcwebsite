@@ -3,8 +3,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const WhatsAppButton = () => {
-    const phoneNumber = '+351923382195'; // Your support WhatsApp number
-    const message = encodeURIComponent("Olá Preciso de algumas de ajuda, com algumas questões com o meu consulado."); // Predefined message
+    const phoneNumber = '+351923382195'; 
+    const message = encodeURIComponent("Olá Preciso de ajuda, com algumas questões com o meu consulado."); // Predefined message
     const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
 
     return (
