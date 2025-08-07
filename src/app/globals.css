@@ -41,6 +41,11 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
+  --conference-navy: var(--conference-navy);
+  --conference-navy-light: var(--conference-navy-light);
+  --conference-orange: var(--conference-orange);
+  --conference-orange-light: var(--conference-orange-light);
+  --gradient-hero: linear-gradient(135deg, var(--conference-navy), var(--conference-navy-light));
 }
 
 :root {
@@ -76,6 +81,10 @@
   --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
   --sidebar-border: oklch(0.928 0.006 264.531);
   --sidebar-ring: oklch(0.707 0.022 261.325);
+  --conference-navy: #1e3a8a;
+  --conference-navy-light: #3b82f6;
+  --conference-orange: #f97316;
+  --conference-orange-light: #fb923c;
 }
 
 .dark {
@@ -110,6 +119,10 @@
   --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
+  --conference-navy: #1e3a8a;
+  --conference-navy-light: #3b82f6;
+  --conference-orange: #f97316;
+  --conference-orange-light: #fb923c;
 }
 
 @layer base {

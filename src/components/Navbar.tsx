@@ -17,9 +17,11 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const navigate = useRouter();
 
     return (
         <header className="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-sm border-b shadow-sm">
@@ -55,8 +57,10 @@ export default function Navbar() {
                 </nav>
 
                 <div className="hidden md:flex items-center gap-4">
-                    <Button variant="outline" className="border-blue-950 text-blue-950 hover:bg-blue-950 hover:text-white">
-                        PT | EN
+                    <Button variant="outline" className="border-red-400 cursor-not-allowed text-red-500  hover:text-green-400" onClick={() => navigate.push('/perdidos')}  disabled>
+                        <span className="flex items-center gap-2">
+                            Pedidos e achados
+                        </span>
                     </Button>
 
                     {/* Botão com dialog */}
@@ -175,18 +179,9 @@ export default function Navbar() {
                             </Link>
                         </nav>
                         <div className="mt-4 space-y-4">
-                            <Button
-                                variant="outline"
-                                className="w-full border-blue-950 text-blue-950 hover:bg-blue-950 hover:text-white"
-                            >
-                                PT | EN
-                            </Button>
 
                             <Dialog>
                                 <DialogTrigger asChild>
-                                    <Button className="w-full bg-blue-950 text-white hover:bg-white hover:text-blue-950">
-                                        Solicitar Orçamento
-                                    </Button>
                                 </DialogTrigger>
                                 <DialogContent className="sm:max-w-[600px]">
                                     <DialogHeader>
