@@ -12,6 +12,7 @@ import { toast } from "sonner";
 import { User, Mail, Phone, Building, Users } from "lucide-react";
 import { api } from "@/services/api";
 import { Controller } from "react-hook-form";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
     firstName: z.string().min(1, "Nome é obrigatório"),
@@ -29,8 +30,9 @@ type FormData = z.infer<typeof formSchema>;
 
 export default function ConferenceForm() {
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const router = useRouter();
 
-    const { register, handleSubmit, control, formState: { errors } } = useForm<FormData>({
+    const { register, handleSubmit, control, reset, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
             firstName: "",
@@ -51,7 +53,16 @@ export default function ConferenceForm() {
         try {
             await api.post('/api/conference/registration', data);
             await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate delay
-            toast.success("Inscrição realizada com sucesso!");
+            toast.success("Inscrição realizada com sucesso, verifique a confirmação no seu Email!", {
+                style: {
+                    color: 'green',
+                    
+                }
+            });
+            reset();
+
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            router.push('/');
         } catch (error) {
             toast.error("Erro ao realizar inscrição. Tente novamente.");
             console.error("Error submitting form:", error);

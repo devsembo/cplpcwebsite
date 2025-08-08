@@ -13,8 +13,9 @@ export default function ConferenceHero() {
                 <div className="text-center mb-12">
                     {/* LAP Logo placeholder */}
                     <div className="mb-8">
-                        <div className="w-24 h-24 mx-auto bg-[var(--color-card)]/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-                            <Image src={'/torneio/lap_red.png'} alt="Lap logo" width={150} height={20}/>
+                        <div className=" w-full h-24 mx-auto gap-5 bg-[var(--color-card)]/10 rounded-full flex items-center justify-center backdrop-blur-sm">
+                            <Image src={'/torneio/lap_red.png'} alt="Lap logo" width={50} height={20}/>
+                            <Image src={'/consulado.png'} alt="Lap logo" width={200} height={80} className="bg-black p-2 rounded-2xl"/>
                         </div>
                     </div>
 
