@@ -2,6 +2,7 @@
 import { Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Instagram, Linkedin } from 'lucide-react'; // Ícones para redes sociais
 
 export default function Footer() {
     return (
@@ -69,13 +70,34 @@ export default function Footer() {
                                 <span className="text-gray-400">geral@cplpconnect.pt</span>
                             </li>
                         </ul>
+
                     </div>
                 </div>
 
                 <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                    <p className="text-gray-400 text-sm">
-                        © {new Date().getFullYear()} CPLP Connect. Todos os direitos reservados.
-                    </p>
+                    <div>
+                        <ul className="space-y-4 w-80 md:w-full flex items-center gap-3">
+                            <li className="flex items-center gap-3">
+                                <Instagram className="h-6 w-6 text-brand-green bg-purple-400 rounded-sm p-0.1"  />
+                                <Link target='_blank' href="https://www.instagram.com/cplpconnect/" className="text-gray-400 hover:text-white transition-colors">
+                                    Instagram
+                                </Link>
+                            </li>
+                            <li className="flex items-center gap-3">
+                                <Linkedin className="h-6 w-6 text-brand-green bg-blue-500 rounded-sm p-0.5"   />
+                                <Link target='_blank' href="https://www.linkedin.com/company/cplp-connect/" className="text-gray-400 hover:text-white transition-colors">
+                                    LinkedIn
+                                </Link>
+                            </li>
+                            <li className="flex items-center gap-3">
+                            </li>
+                        </ul>
+
+                        <p className="text-gray-400 text-sm">
+                            © {new Date().getFullYear()} CPLP Connect. Todos os direitos reservados.
+                        </p>
+
+                    </div>
                     <div className="mt-4 md:mt-0 flex gap-4">
                         <Link href="/politica-privacidade" className="text-gray-400 hover:text-white text-sm transition-colors">
                             Política de Privacidade
