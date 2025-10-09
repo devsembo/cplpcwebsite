@@ -6,21 +6,21 @@ import { Instagram, Linkedin } from 'lucide-react'; // Ícones para redes sociai
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-900 text-white">
+        <footer className="bg-white text-shadow-gray-500">
             <div className="container max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
                     <div className="max-w-xs">
                         <Link href="/">
                             <Image
-                                src="/cplp-logo.png"
+                                src="/Logo.png"
                                 alt="CPLP Connect Logo"
-                                className="h-12 md:h-20 w-auto mb-[-10px]"
+                                className="object-cover"
                                 height={100}
-                                width={100}
+                                width={150}
                             />
                         </Link>
                         <p className="text-gray-400">
-                            Desenvolvendo soluções de software inovadoras para a comunidade CPLP, conectando com tecnologia e inovação para impulsionar o futuro digital da comunidade CPLP.
+                            Desenvolvemos soluções de software para a comunidade CPLP, promovendo serviços digitais confiáveis, acessíveis e interoperáveis.
                         </p>
                     </div>
 
@@ -74,17 +74,17 @@ export default function Footer() {
                     </div>
                 </div>
 
-                <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div className="border-t border-gray-300 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
                     <div>
                         <ul className="space-y-4 w-80 md:w-full flex items-center gap-3">
                             <li className="flex items-center gap-3">
-                                <Instagram className="h-6 w-6 text-brand-green bg-purple-400 rounded-sm p-0.1"  />
+                                <Instagram className="h-6 w-6 text-brand-green rounded-sm p-0.1"  color='#d45a8d'/>
                                 <Link target='_blank' href="https://www.instagram.com/cplpconnect/" className="text-gray-400 hover:text-white transition-colors">
                                     Instagram
                                 </Link>
                             </li>
                             <li className="flex items-center gap-3">
-                                <Linkedin className="h-6 w-6 text-brand-green bg-blue-500 rounded-sm p-0.5"   />
+                                <Linkedin className="h-6 w-6 text-brand-green rounded-sm p-0.5" color='#0077b5' />
                                 <Link target='_blank' href="https://www.linkedin.com/company/cplp-connect/" className="text-gray-400 hover:text-white transition-colors">
                                     LinkedIn
                                 </Link>

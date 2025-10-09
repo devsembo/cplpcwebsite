@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -17,61 +17,74 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
-    const navigate = useRouter();
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
 
     return (
-        <header className="sticky top-0 z-40 w-full bg-white/90 backdrop-blur-sm border-b shadow-sm">
+        <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${isScrolled ? 'bg-background/95 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
             <div className="container max-w-7xl mx-auto flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center gap-2">
                     <Link href="/" className="flex items-center gap-2">
-                        <Image
-                            src="/cplp-logo.png"
-                            alt="CPLP Connect Logo"
-                            width={100}
-                            height={100}
-                            className="h-20 md:h-24 w-auto"
-                        />
+                        {isScrolled ?
+                            <Image
+                                src="/Logo.png"
+                                alt="CPLP Connect Logo"
+                                width={150}
+                                height={100}
+                                className=" object-cover"
+                            />
+
+                            :
+                            <Image
+                                src="/cplp2.png"
+                                alt="CPLP Connect Logo"
+                                width={150}
+                                height={100}
+                                className=" object-cover"
+                            />
+
+                        }
                     </Link>
                 </div>
 
-                <nav className="hidden md:flex items-center gap-6">
-                    <Link href="/" className="text-base font-medium hover:text-blue-950 transition-colors">
+                <nav className={`hidden md:flex items-center gap-6 ${isScrolled ? 'text-blue-600' : 'text-white'}`}>
+                    <Link href="/" className="text-base  font-medium hover:text-green-400 transition-colors">
                         Início
                     </Link>
-                    <Link href="/sobre" className="text-base font-medium hover:text-blue-950 transition-colors">
+                    <Link href="/sobre" className="text-base font-medium hover:text-green-400 transition-colors">
                         Sobre Nós
                     </Link>
-                    <Link href="/servicos" className="text-base font-medium hover:text-blue-950 transition-colors">
+                    <Link href="/servicos" className="text-base font-medium hover:text-green-400 transition-colors">
                         Serviços
                     </Link>
-                    <Link href="/projetos" className="text-base font-medium hover:text-blue-950 transition-colors">
+                    <Link href="/projetos" className="text-base font-medium hover:text-green-400 transition-colors">
                         Projetos
                     </Link>
-                    <Link href="/contacto" className="text-base font-medium hover:text-blue-950 transition-colors">
+                    <Link href="/contacto" className="text-base font-medium hover:text-green-400 transition-colors">
                         Contacto
                     </Link>
                 </nav>
 
                 <div className="hidden md:flex items-center gap-4">
-                    <Button variant="outline" className="border-red-400 cursor-not-allowed text-red-500  hover:text-green-400" onClick={() => navigate.push('/perdidos')}  disabled>
-                        <span className="flex items-center gap-2">
-                            Pedidos e achados
-                        </span>
+                    <Button variant="outline" className="border-gray-300 text-gray-600 cursor-not-allowed" >
+                        Pedidos e achados
                     </Button>
 
-                    {/* Botão com dialog */}
+                    {/* Mobile inside Sheet */}
                     <Dialog>
                         <DialogTrigger asChild>
-                            <Button
-                                variant={'default'}
-                                className="bg-blue-950 text-white hover:bg-white hover:text-blue-950 hover:cursor-pointer"
-                            >
-                                Solicitar Orçamento
-                            </Button>
+                            <Button className="bg-blue-900 cursor-pointer  text-white hover:text-green-400 w-full md:w-40 ">Solicitar Orçamento</Button>
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-[600px]">
                             <DialogHeader>
@@ -247,6 +260,6 @@ export default function Navbar() {
                     </SheetContent>
                 </Sheet>
             </div>
-        </header>
+        </header >
     );
 }

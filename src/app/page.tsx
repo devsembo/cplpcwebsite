@@ -10,25 +10,25 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white h-80  md:h-[45vh] md:py-20">
+      <section className="relative bg-gradient-to-r from-gray-900 to-gray-800 text-white h-80  md:h-[60vh] md:py-20">
         <div className="absolute inset-0  bg-cover bg-center opacity-10"
           style={{
-            backgroundImage: "url('/web.jpeg')", // substitui com o caminho real da imagem
+            backgroundImage: "url('/web.jpeg')", 
           }}></div>
         <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in ">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
               Soluções de Software Institucionais para a Comunidade CPLP
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-10 animate-slide-up hidden md:block">
-              Transformando a governança digital com tecnologia inovadora e soluções personalizadas.
+            <p className="text-lg md:text-xl text-gray-300 mb-10">
+              Transformamos a governação digital com tecnologia moderna e soluções personalizadas.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button className="bg-blue-950 hover:bg-blue-500 text-white">
-                Nossos Serviços
+              <Button asChild className="bg-brand-blue hover:bg-brand-blue-600 text-white">
+                <Link href="/servicos">Ver Serviços</Link>
               </Button>
-              <Button className="border-white text-white hover:bg-white/10 hover:cursor-pointer">
-                Saber Mais
+              <Button variant="outline" className="border-white text-white hover:bg-white/10">
+                <Link href="/contacto">Falar com a Equipa</Link>
               </Button>
             </div>
           </div>
@@ -114,24 +114,24 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="max-w-lg mx-auto lg:mx-0">
               <h2 className="text-3xl font-bold mb-6">Quem Somos</h2>
-              <p className="text-gray-600 mb-6">
-                A CPLP Connect é uma software house especializada em desenvolver soluções tecnológicas para instituições governamentais e organizações da Comunidade dos Países de Língua Portuguesa.
+              <p className="text-gray-700 mb-6">
+                A CPLP CONNECT desenvolve soluções tecnológicas para instituições e organizações da Comunidade dos Países de Língua Portuguesa (CPLP).
               </p>
-              <p className="text-gray-600 mb-6">
-                Nossa missão é facilitar a transformação digital dos serviços públicos, promovendo eficiência, transparência e melhor atendimento aos cidadãos.
+              <p className="text-gray-700 mb-6">
+                A nossa missão é apoiar a modernização dos serviços públicos, promovendo eficiência, transparência e melhor atendimento aos cidadãos.
               </p>
               <ul className="space-y-3 mb-8">
                 <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <span>Equipe com mais de 5 anos de experiência em desenvolvimento de software</span>
+                  <Check className="h-5 w-5 text-green-600 mt-0.5" aria-hidden="true" />
+                  <span>Equipa com experiência em projetos institucionais e governamentais</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <span>Parceiros oficiais de instituições governamentais em diversos países CPLP</span>
+                  <Check className="h-5 w-5 text-green-600 mt-0.5" aria-hidden="true" />
+                  <span>Projetos com conformidade, acessibilidade e segurança por padrão</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <Check className="h-5 w-5 text-green-500 shrink-0 mt-0.5" />
-                  <span>Soluções tecnológicas adaptadas às necessidades específicas de cada país</span>
+                  <Check className="h-5 w-5 text-green-600 mt-0.5" aria-hidden="true" />
+                  <span>Soluções adaptadas ao contexto cultural e regulatório da CPLP</span>
                 </li>
               </ul>
               <Button asChild className="bg-blue-600 hover:bg-blue-700 text-white">
