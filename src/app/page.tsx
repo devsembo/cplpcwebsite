@@ -25,7 +25,7 @@ export default function Home() {
             <Button asChild className="bg-brand-blue hover:bg-brand-blue-600 text-white w-full sm:w-auto">
               <Link href="/servicos">Ver Serviços</Link>
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white/10 w-full sm:w-auto">
+            <Button variant="outline" className="border-white bg-accent-foreground hover:text-blue-500 text-white hover:bg-white/10 w-full sm:w-auto">
               <Link href="/contacto">Falar com a Equipa</Link>
             </Button>
           </div>
