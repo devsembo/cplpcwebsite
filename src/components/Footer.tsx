@@ -6,7 +6,7 @@ import { Instagram, Linkedin } from 'lucide-react'; // Ícones para redes sociai
 
 export default function Footer() {
     return (
-        <footer className="bg-white text-shadow-gray-500">
+        <footer className="bg-gray-200 text-shadow-gray-600">
             <div className="container max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
                     <div className="max-w-xs">

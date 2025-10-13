@@ -146,8 +146,9 @@ export default function Navbar() {
 
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
+
                         <button className="md:hidden p-2" aria-label={isOpen ? 'Fechar menu' : 'Abrir menu'}>
-                            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                            {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" color={isScrolled ? 'black' : 'white'} />}
                         </button>
                     </SheetTrigger>
                     <SheetContent side="right" className="w-[340px] sm:w-[350px] bg-white p-4">
