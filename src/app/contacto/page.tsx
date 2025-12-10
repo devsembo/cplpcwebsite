@@ -8,6 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { motion } from "framer-motion";
+import { api } from "@/services/api";
 
 export default function Contact() {
     const [formData, setFormData] = useState({
@@ -24,17 +25,23 @@ export default function Contact() {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         setIsSubmitting(true);
 
-        // Simulação de submissão
-        setTimeout(() => {
-            toast.success("Agradecemos o seu contacto. Responderemos em breve.");
-            // Reset do formulário (mantido)
-            setFormData({ name: "", email: "", phone: "", organization: "", message: "", });
+        try {
+            await api.post("/api/contact", formData);
+            setTimeout(() => {
+                toast.success("Agradecemos o seu contacto. Responderemos em breve.");
+                // Reset do formulário (mantido)
+                setFormData({ name: "", email: "", phone: "", organization: "", message: "", });
+                setIsSubmitting(false);
+            }, 1500);
+        } catch (error) {
+            toast.error("Ocorreu um erro ao enviar a sua mensagem. Por favor, tente novamente mais tarde.");
             setIsSubmitting(false);
-        }, 1500);
+            console.error("Erro ao enviar o formulário de contacto:", error);
+        }
     };
 
     const itemVariants = {
@@ -119,11 +126,11 @@ export default function Contact() {
                             </motion.div>
 
                             {/* Cartão de Email */}
-                           <motion.div variants={itemVariants}>
+                            <motion.div variants={itemVariants}>
                                 <Card className="bg-white/5 border border-cyan-400/20 backdrop-blur-xl shadow-[0_0_40px_rgba(34,211,238,0.25)] hover:shadow-[0_0_60px_rgba(56,189,248,0.45)] transition-all duration-300">
                                     <CardContent className="flex items-start gap-4 p-6">
                                         <div className="h-10 w-10 rounded-xl bg-linear-to-br from-cyan-400/30 to-fuchsia-500/30 text-cyan-300 flex items-center justify-center shrink-0 border border-cyan-400/40">
-                                             <Mail className="h-5 w-5" />
+                                            <Mail className="h-5 w-5" />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-lg mb-1 text-slate-50">Email</h3>
@@ -135,10 +142,10 @@ export default function Contact() {
                             </motion.div>
 
                             {/* Horário de Funcionamento (Mantido) */}
-                                <motion.div
-                                    className="mt-12 p-6 bg-gray-200/10 rounded-lg border-[1] border-ring/20 shadow-card"
-                                    variants={itemVariants}
-                                >
+                            <motion.div
+                                className="mt-12 p-6 bg-gray-200/10 rounded-lg border-[1] border-ring/20 shadow-card"
+                                variants={itemVariants}
+                            >
                                 <h3 className="font-semibold text-lg mb-1 text-slate-50">Horário de Funcionamento</h3>
                                 <div className="space-y-3">
                                     <div className="flex justify-between border-b border-border/50 pb-2">
