@@ -3,27 +3,69 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import Image from "next/image";
-//import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react"; // Reintroduzindo ícones
 import { Badge } from "@/components/ui/badge";
+import { motion } from "framer-motion"; // Adicionando motion para dar vida
+
+// Dados de exemplo para o grid (simplificados para o código)
+const projectData = [
+    {
+        id: 1,
+        country: "Moçambique",
+        year: "2025",
+        status: "Em Andamento",
+        statusColor: "bg-yellow-500",
+        title: "Sistema de Gestão Documental Consular",
+        description: "Implementação de uma plataforma digital para gestão e tramitação de processos para o consulado Geral de Moçambique no Porto.",
+        image: "https://images.unsplash.com/photo-1661956602153-23384936a1d3?w=500&auto=format&fit=crop&q=80",
+        link: "#"
+    },
+    {
+        id: 2,
+        country: "CPLP",
+        year: "2025",
+        status: "Em Andamento",
+        statusColor: "bg-yellow-500",
+        title: "TROKA - Plataforma de remessas Digitais",
+        description: "A TROKA é uma plataforma digital (MTO - Money Transfer Operator) com foco na Comunidade dos Países de Língua Portuguesa (CPLP).",
+        image: "/troka-logo.png",
+        link: "https://trokax.com"
+    },
+    // Adicione mais projetos aqui para preencher o grid
+];
 
 
 export default function Projects() {
+
+    // Animação para a entrada dos cartões
+    const cardVariants = {
+        hidden: { opacity: 0, y: 50 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
+    };
+
+    const heroBackground = {
+        backgroundImage: "url('/project-background.jpg')", // Usar um fundo tech
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+    };
+
     return (
-        <div className="min-h-screen flex flex-col">
+        <div className="min-h-screen flex flex-col bg-[#0A192F] text-gray-100">
 
             {/* Hero Section */}
             <section
-                className="relative bg-cover bg-center bg-no-repeat py-20"
-                style={{
-                    backgroundImage: "url('/project.jpg')", // substitui com o caminho real da imagem
-                }}
+                className="relative py-32 md:py-48"
+                style={heroBackground}
             >
-                <div className="absolute inset-0 bg-black/50 bg-opacity-50"></div> {/* Overlay escuro */}
+                {/* Overlay Dark Blue com transparência para o ar tech */}
+                <div className="absolute inset-0 bg-[#0A192F]/80 backdrop-blur-sm"></div>
 
                 <div className="relative container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center text-white">
-                        <h1 className="text-4xl font-bold mb-6">Nossos Projetos</h1>
-                        <p className="text-xl">
+                        <h1 className="text-5xl font-bold mb-4 text-white">
+                            Nossos <span className="text-cyan-400">Projetos</span>
+                        </h1>
+                        <p className="text-xl text-gray-300">
                             Conheça alguns dos nossos principais trabalhos realizados para instituições governamentais da comunidade CPLP.
                         </p>
                     </div>
@@ -31,232 +73,82 @@ export default function Projects() {
             </section>
 
 
-            {/* Filter */}
-            <section className="py-10 border-b">
+
+            {/* Projects Grid */}
+            <section className="py-20 bg-[#162842]">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="flex flex-wrap justify-center gap-4">
-                        <Button variant="ghost" className="hover:bg-blue-200">
-                            Todos os Projetos
-                        </Button>
-                        <Button variant="ghost" className="hover:bg-blue-100">
-                            Angola
-                        </Button>
-                        <Button variant="ghost" className="hover:bg-blue-100">
-                            Moçambique
-                        </Button>
-                    </div>
-                </div>
-            </section>
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
 
-            {/* Projects Section */}
-            <section className="py-20">
-                <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 justify-items-center">
-                        {/* Project 1 */}
-                        <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
-                            <div className="h-56 overflow-hidden">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1661956602153-23384936a1d3?w=500&auto=format&fit=crop&q=80"
-                                    alt="Sistema de Gestão Documental AIMA"
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                                />
-                            </div>
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
-                                        Moçambique
-                                    </span>
-                                    <span className="text-xs text-gray-500">2025</span>
+                        {projectData.map((project) => (
+                            <motion.div
+                                key={project.id}
+                                variants={cardVariants}
+                                initial="hidden"
+                                whileInView="visible"
+                                viewport={{ once: true, amount: 0.3 }}
+                                className="group"
+                            >
+                                {/* Card com estilo tech: fundo escuro, borda sutil, hover glow */}
+                                <Card className="overflow-hidden bg-[#102A43] border border-[#1E3050] shadow-xl shadow-black/30 hover:shadow-cyan-400/20 transition-all duration-300">
+                                    <div className="h-56 overflow-hidden">
+                                        <Image
+                                            src={project.image}
+                                            alt={project.title}
+                                            width={500}
+                                            height={300}
+                                            className="w-full h-full object-cover transition-transform group-hover:scale-105"
+                                        />
+                                    </div>
+                                    <CardContent className="p-6">
+                                        <div className="flex justify-between items-center mb-4">
+                                            {/* Tag do País */}
+                                            <span className="text-xs font-medium text-blue-300 bg-blue-900/40 py-1 px-3 rounded-full">
+                                                {project.country}
+                                            </span>
+                                            <span className="text-xs text-gray-400">{project.year}</span>
+                                        </div>
+                                        <h3 className="text-2xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">
+                                            {project.title}
+                                        </h3>
+                                        <p className="text-gray-400 mb-4">
+                                            {project.description}
+                                        </p>
 
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">Sistema de Gestão Documental Consular</h3>
-                                <p className="text-gray-600 mb-4">
-                                    Implementação de uma plataforma digital para gestão e tramitação de processos para o consulado Geral de Moçambique no Porto.
-                                </p>
-                                <Badge variant="outline" className="text-xs font-medium text-white bg-orange-400 py-1 px-2 rounded-full">
-                                    Em Andamento
-                                </Badge>
-                                {/**
-                                <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                                    Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                </Link>
-                                 */}
-                            </CardContent>
-                        </Card>
+                                        {/* Badge do Status (Em Andamento/Concluído) */}
+                                        <Badge variant="default" className={`${project.statusColor} text-xs font-bold text-black py-1 px-3 rounded`}>
+                                            {project.status}
+                                        </Badge>
 
-                        {/* Project 2 
-                        <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
-                            <div className="h-56 overflow-hidden">
-                                <Image
-                                    src="/sepe.jpg"
-                                    alt="Portal de Serviços Públicos"
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                                />
-                            </div>
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
-                                        Angola
-                                    </span>
-                                    <span className="text-xs text-gray-500">2022</span>
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">Portal de Serviços Públicos</h3>
-                                <p className="text-gray-600 mb-4">
-                                    Desenvolvimento de portal integrado de serviços públicos para cidadãos angolanos.
-                                </p>
-                                <Link href="https://sepe.gov.ao/ao/" target="_blank" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                                    Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                </Link>
-                            </CardContent>
-                        </Card>
-*/}
-                        {/* Project 3 
-                        <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
-                            <div className="h-56 overflow-hidden">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1573496130423-4516f84b4a4b?w=500&auto=format&fit=crop&q=80"
-                                    alt="Sistema de Gestão Eleitoral"
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                                />
-                            </div>
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
-                                        Moçambique
-                                    </span>
-                                    <span className="text-xs text-gray-500">2022</span>
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">Sistema de Gestão Eleitoral</h3>
-                                <p className="text-gray-600 mb-4">
-                                    Plataforma segura para gestão e auditoria de processos eleitorais em Moçambique.
-                                </p>
-                                <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                                    Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                </Link>
-                            </CardContent>
-                        </Card>
-                        */}
-
-                        {/* Project 4 
-                        <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
-                            <div className="h-56 overflow-hidden">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=500&auto=format&fit=crop&q=80"
-                                    alt="Sistema de Registro Civil"
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                                />
-                            </div>
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
-                                        Cabo Verde
-                                    </span>
-                                    <span className="text-xs text-gray-500">2021</span>
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">Sistema de Registro Civil</h3>
-                                <p className="text-gray-600 mb-4">
-                                    Modernização do sistema de registro civil e identidade de Cabo Verde, com emissão de documentos digitais.
-                                </p>
-                                <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                                    Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                </Link>
-                            </CardContent>
-                        </Card>
-*/}
-                        {/* Project 5 
-                        <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
-                            <div className="h-56 overflow-hidden">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1579389083395-4507e98b5e67?w=500&auto=format&fit=crop&q=80"
-                                    alt="Plataforma de Compras Públicas"
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                                />
-                            </div>
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
-                                        Brasil
-                                    </span>
-                                    <span className="text-xs text-gray-500">2021</span>
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">Plataforma de Compras Públicas</h3>
-                                <p className="text-gray-600 mb-4">
-                                    Sistema integrado para gestão de compras governamentais, licitações e contratos públicos.
-                                </p>
-                                <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                                    Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                </Link>
-                            </CardContent>
-                        </Card>
-*/}
-                        {/* Project 6 
-                        <Card className="overflow-hidden border-none shadow-lg hover:shadow-xl transition-all max-w-sm">
-                            <div className="h-56 overflow-hidden">
-                                <Image
-                                    src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=500&auto=format&fit=crop&q=80"
-                                    alt="Sistema Integrado de Educação"
-                                    width={500}
-                                    height={300}
-                                    className="w-full h-full object-cover transition-transform hover:scale-105"
-                                />
-                            </div>
-                            <CardContent className="p-6">
-                                <div className="flex justify-between items-center mb-4">
-                                    <span className="text-xs font-medium text-blue-950 bg-blue-950/10 py-1 px-2 rounded-full">
-                                        Portugal
-                                    </span>
-                                    <span className="text-xs text-gray-500">2020</span>
-                                </div>
-                                <h3 className="text-xl font-semibold mb-2">Sistema Integrado de Educação</h3>
-                                <p className="text-gray-600 mb-4">
-                                    Plataforma para gestão escolar, registro acadêmico e integração entre instituições de ensino.
-                                </p>
-                                <Link href="#" className="text-blue-950 font-medium inline-flex items-center gap-1 hover:gap-2 transition-all">
-                                    Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                </Link>
-                            </CardContent>
-                        </Card>
-                        */}
+                                        {/* Link de Detalhes */}
+                                        {project.link !== '#' && (
+                                            <Link
+                                                href={project.link}
+                                                target="_blank"
+                                                className="mt-4 ml-5 text-cyan-400 font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300"
+                                            >
+                                                Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
+                                            </Link>
+                                        )}
+                                    </CardContent>
+                                </Card>
+                            </motion.div>
+                        ))}
                     </div>
 
-                    {/* Pagination 
-                    <div className="flex justify-center mt-12">
-                        <div className="flex items-center gap-2">
-                            <Button variant="outline" size="icon" disabled>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-left"><path d="m15 18-6-6 6-6" /></svg>
-                            </Button>
-                            <Button variant="outline" size="sm" className="bg-blue-950 text-white hover:bg-blue-950-dark">1</Button>
-                            <Button variant="outline" size="sm">2</Button>
-                            <Button variant="outline" size="sm">3</Button>
-                            <Button variant="outline" size="icon">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-chevron-right"><path d="m9 18 6-6-6-6" /></svg>
-                            </Button>
-                        </div>
-                    </div>
-                    */}
                 </div>
             </section>
 
 
-            {/* Contact CTA */}
-            <section className="py-20 bg-blue-950 text-white">
+            {/* Contact CTA (Ajustado para cores fixas tech) */}
+            <section className="py-20 bg-[#153457] text-white">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center">
                         <h2 className="text-3xl font-bold mb-6">Transforme sua Instituição com Soluções Inovadoras</h2>
                         <p className="text-xl text-white/80 mb-8">
                             Entre em contacto connosco para discutir as necessidades específicas da sua instituição e descobrir como podemos ajudar.
                         </p>
-                        <Button size="lg" className="bg-white text-blue-900 hover:bg-gray-100">
+                        {/* Botão de destaque com cor cian */}
+                        <Button size="lg" className="bg-cyan-400 text-gray-900 hover:bg-cyan-300 font-bold shadow-lg shadow-cyan-400/30">
                             <Link href="/contacto">Solicitar Reunião</Link>
                         </Button>
                     </div>

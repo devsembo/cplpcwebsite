@@ -6,13 +6,13 @@ import { Instagram, Linkedin } from 'lucide-react'; // Ícones para redes sociai
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-200 text-shadow-gray-600">
+        <footer className="bg-gray-900 text-white">
             <div className="container max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
                     <div className="max-w-xs">
                         <Link href="/">
                             <Image
-                                src="/Logo.png"
+                                src="/CPLP LOGO (3).png"
                                 alt="CPLP Connect Logo"
                                 className="object-cover"
                                 height={100}

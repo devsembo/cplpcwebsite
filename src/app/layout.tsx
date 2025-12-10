@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
-import WhatsAppButton from "@/components/WhatsAppButton";
+import { LanguageProvider } from "@/contexts/LanguageContext";
+import AnimatedBackground from '@/components/AnimatedBackground';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -60,9 +61,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white text-black`}
       >
+        <AnimatedBackground />
         <LayoutWrapper>
-          {children}
-          <WhatsAppButton />
+          <LanguageProvider>
+            <div className="flex-1">
+              {children}
+            </div>
+          </LanguageProvider>
         </LayoutWrapper>
       </body>
     </html>
