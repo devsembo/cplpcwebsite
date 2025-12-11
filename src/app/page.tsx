@@ -10,7 +10,6 @@ import Solutions from '@/components/Solutions';
 export default function Home() {
   return (
     <>
- 
       <Hero />
       <About />
       <Services />

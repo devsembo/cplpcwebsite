@@ -76,7 +76,7 @@ const Hero = () => {
 
                     {/* CTA Buttons - Link do Next.js */}
                     <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in-up" style={{ animationDelay: "0.5s" }}>
-                        <Link href="/about" passHref>
+                        <Link href="/sobre" passHref>
                             <Button
                                 size="lg"
                                 className="text-lg px-8 py-6 shadow-glow hover:shadow-card-hover transition-smooth group animate-glow-pulse bg-linear-to-r from-cyan-500/50  to-green-600/50 cursor-pointer hover:text-white"
@@ -86,7 +86,7 @@ const Hero = () => {
                                 <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-smooth" />
                             </Button>
                         </Link>
-                        <Link href="/contact" passHref>
+                        <Link href="/contacto" passHref>
                             <Button
                                 size="lg"
                                 variant="outline"

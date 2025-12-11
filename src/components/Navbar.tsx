@@ -88,7 +88,7 @@ export default function Navbar() {
                         </SheetHeader>
 
                         <nav className="flex flex-col space-y-2 py-6">
-                            {['Início', 'Sobre Nós', 'Serviços', 'Projetos', 'Contacto'].map((label, index) => (
+                            {['Início', 'Sobre', 'servicos', 'projetos', 'contacto'].map((label, index) => (
                                 <Link
                                     key={index}
                                     href={label === 'Início' ? '/' : `/${label.toLowerCase().replace(' ', '')}`}
