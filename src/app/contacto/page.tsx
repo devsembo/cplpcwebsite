@@ -119,7 +119,7 @@ export default function Contact() {
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-lg mb-1 text-slate-50">Telefone</h3>
-                                            <p className="text-slate-300/80">+351 923 382 195</p>
+                                            <p className="text-slate-300/80">+351 935 254 355</p>
                                         </div>
                                     </CardContent>
                                 </Card>
