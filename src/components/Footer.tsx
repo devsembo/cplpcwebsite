@@ -6,7 +6,7 @@ import { Instagram, Linkedin } from 'lucide-react'; // Ícones para redes sociai
 
 export default function Footer() {
     return (
-        <footer className="bg-gray-900 text-white">
+        <footer className="bg-white/[0.03] backdrop-blur-sm border-t border-cyan-400/10 text-white">
             <div className="container max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-8 justify-items-center">
                     <div className="max-w-xs">
@@ -19,7 +19,7 @@ export default function Footer() {
                                 width={150}
                             />
                         </Link>
-                        <p className="text-gray-400">
+                        <p className="text-slate-300/70">
                             Desenvolvemos soluções de software para a comunidade CPLP, promovendo serviços digitais confiáveis, acessíveis e interoperáveis.
                         </p>
                     </div>
@@ -30,11 +30,11 @@ export default function Footer() {
                             Links Rápidos
                         </h3>
                         <ul className="space-y-2 w-80 md:w-full ">
-                            <li><Link href="/" className="text-gray-400 hover:text-white transition-colors ">Início</Link></li>
-                            <li><Link href="/sobre" className="text-gray-400 hover:text-white transition-colors">Sobre Nós</Link></li>
-                            <li><Link href="/servicos" className="text-gray-400 hover:text-white transition-colors">Serviços</Link></li>
-                            <li><Link href="/projetos" className="text-gray-400 hover:text-white transition-colors">Projetos</Link></li>
-                            <li><Link href="/contacto" className="text-gray-400 hover:text-white transition-colors">Contacto</Link></li>
+                            <li><Link href="/" className="text-slate-300/70 hover:text-cyan-400 transition-colors ">Início</Link></li>
+                            <li><Link href="/sobre" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Sobre Nós</Link></li>
+                            <li><Link href="/servicos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Serviços</Link></li>
+                            <li><Link href="/projetos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Projetos</Link></li>
+                            <li><Link href="/contacto" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Contacto</Link></li>
                         </ul>
                     </div>
 
@@ -44,10 +44,10 @@ export default function Footer() {
                             Serviços
                         </h3>
                         <ul className="space-y-2 w-80 md:w-full">
-                            <li><Link href="/servicos" className="text-gray-400 hover:text-white transition-colors">Desenvolvimento Personalizado</Link></li>
-                            <li><Link href="/servicos" className="text-gray-400 hover:text-white transition-colors">Consultoria</Link></li>
-                            <li><Link href="/servicos" className="text-gray-400 hover:text-white transition-colors">Suporte Técnico</Link></li>
-                            <li><Link href="/faqs" className="text-gray-400 hover:text-white transition-colors">Pergunta Frequentes</Link></li>
+                            <li><Link href="/servicos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Desenvolvimento Personalizado</Link></li>
+                            <li><Link href="/servicos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Consultoria</Link></li>
+                            <li><Link href="/servicos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Suporte Técnico</Link></li>
+                            <li><Link href="/faqs" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Perguntas Frequentes</Link></li>
                         </ul>
                     </div>
 
@@ -58,34 +58,34 @@ export default function Footer() {
                         </h3>
                         <ul className="space-y-4 w-80 md:w-full">
                             <li className="flex items-start gap-3">
-                                <MapPin className="h-5 w-5 text-brand-green mt-0.5" />
-                                <span className="text-gray-400">Porto, Portugal</span>
+                                <MapPin className="h-5 w-5 text-cyan-400 mt-0.5" />
+                                <span className="text-slate-300/70">Porto, Portugal</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <Phone className="h-5 w-5 text-brand-green mt-0.5" />
-                                <span className="text-gray-400">+351 935 254 355</span>
+                                <Phone className="h-5 w-5 text-cyan-400 mt-0.5" />
+                                <span className="text-slate-300/70">+351 935 254 355</span>
                             </li>
                             <li className="flex items-start gap-3">
-                                <Mail className="h-5 w-5 text-brand-green mt-0.5" />
-                                <span className="text-gray-400">geral@cplpconnect.pt</span>
+                                <Mail className="h-5 w-5 text-cyan-400 mt-0.5" />
+                                <span className="text-slate-300/70">info@cplpconnect.pt</span>
                             </li>
                         </ul>
 
                     </div>
                 </div>
 
-                <div className="border-t border-gray-300 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div className="border-t border-cyan-400/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
                     <div>
                         <ul className="space-y-4 w-80 md:w-full flex items-center gap-3">
                             <li className="flex items-center gap-3">
                                 <Instagram className="h-6 w-6 text-brand-green rounded-sm p-0.1"  color='#d45a8d'/>
-                                <Link target='_blank' href="https://www.instagram.com/cplpconnect/" className="text-gray-400 hover:text-white transition-colors">
+                                <Link target='_blank' href="https://www.instagram.com/cplpconnect/" className="text-slate-300/70 hover:text-cyan-400 transition-colors">
                                     Instagram
                                 </Link>
                             </li>
                             <li className="flex items-center gap-3">
                                 <Linkedin className="h-6 w-6 text-brand-green rounded-sm p-0.5" color='#0077b5' />
-                                <Link target='_blank' href="https://www.linkedin.com/company/cplp-connect/" className="text-gray-400 hover:text-white transition-colors">
+                                <Link target='_blank' href="https://www.linkedin.com/company/cplp-connect/" className="text-slate-300/70 hover:text-cyan-400 transition-colors">
                                     LinkedIn
                                 </Link>
                             </li>
@@ -93,16 +93,16 @@ export default function Footer() {
                             </li>
                         </ul>
 
-                        <p className="text-gray-400 text-sm">
+                        <p className="text-slate-400/60 text-sm">
                             © {new Date().getFullYear()} CPLP Connect. Todos os direitos reservados.
                         </p>
 
                     </div>
                     <div className="mt-4 md:mt-0 flex gap-4">
-                        <Link href="/politica-privacidade" className="text-gray-400 hover:text-white text-sm transition-colors">
+                        <Link href="/politica-privacidade" className="text-slate-400/60 hover:text-cyan-400 text-sm transition-colors">
                             Política de Privacidade
                         </Link>
-                        <Link href="/termos-de-servico" className="text-gray-400 hover:text-white text-sm transition-colors">
+                        <Link href="/termos-de-servico" className="text-slate-400/60 hover:text-cyan-400 text-sm transition-colors">
                             Termos de Serviço
                         </Link>
                     </div>

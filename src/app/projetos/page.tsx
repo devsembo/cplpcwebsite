@@ -50,22 +50,19 @@ export default function Projects() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-[#0A192F] text-gray-100">
+        <div className="min-h-screen flex flex-col text-foreground">
 
             {/* Hero Section */}
-            <section
-                className="relative py-32 md:py-48"
-                style={heroBackground}
-            >
-                {/* Overlay Dark Blue com transparência para o ar tech */}
-                <div className="absolute inset-0 bg-[#0A192F]/80 backdrop-blur-sm"></div>
+            <section className="relative py-32 md:py-48 overflow-hidden">
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-fuchsia-500/10 to-emerald-500/10" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.35),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(244,63,94,0.25),_transparent_55%)] opacity-70" />
 
                 <div className="relative container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center text-white">
-                        <h1 className="text-5xl font-bold mb-4 text-white">
-                            Nossos <span className="text-cyan-400">Projetos</span>
+                    <div className="max-w-3xl mx-auto text-center">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+                            Nossos <span className="bg-linear-to-r from-cyan-400 via-sky-400 to-emerald-400 bg-clip-text text-transparent">Projetos</span>
                         </h1>
-                        <p className="text-xl text-gray-300">
+                        <p className="text-xl text-slate-300/80">
                             Conheça alguns dos nossos principais trabalhos realizados para instituições governamentais da comunidade CPLP.
                         </p>
                     </div>
@@ -75,7 +72,7 @@ export default function Projects() {
 
 
             {/* Projects Grid */}
-            <section className="py-20 bg-[#162842]">
+            <section className="py-20 bg-white/[0.03] backdrop-blur-sm">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
 
@@ -89,7 +86,7 @@ export default function Projects() {
                                 className="group"
                             >
                                 {/* Card com estilo tech: fundo escuro, borda sutil, hover glow */}
-                                <Card className="overflow-hidden bg-[#102A43] border border-[#1E3050] shadow-xl shadow-black/30 hover:shadow-cyan-400/20 transition-all duration-300">
+                                <Card className="overflow-hidden bg-white/5 border border-cyan-400/20 backdrop-blur-xl shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:shadow-[0_0_40px_rgba(34,211,238,0.3)] transition-all duration-300">
                                     <div className="h-56 overflow-hidden">
                                         <Image
                                             src={project.image}
@@ -110,7 +107,7 @@ export default function Projects() {
                                         <h3 className="text-2xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">
                                             {project.title}
                                         </h3>
-                                        <p className="text-gray-400 mb-4">
+                                        <p className="text-slate-300/70 mb-4">
                                             {project.description}
                                         </p>
 
@@ -140,7 +137,7 @@ export default function Projects() {
 
 
             {/* Contact CTA (Ajustado para cores fixas tech) */}
-            <section className="py-20 bg-[#153457] text-white">
+            <section className="py-20 bg-linear-to-r from-cyan-500/10 to-emerald-500/10 text-white border-t border-cyan-400/10">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center">
                         <h2 className="text-3xl font-bold mb-6">Transforme sua Instituição com Soluções Inovadoras</h2>
@@ -148,7 +145,7 @@ export default function Projects() {
                             Entre em contacto connosco para discutir as necessidades específicas da sua instituição e descobrir como podemos ajudar.
                         </p>
                         {/* Botão de destaque com cor cian */}
-                        <Button size="lg" className="bg-cyan-400 text-gray-900 hover:bg-cyan-300 font-bold shadow-lg shadow-cyan-400/30">
+                        <Button size="lg" className="bg-linear-to-r from-cyan-500/60 via-sky-500/60 to-emerald-400/60 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:shadow-[0_0_60px_rgba(45,212,191,0.7)] hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 cursor-pointer">
                             <Link href="/contacto">Solicitar Reunião</Link>
                         </Button>
                     </div>

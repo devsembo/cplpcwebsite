@@ -16,6 +16,7 @@ export default function Contact() {
         email: "",
         phone: "",
         organization: "",
+        subject: "",
         message: "",
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,11 +31,10 @@ export default function Contact() {
         setIsSubmitting(true);
 
         try {
-            await api.post("/api/contact", formData);
+            await api.post("/public/contact", formData);
             setTimeout(() => {
                 toast.success("Agradecemos o seu contacto. Responderemos em breve.");
-                // Reset do formulário (mantido)
-                setFormData({ name: "", email: "", phone: "", organization: "", message: "", });
+                setFormData({ name: "", email: "", phone: "", organization: "", subject: "", message: "", });
                 setIsSubmitting(false);
             }, 1500);
         } catch (error) {
@@ -238,6 +238,20 @@ export default function Contact() {
                                                     className="bg-slate-900/60 border border-slate-700/70 rounded-xl px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/70 focus:border-transparent transition-all duration-200"
                                                 />
                                             </div>
+                        </div>
+
+                                        {/* Assunto */}
+                                        <div className="space-y-2">
+                                            <Label htmlFor="subject" className="text-white">Assunto *</Label>
+                                            <Input
+                                                id="subject"
+                                                name="subject"
+                                                value={formData.subject}
+                                                onChange={handleChange}
+                                                placeholder="Assunto da mensagem"
+                                                required
+                                                className="bg-slate-900/60 border border-slate-700/70 rounded-xl px-4 py-2 text-slate-100 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-cyan-400/70 focus:border-transparent transition-all duration-200"
+                                            />
                                         </div>
 
                                         {/* Mensagem */}
@@ -256,10 +270,10 @@ export default function Contact() {
                                         </div>
 
                                         {/* Botão de Submissão */}
-                                        <Button
+                        <Button
                                             type="submit"
                                             size="lg"
-                                            className="w-full bg-linear-to-r cursor-pointer from-cyan-500/50 via-sky-500/50 to-emerald-400/50 text-slate-950 font-semibold rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.6)] hover:shadow-[0_0_60px_rgba(45,212,191,0.85)] hover:scale-[1.02] active:scale-[0.99] transition-all duration-200"
+                                            className="w-full bg-linear-to-r cursor-pointer from-cyan-500/60 via-sky-500/60 to-emerald-400/60 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:shadow-[0_0_60px_rgba(45,212,191,0.7)] hover:scale-[1.02] active:scale-[0.99] transition-all duration-200"
                                             disabled={isSubmitting}
                                         >
                                             {isSubmitting ? "Enviando..." : "Enviar Mensagem"}

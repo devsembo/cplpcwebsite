@@ -17,22 +17,19 @@ export default function Services() {
 
 
     return (
-        <div className="min-h-screen flex flex-col bg-[#0A192F] text-gray-100">
+        <div className="min-h-screen flex flex-col text-foreground">
 
             {/* Hero Section */}
-            <section
-                className="relative py-32 md:py-48 border-b border-[#fcfcfc] "
-                style={{ backgroundImage: "url('/service-background.jpg')", backgroundSize: 'cover', backgroundPosition: 'center' }}
-            >
-                {/* Overlay Dark Tech */}
-                <div className="absolute inset-0 bg-[#0A192F]/80 backdrop-blur-sm"></div>
+            <section className="relative py-32 md:py-48 overflow-hidden">
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-fuchsia-500/10 to-emerald-500/10" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.35),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(244,63,94,0.25),_transparent_55%)] opacity-70" />
 
                 <div className="relative container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center text-white">
-                        <h1 className="text-5xl font-bold mb-4">
-                            Nossos <span className="text-cyan-400">Serviços</span>
+                    <div className="max-w-3xl mx-auto text-center">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+                            Nossos <span className="bg-linear-to-r from-cyan-400 via-sky-400 to-emerald-400 bg-clip-text text-transparent">Serviços</span>
                         </h1>
-                        <p className="text-xl text-gray-300">
+                        <p className="text-xl text-slate-300/80">
                             Soluções tecnológicas personalizadas para instituições governamentais e organizações da comunidade CPLP.
                         </p>
                     </div>
@@ -41,7 +38,7 @@ export default function Services() {
 
 
             {/* Services Section (Serviços Principais) */}
-            <section className="py-20 bg-[#0A192F]">
+            <section className="py-20">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="grid grid-cols-1 gap-20">
 
@@ -55,7 +52,7 @@ export default function Services() {
                         >
                             <div className="order-2 lg:order-1 max-w-lg mx-auto lg:mx-0">
                                 <h2 className="text-3xl font-bold mb-6 text-cyan-400">Desenvolvimento de Software Institucional</h2>
-                                <p className="text-gray-400 mb-6">
+                                <p className="text-slate-300/70 mb-6">
                                     Criamos soluções de software personalizadas para atender às necessidades específicas de instituições governamentais, facilitando a gestão de processos e serviços públicos.
                                 </p>
                                 <ul className="space-y-3 mb-8">
@@ -76,12 +73,12 @@ export default function Services() {
                                         <span>Soluções de interoperabilidade entre sistemas governamentais</span>
                                     </li>
                                 </ul>
-                                <Button className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-600/20">
+                                <Button className="bg-linear-to-r from-cyan-500/60 to-emerald-400/60 text-white font-semibold rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.4)] hover:shadow-[0_0_50px_rgba(45,212,191,0.6)] hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                                     Solicitar Informações
                                 </Button>
                             </div>
                             <div className="order-1 lg:order-2 max-w-lg mx-auto lg:mx-0">
-                                <div className="rounded-xl overflow-hidden border border-[#1E3050] shadow-2xl shadow-cyan-400/10">
+                                <div className="rounded-xl overflow-hidden border border-cyan-400/20 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
                                     <Image
                                         src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&auto=format&fit=crop&q=80"
                                         alt="Software Governamental"
@@ -106,7 +103,7 @@ export default function Services() {
                         >
                             <div className="order-2 max-w-lg mx-auto lg:mx-0">
                                 <h2 className="text-3xl font-bold mb-6 text-cyan-400">Assessoria em Transformação Digital</h2>
-                                <p className="text-gray-400 mb-6">
+                                <p className="text-slate-300/70 mb-6">
                                     Oferecemos consultoria especializada para auxiliar instituições governamentais no processo de transformação digital, definindo estratégias e implementando soluções.
                                 </p>
                                 <ul className="space-y-3 mb-8">
@@ -127,12 +124,12 @@ export default function Services() {
                                         <span>Capacitação de equipes para a cultura digital</span>
                                     </li>
                                 </ul>
-                                <Button className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-600/20">
+                                <Button className="bg-linear-to-r from-cyan-500/60 to-emerald-400/60 text-white font-semibold rounded-xl shadow-[0_0_30px_rgba(34,211,238,0.4)] hover:shadow-[0_0_50px_rgba(45,212,191,0.6)] hover:scale-[1.02] transition-all duration-200 cursor-pointer">
                                     Solicitar Informações
                                 </Button>
                             </div>
                             <div className="order-1 max-w-lg mx-auto lg:mx-0">
-                                <div className="rounded-xl overflow-hidden border border-[#1E3050] shadow-2xl shadow-cyan-400/10">
+                                <div className="rounded-xl overflow-hidden border border-cyan-400/20 shadow-[0_0_40px_rgba(34,211,238,0.2)]">
                                     <Image
                                         src="https://images.unsplash.com/photo-1522071500372-f0fd8c452178?w=600&auto=format&fit=crop&q=80"
                                         alt="Consultoria Tecnológica"
@@ -148,11 +145,11 @@ export default function Services() {
             </section>
 
             {/* Additional Services (Serviços Complementares) */}
-            <section className="py-20 bg-[#0C2036] border-t border-[#1E3050]">
+            <section className="py-20 bg-white/[0.03] backdrop-blur-sm border-t border-cyan-400/10">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
                         <h2 className="text-4xl font-bold mb-4 text-white">Serviços <span className="text-cyan-400">Complementares</span></h2>
-                        <p className="text-lg text-gray-400">
+                        <p className="text-lg text-slate-300/70">
                             Além dos nossos serviços principais, oferecemos uma série de soluções complementares para atender às necessidades específicas dos nossos clientes.
                         </p>
                     </div>
@@ -179,7 +176,7 @@ export default function Services() {
                                 }}
                             >
                                 {/* Cartão com estilo dark tech */}
-                                <Card className="bg-[#102A43] border border-[#1E3050] shadow-lg hover:border-cyan-400/50 transition-all duration-300 h-full">
+                                <Card className="bg-white/5 border border-cyan-400/20 backdrop-blur-xl shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:border-cyan-400/50 hover:shadow-[0_0_40px_rgba(34,211,238,0.3)] transition-all duration-300 h-full">
                                     <CardContent className="p-8">
                                         <div className="h-14 w-14 rounded-xl bg-cyan-600/10 text-cyan-400 flex items-center justify-center mb-5 border border-cyan-400/20">
                                             <service.icon className="h-7 w-7" />
@@ -187,7 +184,7 @@ export default function Services() {
                                         <h3 className="text-xl font-semibold mb-2 text-white group-hover:text-cyan-400 transition-colors">
                                             {service.title}
                                         </h3>
-                                        <p className="text-gray-400">
+                                        <p className="text-slate-300/70">
                                             {service.description}
                                         </p>
                                     </CardContent>
@@ -199,14 +196,14 @@ export default function Services() {
             </section>
 
             {/* Contact CTA */}
-            <section className="py-20 bg-gradient-to-r from-[#102A43] to-[#0A192F] text-white border-t border-[#1E3050]">
+            <section className="py-20 bg-linear-to-r from-cyan-500/10 to-emerald-500/10 text-white border-t border-cyan-400/10">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center">
                         <h2 className="text-3xl font-bold mb-6">Vamos Desenvolver a Solução Ideal para sua Instituição, Empresa ou Negócio</h2>
                         <p className="text-xl text-white/80 mb-8">
                             Entre em contacto connosco para discutir como podemos ajudar a sua instituição a transformar-se digitalmente.
                         </p>
-                        <Button size="lg" className="bg-cyan-400 text-gray-900 hover:bg-cyan-300 font-bold shadow-xl shadow-cyan-400/40 transition-all duration-300">
+                        <Button size="lg" className="bg-linear-to-r from-cyan-500/60 via-sky-500/60 to-emerald-400/60 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:shadow-[0_0_60px_rgba(45,212,191,0.7)] hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 cursor-pointer">
                             <Link href="/contacto">Solicitar Proposta</Link>
                         </Button>
                     </div>

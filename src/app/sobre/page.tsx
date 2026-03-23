@@ -41,10 +41,11 @@ export default function AboutUs() {
     };
 
     const team = [
-        { name: "Anderson Pedro", role: "Co-Founder & CTO", role_en: "Co-Founder & Chief Technology Officer", image: "/team/anderson.jpg" },
-        { name: "Nuno Marques", role: "Diretor-Executivo (CEO)", role_en: "Chief Executive Officer", image: "/team/nuno.jpg" },
-        { name: "William Vieira", role: "Diretor de Operações & Projetos (COO)", role_en: "Chief Operations Officer", image: "/team/william.jpg" },
-        { name: "Valter Micas", role: "Diretor Comercial (CCO)", role_en: "Chief Commercial Officer", image: "/team/valter.jpg" },
+        { name: "Anderson Pedro", role: "Co-Founder", role_en: "Co-Founder", image: "/team/anderson.jpg" },
+        { name: "Emanuel Macaia", role: "Strategic Director", role_en: "Strategic Director", image: "/team/Emanuel.jpg" },
+        { name: "Aldemir Gunza", role: "Business Developer", role_en: "Business Developer", image: "/team/Aldemir.jpg" },
+        { name: "Bruno Ribas", role: "Diretor de Operações & Projetos (COO)", role_en: "Chief Operations Officer", image: "/team/William.jpg" },
+        { name: "Leocádio Estrela", role: "Chief Technology Officer (CTO)", role_en: "Chief Technology Officer", image: "/team/Valter.jpg" },
     ];
 
     const heroBackground = {
@@ -54,23 +55,21 @@ export default function AboutUs() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col bg-[#0A192F] text-gray-100">
+        <div className="min-h-screen flex flex-col text-foreground">
 
             {/* ------------------------------------------------
             // 1. HERO SECTION
             // ------------------------------------------------ */}
-            <section
-                className="relative py-32 md:py-48"
-                style={heroBackground}
-            >
-                <div className="absolute inset-0 bg-[#0A192F]/80 backdrop-blur-sm"></div>
+            <section className="relative py-32 md:py-48 overflow-hidden">
+                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-fuchsia-500/10 to-emerald-500/10" />
+                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.35),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(244,63,94,0.25),_transparent_55%)] opacity-70" />
 
                 <div className="relative container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center text-white">
-                        <h1 className="text-5xl font-bold mb-4">
-                            <span className="text-cyan-400">Sobre</span> Nós
+                    <div className="max-w-3xl mx-auto text-center">
+                        <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
+                            <span className="bg-linear-to-r from-cyan-400 via-sky-400 to-emerald-400 bg-clip-text text-transparent">Sobre</span> Nós
                         </h1>
-                        <p className="text-xl text-gray-300">
+                        <p className="text-xl text-slate-300/80">
                             Uma equipe dedicada ao desenvolvimento de soluções tecnológicas inovadoras para a comunidade CPLP.
                         </p>
                     </div>
@@ -80,7 +79,7 @@ export default function AboutUs() {
             {/* ------------------------------------------------
             // 2. MISSÃO, VISÃO & VALORES (Valores do componente About.tsx)
             // ------------------------------------------------ */}
-            <section className="py-20 md:py-32 bg-[#0C2036]">
+            <section className="py-20 md:py-32 bg-white/[0.03] backdrop-blur-sm">
                 <div className="container mx-auto px-4 relative z-10">
                     <div className="max-w-6xl mx-auto">
                         <motion.div
@@ -94,9 +93,9 @@ export default function AboutUs() {
                                 <span className="text-sm font-mono text-cyan-400">{t('about.tag') || "Nossa Essência"}</span>
                             </div>
                             <h2 className="text-4xl md:text-6xl font-bold mb-4 text-white">
-                                Missão, Visão e <span className="text-cyan-400">Valores</span>
+                                Missão, Visão e <span className="bg-linear-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent">Valores</span>
                             </h2>
-                            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+                            <p className="text-xl text-slate-300/70 max-w-3xl mx-auto">
                                 {t('about.description') || "Nossos pilares fundamentais para impulsionar a transformação digital na CPLP."}
                             </p>
                         </motion.div>
@@ -114,14 +113,14 @@ export default function AboutUs() {
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
                                         className="group"
                                     >
-                                        <Card className="p-4 border-2 border-[#1E3050] bg-[#102A43] hover:border-cyan-400/50 transition-all duration-300 shadow-xl shadow-black/30 h-full lg:w-72">
+                                        <Card className="p-4 border border-cyan-400/20 bg-white/5 backdrop-blur-xl hover:border-cyan-400/50 transition-all duration-300 shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:shadow-[0_0_40px_rgba(34,211,238,0.3)] h-full lg:w-72">
                                             <div className="flex items-start gap-4">
                                                 <div className="p-3 bg-cyan-600/10 rounded-xl border border-cyan-400/30">
                                                     <Icon className="w-6 h-6 text-cyan-400" />
                                                 </div>
                                                 <div className="flex-1">
                                                     <h3 className="text-xl font-bold mb-2 text-white group-hover:text-cyan-400 transition-smooth">{value.title}</h3>
-                                                    <p className="text-gray-400 leading-relaxed text-sm">{value.description}</p>
+                                                    <p className="text-slate-300/70 leading-relaxed text-sm">{value.description}</p>
                                                 </div>
                                             </div>
                                         </Card>
@@ -136,14 +135,14 @@ export default function AboutUs() {
             {/* ------------------------------------------------
             // 3. OUR STORY (Timeline)
             // ------------------------------------------------ */}
-            <section className="py-20 md:py-32 bg-[#0A192F]">
+            <section className="py-20 md:py-32">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-4xl mx-auto">
-                        <h2 className="text-4xl font-bold mb-16 text-center text-white">Nossa <span className='text-cyan-400'>História</span></h2>
+                        <h2 className="text-4xl font-bold mb-16 text-center text-white">Nossa <span className='bg-linear-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent'>História</span></h2>
 
                         <div className="space-y-12 relative">
                             {/* Linha vertical decorativa (simulada) */}
-                            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-[#1E3050] transform -translate-x-1/2 hidden md:block"></div>
+                            <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-cyan-400/20 transform -translate-x-1/2 hidden md:block"></div>
 
                             {[
                                 { year: "2024", title: "Fundação", desc: "A CPLP Connect foi fundada com a visão de conectar tecnologicamente os países da Comunidade de Língua Portuguesa. Começamos com uma pequena equipe de desenvolvedores em Lisboa." },
@@ -159,14 +158,14 @@ export default function AboutUs() {
                                     variants={itemVariants}
                                 >
                                     {/* Círculo do Tempo */}
-                                    <div className="hidden md:flex w-16 h-16 rounded-full bg-cyan-600/20 border-4 border-[#0A192F] items-center justify-center text-cyan-400 text-lg font-bold shrink-0 absolute left-1/2 top-0 transform -translate-x-1/2">
+                                    <div className="hidden md:flex w-16 h-16 rounded-full bg-cyan-600/20 border-4 border-background items-center justify-center text-cyan-400 text-lg font-bold shrink-0 absolute left-1/2 top-0 transform -translate-x-1/2">
                                         {item.year}
                                     </div>
 
                                     {/* Conteúdo */}
                                     <div className={`md:w-5/12 p-4 ${index % 2 === 1 ? 'md:text-right md:pr-12' : 'md:text-left md:pl-12'}`}>
                                         <h3 className="text-2xl font-bold text-white mb-2">{item.year} - {item.title}</h3>
-                                        <p className="text-gray-400">{item.desc}</p>
+                                        <p className="text-slate-300/70">{item.desc}</p>
                                     </div>
                                 </motion.div>
                             ))}
@@ -178,11 +177,11 @@ export default function AboutUs() {
             {/* ------------------------------------------------
             // 4. TEAM SECTION
             // ------------------------------------------------ */}
-            <section className="py-20 md:py-32 bg-[#0C2036] border-t border-[#1E3050]">
+            <section className="py-20 md:py-32 bg-white/[0.03] backdrop-blur-sm border-t border-cyan-400/10">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="text-center max-w-3xl mx-auto mb-16">
-                        <h2 className="text-4xl font-bold mb-4 text-white">Nossa <span className='text-cyan-400'>Equipa</span></h2>
-                        <p className="text-gray-400">
+                        <h2 className="text-4xl font-bold mb-4 text-white">Nossa <span className='bg-linear-to-r from-cyan-400 to-emerald-400 bg-clip-text text-transparent'>Equipa</span></h2>
+                        <p className="text-slate-300/70">
                             Conheça os profissionais dedicados que fazem da CPLP Connect uma empresa inovadora e de excelência.
                         </p>
                     </div>
@@ -212,7 +211,7 @@ export default function AboutUs() {
                                 </div>
                                 <h3 className="text-xl font-semibold text-white">{member.name}</h3>
                                 <p className="text-cyan-400 font-medium text-sm">{member.role}</p>
-                                <p className="text-gray-500 text-xs">{member.role_en}</p>
+                                <p className="text-slate-400 text-xs">{member.role_en}</p>
                             </motion.div>
                         ))}
                     </div>
@@ -222,14 +221,14 @@ export default function AboutUs() {
             {/* ------------------------------------------------
             // 5. CONTACT CTA
             // ------------------------------------------------ */}
-            <section className="py-20 bg-gradient-to-r from-[#102A43] to-[#0A192F] text-white border-t border-[#1E3050]">
+            <section className="py-20 bg-linear-to-r from-cyan-500/10 to-emerald-500/10 text-white border-t border-cyan-400/10">
                 <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="max-w-3xl mx-auto text-center">
                         <h2 className="text-3xl font-bold mb-6">Trabalhe Connosco</h2>
-                        <p className="text-xl text-white/80 mb-8">
+                        <p className="text-xl text-slate-300/80 mb-8">
                             Estamos sempre à procura de talentos para se juntar à nossa equipa e contribuir para o desenvolvimento tecnológico da comunidade CPLP.
                         </p>
-                        <Button size="lg" className="bg-cyan-400 text-gray-900 hover:bg-cyan-300 font-bold shadow-xl shadow-cyan-400/40 transition-all duration-300">
+                        <Button size="lg" className="bg-linear-to-r from-cyan-500/60 via-sky-500/60 to-emerald-400/60 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:shadow-[0_0_60px_rgba(45,212,191,0.7)] hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 cursor-pointer">
                             <Link href="/contacto">Entre em Contacto</Link>
                         </Button>
                     </div>
