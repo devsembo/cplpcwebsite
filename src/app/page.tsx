@@ -1,22 +1,21 @@
 'use client';
 
-import About from '@/components/About';
-
 import Hero from '@/components/Hero';
 import Services from '@/components/Services';
 import AcademySection from '@/components/AcademySection';
+import Sectors from '@/components/Sectors';
 import Projects from '@/components/Projects';
-import Solutions from '@/components/Solutions';
+import ContactCTA from '@/components/ContactCTA';
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <About />
       <Services />
       <AcademySection />
+      <Sectors />
       <Projects />
-      <Solutions/>
+      <ContactCTA />
     </>
   );
 }

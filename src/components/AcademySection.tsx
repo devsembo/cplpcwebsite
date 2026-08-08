@@ -2,82 +2,63 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import AcademyLockup from "@/components/academy/AcademyLockup";
-
-const formatos = ["In-Company Angola", "Executive Program Portugal", "Online & Híbrido", "Corporate Exchange"];
 
 const AcademySection = () => {
     return (
-        <section
-            id="academy"
-            className="relative py-24 md:py-32 overflow-hidden"
-            style={{ backgroundColor: "#0B1533" }}
-        >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(5,84,245,0.2),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(5,196,128,0.15),_transparent_55%)]" />
-
-            <div className="container mx-auto px-4 relative z-10">
-                <div className="max-w-4xl mx-auto text-center">
+        <section id="academy" className="bg-cplp-navy py-20 md:py-28">
+            <div className="container mx-auto px-4">
+                <div className="max-w-3xl mx-auto text-center">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.5 }}
                         className="flex justify-center mb-8"
                     >
-                        <AcademyLockup theme="dark" />
+                        <Image
+                            src="/brand/svg/academy-lockup-h-dark.svg"
+                            alt="CPLP CONNECT Academy"
+                            width={310}
+                            height={90}
+                            className="h-12 md:h-14 w-auto"
+                        />
                     </motion.div>
 
                     <motion.h2
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-3xl md:text-5xl font-bold text-white mb-6"
+                        transition={{ duration: 0.5, delay: 0.05 }}
+                        className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-5"
                     >
                         Formação corporativa com ADN tecnológico
                     </motion.h2>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
-                        className="text-lg text-white/70 mb-10 max-w-2xl mx-auto"
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                        className="text-white/70 mb-10 leading-relaxed"
                     >
-                        A nossa unidade de formação executiva para empresas de Portugal, Angola
-                        e restante CPLP — em quatro formatos, do In-Company ao Corporate Exchange.
+                        Corporate Training, Executive Education e programas de transformação
+                        digital para empresas de Portugal, Angola e restante CPLP.
                     </motion.p>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
-                        className="flex flex-wrap justify-center gap-3 mb-10"
+                        transition={{ duration: 0.5, delay: 0.15 }}
                     >
-                        {formatos.map((formato) => (
-                            <span
-                                key={formato}
-                                className="px-4 py-2 rounded-full text-sm font-medium text-white/80 border border-white/15 bg-white/5"
-                            >
-                                {formato}
-                            </span>
-                        ))}
-                    </motion.div>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.6, delay: 0.4 }}
-                    >
-                        <Button size="lg" asChild style={{ backgroundColor: "#05C480" }} className="text-white font-semibold hover:opacity-90">
+                        <Button asChild size="lg" className="bg-cplp-blue hover:bg-cplp-blue-hover text-white rounded-md">
                             <Link href="/academy" className="flex items-center gap-2">
                                 Conhecer a Academy
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-4 h-4" />
                             </Link>
                         </Button>
                     </motion.div>
