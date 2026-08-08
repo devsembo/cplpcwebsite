@@ -13,10 +13,13 @@ export const SITE_STATS: { number: string; labelKey: TranslationKeys }[] = [
   { number: "Porto", labelKey: "hero.stats.headquarters" },
 ];
 
+// NIF ainda por atribuir/confirmar. TODO: substituir por o NIF real.
+export const NIF_PLACEHOLDER = "NIF a preencher";
+
 // Dados legais da empresa, usados no rodapé.
-// TODO: preencher o NIF real.
 export const COMPANY_INFO = {
   legalName: "CPLP CONNECT",
-  nif: "NIF: 000000000",
+  nif: NIF_PLACEHOLDER,
   address: "Porto, Portugal",
+  email: "info@cplpconnect.pt",
 };

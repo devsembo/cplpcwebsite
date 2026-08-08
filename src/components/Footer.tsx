@@ -67,7 +67,7 @@ export default function Footer() {
                             </li>
                             <li className="flex items-start gap-3">
                                 <Mail className="h-4 w-4 text-cplp-green mt-0.5 shrink-0" />
-                                <span className="text-white/60 text-sm">info@cplpconnect.pt</span>
+                                <span className="text-white/60 text-sm">{COMPANY_INFO.email}</span>
                             </li>
                         </ul>
                     </div>
@@ -99,7 +99,7 @@ export default function Footer() {
                         </ul>
 
                         <p className="text-white/50 text-sm">
-                            © {new Date().getFullYear()} CPLP Connect. Todos os direitos reservados.
+                            © {new Date().getFullYear()} {COMPANY_INFO.legalName}. Todos os direitos reservados.
                         </p>
                         <p className="text-white/40 text-xs mt-1">
                             {COMPANY_INFO.legalName} · {COMPANY_INFO.nif} · {COMPANY_INFO.address}
