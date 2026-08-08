@@ -5,7 +5,7 @@ type Language = 'pt' | 'en';
 
 
 type Translations = typeof translations;
-type TranslationKeys = keyof Translations['pt'];
+export type TranslationKeys = keyof Translations['pt'];
 
 interface LanguageContextType {
   language: Language;
@@ -37,10 +37,13 @@ const translations = {
     'hero.stats.million': 'Milhões',
     'hero.stats.people': 'de pessoas',
     'hero.stats.continents': 'Continentes',
+    'hero.stats.projectsDelivered': 'Projetos entregues',
+    'hero.stats.businessUnits': 'Unidades de negócio',
+    'hero.stats.lusophone': 'Lusófonos',
     'hero.scroll': 'Rolar para explorar',
-    
+
     // About
-    'about.tag': '<About />',
+    'about.tag': 'Quem Somos',
     'about.title': 'Sobre',
     'about.titleHighlight': 'Nós',
     'about.description': 'Especialistas em transformação digital no espaço CPLP',
@@ -55,35 +58,35 @@ const translations = {
     'about.presence.description': 'Atuamos em múltiplos países da Comunidade de Países de Língua Portuguesa, conectando mercados e oportunidades.',
     
     // Services
-    'services.tag': '<Services />',
+    'services.tag': 'O Que Fazemos',
     'services.title': 'Nossos',
     'services.titleHighlight': 'Serviços',
     'services.description': 'Soluções tecnológicas completas e personalizadas para impulsionar o seu negócio',
-    'services.items.web.title': 'Desenvolvimento Web',
+    'services.items.web.title': 'Desenvolvimento Web & Plataformas',
     'services.items.web.description': 'Websites e aplicações web modernas, responsivas e de alta performance',
     'services.items.mobile.title': 'Apps Mobile',
     'services.items.mobile.description': 'Aplicações nativas e híbridas para iOS e Android',
-    'services.items.consulting.title': 'Consultoria Digital',
-    'services.items.consulting.description': 'Estratégias personalizadas para transformação digital',
-    'services.items.transformation.title': 'Transformação Digital',
-    'services.items.transformation.description': 'Modernização de processos e infraestrutura tecnológica',
-    'services.items.cloud.title': 'Cloud Computing',
-    'services.items.cloud.description': 'Migração e gestão de ambientes cloud seguros e escaláveis',
+    'services.items.consulting.title': 'Marketing Digital',
+    'services.items.consulting.description': 'Gestão de redes sociais, SEO e estratégias de marketing digital orientadas a resultados',
+    'services.items.transformation.title': 'Formação Corporativa',
+    'services.items.transformation.description': 'Programas de formação com ADN tecnológico, através da CPLP CONNECT Academy',
+    'services.items.cloud.title': 'Cloud & Infraestrutura',
+    'services.items.cloud.description': 'Servidores, migração e gestão de infraestrutura cloud segura e escalável',
     'services.items.api.title': 'Integrações API',
     'services.items.api.description': 'Desenvolvimento de APIs RESTful e integrações de sistemas',
     'services.items.support.title': 'Suporte 24/7',
     'services.items.support.description': 'Assistência técnica contínua e manutenção de sistemas',
-    'services.items.design.title': 'UI/UX Design',
-    'services.items.design.description': 'Design de interfaces intuitivas e experiências memoráveis',
-    
+    'services.items.design.title': 'UI/UX & Branding',
+    'services.items.design.description': 'Identidade visual, branding e design de interfaces intuitivas e memoráveis',
+
     // Projects
-    'projects.tag': '<Projects />',
+    'projects.tag': 'Casos de Sucesso',
     'projects.title': 'Nossos',
     'projects.titleHighlight': 'Projetos',
     'projects.description': 'Casos de sucesso que transformaram negócios e criaram impacto real',
-    
+
     // Solutions
-    'solutions.tag': '<Solutions />',
+    'solutions.tag': 'Setores de Atuação',
     'solutions.title': 'Soluções por',
     'solutions.titleHighlight': 'Setor',
     'solutions.description': 'Experiência comprovada em diversos setores de mercado',
@@ -101,15 +104,15 @@ const translations = {
     'solutions.items.finance.description': 'Soluções financeiras seguras e conformes',
     
     // Blog
-    'blog.tag': '<Blog />',
+    'blog.tag': 'Blog',
     'blog.title': 'Nosso',
     'blog.titleHighlight': 'Blog',
     'blog.description': 'Insights, tendências e novidades sobre tecnologia e inovação',
     'blog.readMore': 'Ler mais',
     'blog.viewAll': 'Ver Todos os Artigos',
-    
+
     // Contact
-    'contact.tag': '<Contact />',
+    'contact.tag': 'Fale Connosco',
     'contact.title': 'Fale',
     'contact.titleHighlight': 'Connosco',
     'contact.description': 'Estamos prontos para transformar o seu negócio com soluções tecnológicas inovadoras',
@@ -163,10 +166,13 @@ const translations = {
     'hero.stats.million': 'Million',
     'hero.stats.people': 'people',
     'hero.stats.continents': 'Continents',
+    'hero.stats.projectsDelivered': 'Projects delivered',
+    'hero.stats.businessUnits': 'Business units',
+    'hero.stats.lusophone': 'Lusophone',
     'hero.scroll': 'Scroll to explore',
-    
+
     // About
-    'about.tag': '<About />',
+    'about.tag': 'Who We Are',
     'about.title': 'About',
     'about.titleHighlight': 'Us',
     'about.description': 'Digital transformation experts in the CPLP region',
@@ -181,35 +187,35 @@ const translations = {
     'about.presence.description': 'We operate in multiple Portuguese-speaking countries, connecting markets and opportunities.',
     
     // Services
-    'services.tag': '<Services />',
+    'services.tag': 'What We Do',
     'services.title': 'Our',
     'services.titleHighlight': 'Services',
     'services.description': 'Complete and customized technology solutions to boost your business',
-    'services.items.web.title': 'Web Development',
+    'services.items.web.title': 'Web Development & Platforms',
     'services.items.web.description': 'Modern, responsive, and high-performance websites and web applications',
     'services.items.mobile.title': 'Mobile Apps',
     'services.items.mobile.description': 'Native and hybrid applications for iOS and Android',
-    'services.items.consulting.title': 'Digital Consulting',
-    'services.items.consulting.description': 'Customized strategies for digital transformation',
-    'services.items.transformation.title': 'Digital Transformation',
-    'services.items.transformation.description': 'Modernization of processes and technological infrastructure',
-    'services.items.cloud.title': 'Cloud Computing',
-    'services.items.cloud.description': 'Migration and management of secure and scalable cloud environments',
+    'services.items.consulting.title': 'Digital Marketing',
+    'services.items.consulting.description': 'Social media management, SEO and results-driven digital marketing strategies',
+    'services.items.transformation.title': 'Corporate Training',
+    'services.items.transformation.description': 'Training programs with a technology DNA, delivered through CPLP CONNECT Academy',
+    'services.items.cloud.title': 'Cloud & Infrastructure',
+    'services.items.cloud.description': 'Servers, migration and management of secure and scalable cloud infrastructure',
     'services.items.api.title': 'API Integrations',
     'services.items.api.description': 'Development of RESTful APIs and system integrations',
     'services.items.support.title': '24/7 Support',
     'services.items.support.description': 'Continuous technical assistance and system maintenance',
-    'services.items.design.title': 'UI/UX Design',
-    'services.items.design.description': 'Intuitive interface design and memorable experiences',
-    
+    'services.items.design.title': 'UI/UX & Branding',
+    'services.items.design.description': 'Visual identity, branding and intuitive, memorable interface design',
+
     // Projects
-    'projects.tag': '<Projects />',
+    'projects.tag': 'Success Stories',
     'projects.title': 'Our',
     'projects.titleHighlight': 'Projects',
     'projects.description': 'Success stories that transformed businesses and created real impact',
-    
+
     // Solutions
-    'solutions.tag': '<Solutions />',
+    'solutions.tag': 'Sectors We Serve',
     'solutions.title': 'Solutions by',
     'solutions.titleHighlight': 'Sector',
     'solutions.description': 'Proven experience across various market sectors',
@@ -227,15 +233,15 @@ const translations = {
     'solutions.items.finance.description': 'Secure and compliant financial solutions',
     
     // Blog
-    'blog.tag': '<Blog />',
+    'blog.tag': 'Blog',
     'blog.title': 'Our',
     'blog.titleHighlight': 'Blog',
     'blog.description': 'Insights, trends, and news about technology and innovation',
     'blog.readMore': 'Read more',
     'blog.viewAll': 'View All Articles',
-    
+
     // Contact
-    'contact.tag': '<Contact />',
+    'contact.tag': 'Get in Touch',
     'contact.title': 'Get in',
     'contact.titleHighlight': 'Touch',
     'contact.description': 'We are ready to transform your business with innovative technology solutions',

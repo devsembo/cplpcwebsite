@@ -9,6 +9,7 @@ import { ArrowRight, Sparkles, Code2, Zap } from "lucide-react";
 
 import { useTypewriter } from "@/hooks/useTypewriter";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SITE_STATS } from "@/lib/constants";
 
 
 const Hero = () => {
@@ -26,14 +27,6 @@ const Hero = () => {
                 <div className="absolute top-20 left-10 w-96 h-96 bg-primary/30 rounded-full blur-3xl animate-[float_10s_ease-in-out_infinite]" />
                 <div className="absolute bottom-20 right-10 w-[500px] h-[500px] bg-accent/30 rounded-full blur-3xl animate-[float_10s_ease-in-out_infinite]" style={{ animationDelay: "1s" }} />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-3xl animate-[float_10s_ease-in-out_infinite]" style={{ animationDelay: "3s" }} />
-            </div>
-
-            {/* Código decorativo (Mantido) */}
-            <div className="absolute top-[410px] md:top-40 left-10 md:left-40 text-gray-200/55 font-mono text-xs md:text-sm lg:block">
-                <div className="animate-fade-in">{"// CPLP Connect"}</div>
-                <div className="animate-fade-in" style={{ animationDelay: "0.2s" }}>{"function innovate() {"}</div>
-                <div className="animate-fade-in pl-4" style={{ animationDelay: "0.3s" }}>{"return 'future';"}</div>
-                <div className="animate-fade-in" style={{ animationDelay: "0.4s" }}>{"}"}</div>
             </div>
 
             <div className="container mx-auto px-4 relative z-10">
@@ -95,19 +88,14 @@ const Hero = () => {
                         </Link>
                     </div>
 
-                    {/* Stats (Mantidos) */}
+                    {/* Estatísticas — valores editáveis em src/lib/constants.ts (SITE_STATS) */}
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-20 animate-fade-in" style={{ animationDelay: "0.6s" }}>
-                        {[
-                            { number: "3", label: t('hero.stats.countries') },
-                            { number: "10+", label: t('nav.projects') },
-                            { number: "24/5", label: "Suporte" },
-                            { number: "100%", label: "Dedicação" },
-                        ].map((stat, index) => (
+                        {SITE_STATS.map((stat, index) => (
                             <div key={index} className="text-center group cursor-default">
                                 <div className="text-4xl md:text-5xl font-bold bg-linear-to-r  from-cyan-500  to-green-600/10 bg-clip-text text-transparent mb-2 group-hover:scale-110 transition-smooth">
                                     {stat.number}
                                 </div>
-                                <div className="text-sm text-white font-semibold">{stat.label}</div>
+                                <div className="text-sm text-white font-semibold">{t(stat.labelKey)}</div>
                             </div>
                         ))}
                     </div>

@@ -2,13 +2,20 @@
 "use client"; // OBRIGATÓRIO: Usa hooks (useLanguage) e a biblioteca Framer Motion
 
 import React from 'react';
+import Link from "next/link";
 import { motion } from "framer-motion"; // Deve estar instalado
+import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext"; // Deve estar migrado
 
 const Services = () => {
     const { t } = useLanguage();
 
-    const services = [
+    const services: {
+        number: string;
+        title: string;
+        items: string[];
+        href?: string;
+    }[] = [
         {
             number: "01.",
             title: t('services.items.web.title'),
@@ -35,13 +42,24 @@ const Services = () => {
             items: [
                 "Servidor VPS",
                 "Servidor Dedicado",
-                "Servidor Linux",
-                "Servidor Windows",
-                "Servidor Cloud"
+                "Servidor Cloud",
+                "Registo de Domínios & DNS",
+                "Gestão e Configuração de Infraestrutura"
             ]
         },
         {
             number: "04.",
+            title: t('services.items.design.title'),
+            items: [
+                "Digital Branding",
+                "Design de Websites",
+                "Cartões de Visita",
+                "Flyers",
+                "Design Publicitário"
+            ]
+        },
+        {
+            number: "05.",
             title: t('services.items.consulting.title'),
             items: [
                 "Gestão de Redes Sociais",
@@ -52,24 +70,15 @@ const Services = () => {
             ]
         },
         {
-            number: "05.",
+            number: "06.",
             title: t('services.items.transformation.title'),
             items: [
-                "Registo de Domínios",
-                "Gestão e Configuração",
-                "Oferta de Landing Page"
-            ]
-        },
-        {
-            number: "06.",
-            title: t('services.items.design.title'),
-            items: [
-                "Digital Branding",
-                "Design de Websites",
-                "Cartões de Visita",
-                "Flyers",
-                "Design Publicitário"
-            ]
+                "In-Company Angola",
+                "Executive Program Portugal",
+                "Online & Híbrido",
+                "Corporate Exchange"
+            ],
+            href: "/academy"
         }
     ];
 
@@ -168,6 +177,16 @@ const Services = () => {
                                             </motion.li>
                                         ))}
                                     </ul>
+
+                                    {service.href && (
+                                        <Link
+                                            href={service.href}
+                                            className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-green-500 hover:text-green-400 transition-colors"
+                                        >
+                                            Conhecer a Academy
+                                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                        </Link>
+                                    )}
                                 </div>
                             </motion.div>
                         ))}
