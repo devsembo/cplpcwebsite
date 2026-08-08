@@ -8,8 +8,8 @@ export default function Head() {
             <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
             <link rel="manifest" href="/site.webmanifest" />
             <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content="CPLP CONNECT" />
-            <meta name="twitter:description" content="A ponte digital entre cidadãos e serviços consulares da CPLP." />
+            <meta name="twitter:title" content="CPLP CONNECT — Consultoria Tecnológica e Transformação Digital no Espaço CPLP" />
+            <meta name="twitter:description" content="Desenhamos e desenvolvemos software, apps e plataformas digitais para empresas e instituições do espaço CPLP." />
             <meta name="twitter:image" content="https://cplpconnect.pt/cplp-logo.png" />
         </>
     );

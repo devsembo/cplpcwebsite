@@ -25,10 +25,11 @@ const translations = {
     'nav.blog': 'Blog',
     'nav.contact': 'Contacto',
     'nav.cta': 'Fale Connosco',
-    
+    'nav.quote': 'Solicitar Orçamento',
+
     // Hero
     'hero.badge': 'Transformação Digital no Espaço CPLP',
-    'hero.title': 'Inovação Tecnológica',
+    'hero.title': 'Transformação digital para o espaço CPLP',
     'hero.subtitle': 'Conectando empresas através da tecnologia',
     'hero.cta.primary': 'Conheça-nos',
     'hero.cta.secondary': 'Entre em Contacto',
@@ -150,10 +151,11 @@ const translations = {
     'nav.blog': 'Blog',
     'nav.contact': 'Contact',
     'nav.cta': 'Contact Us',
-    
+    'nav.quote': 'Request a Quote',
+
     // Hero
     'hero.badge': 'Digital Transformation in CPLP',
-    'hero.title': 'Technological Innovation',
+    'hero.title': 'Digital transformation for the CPLP region',
     'hero.subtitle': 'Connecting businesses through technology',
     'hero.cta.primary': 'Learn More',
     'hero.cta.secondary': 'Get in Touch',

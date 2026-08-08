@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { Menu, X, Rocket } from 'lucide-react';
+import { Menu, X, Rocket, Languages } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import {
@@ -10,10 +10,12 @@ import {
 } from '@/components/ui/dialog';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const { language, setLanguage, t } = useLanguage();
 
     useEffect(() => {
         const handleScroll = () => {
@@ -22,6 +24,16 @@ export default function Navbar() {
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
+
+    const toggleLanguage = () => setLanguage(language === 'pt' ? 'en' : 'pt');
+
+    const navLinks = [
+        { href: '/', label: t('nav.home') },
+        { href: '/sobre', label: t('nav.about') },
+        { href: '/servicos', label: t('nav.services') },
+        { href: '/projetos', label: t('nav.projects') },
+        { href: '/contacto', label: t('nav.contact') },
+    ];
 
 
     return (
@@ -52,24 +64,29 @@ export default function Navbar() {
                 </div>
 
                 <nav className={`hidden md:flex items-center gap-6 ${isScrolled ? 'text-blue-600' : 'text-white'}`}>
-                    <Link href="/" className="text-white  font-medium hover:text-green-400 transition-colors">
-                        Início
-                    </Link>
-                    <Link href="/sobre" className="text-white font-medium hover:text-green-400 transition-colors">
-                        Sobre Nós
-                    </Link>
-                    <Link href="/servicos" className="text-white font-medium hover:text-green-400 transition-colors">
-                        Serviços
-                    </Link>
-                    <Link href="/projetos" className="text-white font-medium hover:text-green-400 transition-colors">
-                        Projetos
-                    </Link>
-                    <Link href="/contacto" className="text-white font-medium hover:text-green-400 transition-colors">
-                        Contacto
-                    </Link>
+                    {navLinks.map((link) => (
+                        <Link
+                            key={link.href}
+                            href={link.href}
+                            className="text-white font-medium hover:text-green-400 transition-colors"
+                        >
+                            {link.label}
+                        </Link>
+                    ))}
                 </nav>
 
-                        <div></div>
+                <div className="hidden md:flex items-center">
+                    <Button
+                        onClick={toggleLanguage}
+                        variant="outline"
+                        size="sm"
+                        className="gap-1.5 border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-green-400 cursor-pointer"
+                        aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
+                    >
+                        <Languages className="h-4 w-4" />
+                        {language === 'pt' ? 'EN' : 'PT'}
+                    </Button>
+                </div>
 
                 <Sheet open={isOpen} onOpenChange={setIsOpen}>
                     <SheetTrigger asChild>
@@ -88,18 +105,29 @@ export default function Navbar() {
                         </SheetHeader>
 
                         <nav className="flex flex-col space-y-2 py-6">
-                            {['Início', 'Sobre', 'servicos', 'projetos', 'contacto'].map((label, index) => (
+                            {navLinks.map((link) => (
                                 <Link
-                                    key={index}
-                                    href={label === 'Início' ? '/' : `/${label.toLowerCase().replace(' ', '')}`}
+                                    key={link.href}
+                                    href={link.href}
                                     // Usando cores da sidebar (clara)
                                     className="text-lg font-medium py-3 px-4 rounded-lg text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors duration-200"
                                     onClick={() => setIsOpen(false)}
                                 >
-                                    {label}
+                                    {link.label}
                                 </Link>
                             ))}
                         </nav>
+
+                        <Button
+                            onClick={toggleLanguage}
+                            variant="outline"
+                            size="sm"
+                            className="gap-1.5 border-white/30 text-white bg-transparent hover:bg-white/10 hover:text-green-400 cursor-pointer w-fit mx-4"
+                            aria-label={language === 'pt' ? 'Switch to English' : 'Mudar para Português'}
+                        >
+                            <Languages className="h-4 w-4" />
+                            {language === 'pt' ? 'EN' : 'PT'}
+                        </Button>
 
                         {/* Botão de Orçamento no Mobile */}
                         <div className="mt-6">
@@ -114,7 +142,7 @@ export default function Navbar() {
                                     >
                                         <Link href="/contacto" className="flex items-center justify-center gap-2">
                                         <Rocket className="mr-2 w-5 h-5" />
-                                        Solicitar Orçamento
+                                        {t('nav.quote')}
                                         </Link>
                                     </Button>
                                 </DialogTrigger>

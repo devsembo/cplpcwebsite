@@ -15,8 +15,7 @@ const Hero = () => {
     const cplpLogoPath = "/CPLP LOGO (3).png";
 
     const { t } = useLanguage();
-    const { displayedText } = useTypewriter(t('hero.title'), 80, 500);
-    const { displayedText: subText } = useTypewriter(t('hero.subtitle'), 50, 2000);
+    const { displayedText: subText } = useTypewriter(t('hero.subtitle'), 50, 500);
 
     return (
         <section className="relative min-h-screen flex items-center justify-center overflow-hidden py-14 md:py-20">
@@ -61,11 +60,10 @@ const Hero = () => {
                         <Zap className="w-4 h-4 text-accent animate-pulse" style={{ animationDelay: "0.5s" }} color='#3c83f6'/>
                     </div>
 
-                    {/* Título e Subtítulo (Mantidos) */}
-                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up leading-tight min-h-[180px] md:min-h-[200px]" style={{ animationDelay: "0.3s" }}>
+                    {/* H1 real e estático (renderizado no HTML, sem depender de animação) */}
+                    <h1 className="text-5xl md:text-7xl font-bold mb-6 animate-fade-in-up leading-tight" style={{ animationDelay: "0.3s" }}>
                         <span className="bg-linear-to-r from-cyan-500 via-blue-700 to-green-600 bg-clip-text text-transparent">
-                            {displayedText}
-                            <span className="animate-pulse">|</span>
+                            {t('hero.title')}
                         </span>
                     </h1>
 

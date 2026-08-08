@@ -1,41 +1,38 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import AnimatedBackground from '@/components/AnimatedBackground';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
-  title: "CPLP CONNECT - A ponte entre cidadãos e serviços consulares",
+  title: "CPLP CONNECT — Consultoria Tecnológica e Transformação Digital no Espaço CPLP",
   description:
-    "A CPLP CONNECT facilita o acesso a consulados e serviços públicos dos países da CPLP, com agendamentos online, informações consulares e suporte em tempo real.",
+    "Consultoria tecnológica sediada no Porto que desenha e desenvolve software, apps e plataformas digitais para empresas e instituições dos países de língua portuguesa (Portugal, Angola e restante CPLP).",
   keywords: [
     "CPLP",
     "CPLP CONNECT",
-    "consulado",
-    "serviços consulares",
-    "agendamento online",
-    "imigração",
-    "AIMA",
+    "consultoria tecnológica",
+    "transformação digital",
+    "desenvolvimento de software",
+    "desenvolvimento de apps",
+    "Porto",
+    "Portugal",
+    "Angola",
     "países lusófonos",
-    "atendimento cidadão",
   ],
   authors: [{ name: "CPLP CONNECT", url: "https://cplpconnect.pt" }],
   creator: "CPLP CONNECT",
   openGraph: {
-    title: "CPLP CONNECT",
+    title: "CPLP CONNECT — Consultoria Tecnológica e Transformação Digital no Espaço CPLP",
     description:
-      "A ponte digital entre cidadãos e serviços consulares da CPLP.",
+      "Desenhamos e desenvolvemos software, apps e plataformas digitais para empresas e instituições do espaço CPLP.",
     url: "https://cplpconnect.pt",
     siteName: "CPLP CONNECT",
     images: [
@@ -59,16 +56,16 @@ export default function RootLayout({
   return (
     <html lang="pt">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} antialiased`}
       >
         <AnimatedBackground />
-        <LayoutWrapper>
-          <LanguageProvider>
+        <LanguageProvider>
+          <LayoutWrapper>
             <div className="flex-1">
               {children}
             </div>
-          </LanguageProvider>
-        </LayoutWrapper>
+          </LayoutWrapper>
+        </LanguageProvider>
       </body>
     </html>
   );
