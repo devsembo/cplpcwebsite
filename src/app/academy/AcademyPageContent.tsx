@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
     Building2,
@@ -24,7 +25,6 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import AcademyLockup from "@/components/academy/AcademyLockup";
 
 const formatos = [
     {
@@ -70,37 +70,39 @@ const comoFunciona = [
 
 export default function AcademyPageContent() {
     return (
-        <div className="min-h-screen flex flex-col text-foreground">
+        <div className="min-h-screen flex flex-col">
             {/* Hero */}
-            <section
-                className="relative py-32 md:py-44 overflow-hidden"
-                style={{ backgroundColor: "#0B1533" }}
-            >
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(5,84,245,0.25),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(5,196,128,0.15),_transparent_55%)]" />
-
+            <section className="relative pt-32 pb-20 md:pt-44 md:pb-28 bg-cplp-navy">
                 <div className="relative container max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
+                        transition={{ duration: 0.5 }}
                         className="flex justify-center mb-10"
                     >
-                        <AcademyLockup theme="dark" />
+                        <Image
+                            src="/brand/svg/academy-lockup-h-dark.svg"
+                            alt="CPLP CONNECT Academy"
+                            width={310}
+                            height={90}
+                            className="h-14 md:h-16 w-auto"
+                            priority
+                        />
                     </motion.div>
 
                     <motion.h1
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.1 }}
+                        transition={{ duration: 0.5, delay: 0.05 }}
                         className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6"
                     >
                         Formação corporativa com ADN tecnológico
                     </motion.h1>
 
                     <motion.p
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.2 }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
                         className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto"
                     >
                         Corporate Training · Executive Education · Digital Transformation —
@@ -108,15 +110,15 @@ export default function AcademyPageContent() {
                     </motion.p>
 
                     <motion.div
-                        initial={{ opacity: 0, y: 20 }}
+                        initial={{ opacity: 0, y: 16 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6, delay: 0.3 }}
+                        transition={{ duration: 0.5, delay: 0.15 }}
                         className="mt-10"
                     >
-                        <Button size="lg" asChild style={{ backgroundColor: "#0554F5" }} className="text-white font-semibold hover:opacity-90">
+                        <Button asChild size="lg" className="bg-cplp-blue hover:bg-cplp-blue-hover text-white rounded-md">
                             <Link href="/contacto" className="flex items-center gap-2">
                                 Fale connosco sobre um programa à medida
-                                <ArrowRight className="w-5 h-5" />
+                                <ArrowRight className="w-4 h-4" />
                             </Link>
                         </Button>
                     </motion.div>
@@ -124,41 +126,38 @@ export default function AcademyPageContent() {
             </section>
 
             {/* Quatro formatos */}
-            <section className="py-24 bg-background">
+            <section className="py-20 md:py-24 bg-white">
                 <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-14"
                     >
-                        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#05C480" }}>
+                        <span className="text-xs font-semibold uppercase tracking-wide text-cplp-blue">
                             Como formamos
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mt-3">Quatro formatos</h2>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">Quatro formatos</h2>
                     </motion.div>
 
-                    <div className="grid sm:grid-cols-2 gap-6">
+                    <div className="grid sm:grid-cols-2 gap-5">
                         {formatos.map((formato, index) => {
                             const Icon = formato.icon;
                             return (
                                 <motion.div
                                     key={formato.title}
-                                    initial={{ opacity: 0, y: 30 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                                    transition={{ duration: 0.4, delay: index * 0.08 }}
                                 >
-                                    <Card className="p-8 h-full border-2 border-white/10 bg-card/40 backdrop-blur-sm hover:border-[#05C480]/50 transition-colors">
-                                        <div
-                                            className="w-14 h-14 rounded-xl flex items-center justify-center mb-5"
-                                            style={{ background: "linear-gradient(135deg, #0554F5 0%, #05C480 100%)" }}
-                                        >
-                                            <Icon className="w-7 h-7 text-white" />
+                                    <Card className="p-8 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow rounded-lg">
+                                        <div className="w-11 h-11 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center mb-5">
+                                            <Icon className="w-5 h-5 text-cplp-blue" />
                                         </div>
-                                        <h3 className="text-xl font-bold text-white mb-3">{formato.title}</h3>
-                                        <p className="text-white/60 leading-relaxed">{formato.description}</p>
+                                        <h3 className="text-lg font-bold text-cplp-navy mb-2">{formato.title}</h3>
+                                        <p className="text-cplp-grey leading-relaxed">{formato.description}</p>
                                     </Card>
                                 </motion.div>
                             );
@@ -168,40 +167,37 @@ export default function AcademyPageContent() {
             </section>
 
             {/* Áreas de formação */}
-            <section className="py-24 bg-white/[0.02] border-t border-white/10">
+            <section className="py-20 md:py-24 bg-cplp-bg border-t border-cplp-line">
                 <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-14"
                     >
-                        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#05C480" }}>
+                        <span className="text-xs font-semibold uppercase tracking-wide text-cplp-blue">
                             Currículo
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mt-3">Áreas de formação</h2>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">Áreas de formação</h2>
                     </motion.div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
                         {areas.map((area, index) => {
                             const Icon = area.icon;
                             return (
                                 <motion.div
                                     key={area.title}
-                                    initial={{ opacity: 0, scale: 0.9 }}
-                                    whileInView={{ opacity: 1, scale: 1 }}
+                                    initial={{ opacity: 0, y: 16 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.4, delay: index * 0.05 }}
+                                    transition={{ duration: 0.35, delay: index * 0.05 }}
                                 >
-                                    <Card className="p-6 h-full border border-white/10 bg-card/40 backdrop-blur-sm hover:border-[#0554F5]/50 transition-colors text-center">
-                                        <div
-                                            className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 mx-auto"
-                                            style={{ backgroundColor: "rgba(5,84,245,0.15)" }}
-                                        >
-                                            <Icon className="w-6 h-6" style={{ color: "#0554F5" }} />
+                                    <Card className="p-6 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow text-center rounded-lg">
+                                        <div className="w-10 h-10 rounded-md bg-cplp-green/[0.1] flex items-center justify-center mb-4 mx-auto">
+                                            <Icon className="w-5 h-5 text-cplp-green" />
                                         </div>
-                                        <h3 className="text-base font-semibold text-white">{area.title}</h3>
+                                        <h3 className="text-sm font-semibold text-cplp-navy">{area.title}</h3>
                                     </Card>
                                 </motion.div>
                             );
@@ -211,45 +207,41 @@ export default function AcademyPageContent() {
             </section>
 
             {/* Como funciona */}
-            <section className="py-24 bg-background">
+            <section className="py-20 md:py-24 bg-white border-t border-cplp-line">
                 <div className="container max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.6 }}
-                        className="text-center mb-16"
+                        transition={{ duration: 0.5 }}
+                        className="text-center mb-14"
                     >
-                        <span className="text-sm font-semibold uppercase tracking-widest" style={{ color: "#05C480" }}>
+                        <span className="text-xs font-semibold uppercase tracking-wide text-cplp-blue">
                             Metodologia
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-bold text-white mt-3">Como funciona</h2>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">Como funciona</h2>
                     </motion.div>
 
-                    <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-6">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
                         {comoFunciona.map((step, index) => {
                             const Icon = step.icon;
                             return (
                                 <motion.div
                                     key={step.title}
-                                    initial={{ opacity: 0, y: 30 }}
+                                    initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
-                                    className="relative"
+                                    transition={{ duration: 0.4, delay: index * 0.08 }}
                                 >
-                                    <Card className="p-6 h-full border border-white/10 bg-card/40 backdrop-blur-sm text-center">
-                                        <div className="text-xs font-bold mb-3" style={{ color: "#05C480" }}>
+                                    <Card className="p-6 h-full border border-cplp-line bg-white shadow-none text-center rounded-lg">
+                                        <div className="text-xs font-bold text-cplp-blue mb-3">
                                             {String(index + 1).padStart(2, "0")}
                                         </div>
-                                        <div
-                                            className="w-12 h-12 rounded-lg flex items-center justify-center mb-4 mx-auto"
-                                            style={{ backgroundColor: "rgba(5,196,128,0.15)" }}
-                                        >
-                                            <Icon className="w-6 h-6" style={{ color: "#05C480" }} />
+                                        <div className="w-10 h-10 rounded-md bg-cplp-green/[0.1] flex items-center justify-center mb-4 mx-auto">
+                                            <Icon className="w-5 h-5 text-cplp-green" />
                                         </div>
-                                        <h3 className="text-base font-semibold text-white mb-2">{step.title}</h3>
-                                        <p className="text-sm text-white/60 leading-relaxed">{step.description}</p>
+                                        <h3 className="text-sm font-semibold text-cplp-navy mb-2">{step.title}</h3>
+                                        <p className="text-xs text-cplp-grey leading-relaxed">{step.description}</p>
                                     </Card>
                                 </motion.div>
                             );
@@ -259,24 +251,24 @@ export default function AcademyPageContent() {
             </section>
 
             {/* CTA final */}
-            <section className="py-24 border-t border-white/10" style={{ backgroundColor: "#0B1533" }}>
+            <section className="py-20 md:py-24 bg-cplp-navy">
                 <div className="container max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                    <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+                    <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
                         Fale connosco sobre um programa à medida
                     </h2>
                     <p className="text-white/70 mb-10">
                         Diga-nos os objetivos da sua empresa e desenhamos um programa de formação
                         adequado à sua equipa, mercado e orçamento.
                     </p>
-                    <Button size="lg" asChild style={{ backgroundColor: "#05C480" }} className="text-white font-semibold hover:opacity-90">
+                    <Button asChild size="lg" className="bg-cplp-blue hover:bg-cplp-blue-hover text-white rounded-md">
                         <Link href="/contacto" className="flex items-center gap-2">
                             Contactar a Academy
-                            <ArrowRight className="w-5 h-5" />
+                            <ArrowRight className="w-4 h-4" />
                         </Link>
                     </Button>
 
                     <p className="text-xs text-white/40 mt-10">
-                        Certificação DGERT em processo de preparação.
+                        Entidade em processo de preparação para certificação DGERT.
                     </p>
                 </div>
             </section>
