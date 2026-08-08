@@ -13,7 +13,7 @@ import { SITE_STATS } from "@/lib/constants";
 
 
 const Hero = () => {
-    const cplpLogoPath = "/CPLP LOGO (3).png";
+    const cplpLogoPath = "/cplp-connect-logo-header.png";
 
     const { t } = useLanguage();
     const { displayedText: subText } = useTypewriter(t('hero.subtitle'), 50, 500);

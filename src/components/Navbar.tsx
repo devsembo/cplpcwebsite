@@ -43,7 +43,7 @@ export default function Navbar() {
                     <Link href="/" className="flex items-center gap-2">
                         {isScrolled ?
                             <Image
-                                src="/CPLP LOGO (3).png"
+                                src="/cplp-connect-logo-header.png"
                                 alt="CPLP Connect Logo"
                                 width={150}
                                 height={100}

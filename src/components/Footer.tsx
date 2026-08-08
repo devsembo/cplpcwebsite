@@ -3,6 +3,7 @@ import { Mail, MapPin, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Instagram, Linkedin } from 'lucide-react'; // Ícones para redes sociais
+import { COMPANY_INFO } from '@/lib/constants';
 
 export default function Footer() {
     return (
@@ -12,7 +13,7 @@ export default function Footer() {
                     <div className="max-w-xs">
                         <Link href="/">
                             <Image
-                                src="/CPLP LOGO (3).png"
+                                src="/cplp-connect-logo-header.png"
                                 alt="CPLP Connect Logo"
                                 className="object-cover"
                                 height={100}
@@ -34,6 +35,7 @@ export default function Footer() {
                             <li><Link href="/sobre" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Sobre Nós</Link></li>
                             <li><Link href="/servicos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Serviços</Link></li>
                             <li><Link href="/projetos" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Projetos</Link></li>
+                            <li><Link href="/academy" className="text-slate-300/70 hover:text-cyan-400 transition-colors">CPLP CONNECT Academy</Link></li>
                             <li><Link href="/contacto" className="text-slate-300/70 hover:text-cyan-400 transition-colors">Contacto</Link></li>
                         </ul>
                     </div>
@@ -95,6 +97,9 @@ export default function Footer() {
 
                         <p className="text-slate-400/60 text-sm">
                             © {new Date().getFullYear()} CPLP Connect. Todos os direitos reservados.
+                        </p>
+                        <p className="text-slate-400/50 text-xs mt-1">
+                            {COMPANY_INFO.legalName} · {COMPANY_INFO.nif} · {COMPANY_INFO.address}
                         </p>
 
                     </div>

@@ -12,3 +12,11 @@ export const SITE_STATS: { number: string; labelKey: TranslationKeys }[] = [
   { number: "2", labelKey: "hero.stats.businessUnits" },
   { number: "100%", labelKey: "hero.stats.lusophone" },
 ];
+
+// Dados legais da empresa, usados no rodapé.
+// TODO: preencher o NIF real.
+export const COMPANY_INFO = {
+  legalName: "CPLP CONNECT",
+  nif: "NIF: 000000000",
+  address: "Porto, Portugal",
+};
