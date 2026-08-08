@@ -71,10 +71,8 @@ const translations = {
     'services.items.design.description': 'Estratégia de marca, produto e comunicação digital alinhadas com os objetivos de negócio — não apenas com tendências visuais.',
 
     // Projects
-    'projects.tag': 'Casos de Sucesso',
-    'projects.title': 'Nossos',
-    'projects.titleHighlight': 'Projetos',
-    'projects.description': 'Casos de sucesso que transformaram negócios e criaram impacto real',
+    'projects.tag': 'Portefólio',
+    'projects.title': 'Projetos',
 
     // Solutions
     'sectors.tag': 'Setores Servidos',
@@ -185,10 +183,8 @@ const translations = {
     'services.items.design.description': 'Brand, product and digital communication strategy aligned with business goals — not just visual trends.',
 
     // Projects
-    'projects.tag': 'Success Stories',
-    'projects.title': 'Our',
-    'projects.titleHighlight': 'Projects',
-    'projects.description': 'Success stories that transformed businesses and created real impact',
+    'projects.tag': 'Portfolio',
+    'projects.title': 'Projects',
 
     // Solutions
     'sectors.tag': 'Sectors We Serve',

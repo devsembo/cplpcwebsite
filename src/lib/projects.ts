@@ -30,7 +30,7 @@ export const PROJECTS: Project[] = [
     accentTo: "#0554F5",
   },
   {
-    title: "Em breve",
+    title: "Novo projeto em curso",
     description: "Um novo projeto está em desenvolvimento — brevemente aqui.",
     tags: [],
     category: "Em breve",
