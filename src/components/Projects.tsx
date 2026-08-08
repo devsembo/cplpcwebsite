@@ -1,7 +1,7 @@
 // src/components/Projects.tsx
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
@@ -36,7 +36,14 @@ const Projects = () => {
 
     const projects = PROJECTS;
 
-    const isClient = typeof window !== "undefined";
+    // Só ativa as partículas após a montagem no cliente: o servidor não tem
+    // `window`, por isso avaliar `typeof window` durante o render (em vez de
+    // num efeito) faz a primeira passagem de hidratação já divergir do HTML
+    // do servidor.
+    const [isClient, setIsClient] = useState(false);
+    useEffect(() => {
+        setIsClient(true);
+    }, []);
     const initialX = () => (isClient ? Math.random() * window.innerWidth : 0);
     const initialY = () => Math.random() * 1000;
 
