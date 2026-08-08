@@ -12,16 +12,17 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CPLP CONNECT — Consultoria Tecnológica e Transformação Digital no Espaço CPLP",
+  title: "CPLP CONNECT — Consultoria e Transformação Digital no Espaço CPLP",
   description:
-    "Consultoria tecnológica sediada no Porto que desenha e desenvolve software, apps e plataformas digitais para empresas e instituições dos países de língua portuguesa (Portugal, Angola e restante CPLP).",
+    "Consultora sediada no Porto que concebe e implementa plataformas digitais, software e programas de capacitação para empresas e instituições dos países de língua portuguesa (Portugal, Angola e restante CPLP).",
   keywords: [
     "CPLP",
     "CPLP CONNECT",
-    "consultoria tecnológica",
+    "consultoria",
     "transformação digital",
-    "desenvolvimento de software",
-    "desenvolvimento de apps",
+    "plataformas digitais",
+    "software institucional",
+    "formação corporativa",
     "Porto",
     "Portugal",
     "Angola",
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
-    title: "CPLP CONNECT — Consultoria Tecnológica e Transformação Digital no Espaço CPLP",
+    title: "CPLP CONNECT — Consultoria e Transformação Digital no Espaço CPLP",
     description:
-      "Desenhamos e desenvolvemos software, apps e plataformas digitais para empresas e instituições do espaço CPLP.",
+      "Concebemos e implementamos plataformas digitais, software e programas de capacitação para empresas e instituições do espaço CPLP.",
     url: "https://cplpconnect.pt",
     siteName: "CPLP CONNECT",
     images: [
@@ -58,9 +59,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "CPLP CONNECT — Consultoria Tecnológica e Transformação Digital no Espaço CPLP",
+    title: "CPLP CONNECT — Consultoria e Transformação Digital no Espaço CPLP",
     description:
-      "Desenhamos e desenvolvemos software, apps e plataformas digitais para empresas e instituições do espaço CPLP.",
+      "Concebemos e implementamos plataformas digitais, software e programas de capacitação para empresas e instituições do espaço CPLP.",
     images: ["https://cplpconnect.pt/brand/png/cplpconnect-lockup-h.png"],
   },
 };
