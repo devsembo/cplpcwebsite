@@ -2,54 +2,39 @@
 "use client";
 
 import React from "react";
-import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { ExternalLink } from "lucide-react";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { PROJECTS, type Project } from "@/lib/projects";
+
+const ProjectPlaceholder = ({ project }: { project: Project }) => {
+    if (project.comingSoon) {
+        return (
+            <div className="w-full h-full flex items-center justify-center bg-white/5 border-2 border-dashed border-white/15">
+                <span className="text-white/40 font-semibold tracking-wide uppercase text-sm">Em breve</span>
+            </div>
+        );
+    }
+
+    // TODO: substituir este placeholder por um screenshot real do produto
+    // (ex.: /public/projects/troka.png) quando disponível.
+    return (
+        <div
+            className="w-full h-full flex items-center justify-center"
+            style={{ background: `linear-gradient(135deg, ${project.accentFrom} 0%, ${project.accentTo} 100%)` }}
+        >
+            <span className="text-4xl md:text-5xl font-extrabold text-white/90 tracking-tight">
+                {project.title}
+            </span>
+        </div>
+    );
+};
 
 const Projects = () => {
     const { t } = useLanguage();
 
-    const projects = [
-        {
-            title: "Plataforma E-commerce B2B",
-            description:
-                "Sistema completo de comércio eletrónico para distribuidores com gestão de inventário, pedidos e pagamentos integrados.",
-            image:
-                "https://images.unsplash.com/photo-1661956602116-aa6865609028?w=800&h=600&fit=crop",
-            tags: ["React", "Node.js", "PostgreSQL", "Stripe"],
-            category: "E-commerce",
-        },
-        {
-            title: "App Bancária Mobile",
-            description:
-                "Aplicação móvel para serviços bancários com autenticação biométrica, transferências e gestão de contas.",
-            image:
-                "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=800&h=600&fit=crop",
-            tags: ["React Native", "API REST", "Segurança"],
-            category: "Fintech",
-        },
-        {
-            title: "Portal Educacional",
-            description:
-                "Plataforma de e-learning com gestão de cursos, vídeos, avaliações e certificações digitais.",
-            image:
-                "https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&h=600&fit=crop",
-            tags: ["Next.js", "LMS", "Cloud Storage"],
-            category: "Educação",
-        },
-        {
-            title: "Sistema de Gestão Pública",
-            description:
-                "Solução digital para administração pública com workflow automatizado e portal do cidadão.",
-            image:
-                "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
-            tags: ["Vue.js", "Python", "Microserviços"],
-            category: "Gov Tech",
-        },
-    ];
+    const projects = PROJECTS;
 
     const isClient = typeof window !== "undefined";
     const initialX = () => (isClient ? Math.random() * window.innerWidth : 0);
@@ -125,55 +110,30 @@ const Projects = () => {
                     </motion.div>
 
                     {/* Projects grid */}
-                    <div className="grid md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                         {projects.map((project, index) => (
                             <motion.div
-                                key={index}
-                                initial={{
-                                    opacity: 0,
-                                    x: index % 2 === 0 ? -100 : 100,
-                                }}
-                                whileInView={{
-                                    opacity: 1,
-                                    x: 0,
-                                }}
+                                key={project.title}
+                                initial={{ opacity: 0, y: 40 }}
+                                whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{
-                                    duration: 0.8,
-                                    delay: index * 0.2,
+                                    duration: 0.6,
+                                    delay: index * 0.15,
                                     ease: "easeOut",
                                 }}
-                                whileHover={{ scale: 1.02 }}
+                                whileHover={project.comingSoon ? undefined : { scale: 1.02 }}
                             >
-                                <Card className="overflow-hidden border-2 border-blue-400/20 bg-card/40 backdrop-blur-sm hover:border-blue-400/50 hover:bg-card/60 transition-smooth shadow-card hover:shadow-glow group cursor-pointer h-full">
-                                    {/* Project image */}
-                                    <div className="relative h-64 overflow-hidden bg-muted">
-                                        <motion.div
-                                            whileHover={{ scale: 1.1 }}
-                                            transition={{ duration: 0.6 }}
-                                            className="w-full h-full"
-                                        >
-                                            <Image
-                                                src={project.image}
-                                                alt={project.title}
-                                                fill
-                                                sizes="(max-width: 768px) 100vw, 50vw"
-                                                style={{ objectFit: "cover" }}
-                                            />
-                                        </motion.div>
-
-                                        {/* Hover Overlay */}
-                                        <motion.div
-                                            className="absolute inset-0 bg-linear-to-t from-blue-900/30 to-transparent flex items-end justify-center pb-4"
-                                            initial={{ opacity: 0 }}
-                                            whileHover={{ opacity: 1 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <div className="flex items-center gap-2 text-blue-400 font-medium">
-                                                <span>Ver Detalhes</span>
-                                                <ExternalLink className="w-4 h-4" />
-                                            </div>
-                                        </motion.div>
+                                <Card
+                                    className={`overflow-hidden border-2 bg-card/40 backdrop-blur-sm transition-smooth shadow-card h-full ${
+                                        project.comingSoon
+                                            ? "border-white/10 opacity-70"
+                                            : "border-blue-400/20 hover:border-blue-400/50 hover:bg-card/60 hover:shadow-glow group"
+                                    }`}
+                                >
+                                    {/* Project visual */}
+                                    <div className="relative h-56 overflow-hidden bg-muted">
+                                        <ProjectPlaceholder project={project} />
                                     </div>
 
                                     {/* Text Content */}
@@ -190,21 +150,23 @@ const Projects = () => {
                                             {project.description}
                                         </p>
 
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.tags.map((tag, tagIndex) => (
-                                                <motion.div
-                                                    key={tagIndex}
-                                                    initial={{ opacity: 0, scale: 0 }}
-                                                    whileInView={{ opacity: 1, scale: 1 }}
-                                                    viewport={{ once: true }}
-                                                    transition={{ delay: tagIndex * 0.1 }}
-                                                >
-                                                    <Badge variant="outline" className="text-xs  text-white bg-cyan-50/10">
-                                                        {tag}
-                                                    </Badge>
-                                                </motion.div>
-                                            ))}
-                                        </div>
+                                        {project.tags.length > 0 && (
+                                            <div className="flex flex-wrap gap-2">
+                                                {project.tags.map((tag, tagIndex) => (
+                                                    <motion.div
+                                                        key={tagIndex}
+                                                        initial={{ opacity: 0, scale: 0 }}
+                                                        whileInView={{ opacity: 1, scale: 1 }}
+                                                        viewport={{ once: true }}
+                                                        transition={{ delay: tagIndex * 0.1 }}
+                                                    >
+                                                        <Badge variant="outline" className="text-xs  text-white bg-cyan-50/10">
+                                                            {tag}
+                                                        </Badge>
+                                                    </motion.div>
+                                                ))}
+                                            </div>
+                                        )}
                                     </div>
                                 </Card>
                             </motion.div>
