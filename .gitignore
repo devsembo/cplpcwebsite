@@ -24,6 +24,9 @@
 .DS_Store
 *.pem
 
+# pacote de marca fonte (já instalado em public/brand e src/styles)
+/CPLP-CONNECT-Brand-Web/
+
 # debug
 npm-debug.log*
 yarn-debug.log*

@@ -28,18 +28,18 @@ const translations = {
     'nav.quote': 'Solicitar Orçamento',
 
     // Hero
-    'hero.badge': 'Transformação Digital no Espaço CPLP',
+    'hero.badge': 'Consultoria e Transformação Digital no Espaço CPLP',
     'hero.title': 'Transformação digital para o espaço CPLP',
-    'hero.subtitle': 'Conectando empresas através da tecnologia',
-    'hero.cta.primary': 'Conheça-nos',
-    'hero.cta.secondary': 'Entre em Contacto',
+    'hero.subtitle': 'Concebemos, desenvolvemos e implementamos as plataformas que ligam empresas e instituições de Portugal, Angola e da CPLP.',
+    'hero.cta.primary': 'Fale connosco',
+    'hero.cta.secondary': 'Conheça a Academy',
     'hero.stats.countries': 'Países CPLP',
     'hero.stats.million': 'Milhões',
     'hero.stats.people': 'de pessoas',
     'hero.stats.continents': 'Continentes',
     'hero.stats.projectsDelivered': 'Projetos entregues',
     'hero.stats.businessUnits': 'Unidades de negócio',
-    'hero.stats.lusophone': 'Lusófonos',
+    'hero.stats.headquarters': 'Portugal',
     'hero.scroll': 'Rolar para explorar',
 
     // About
@@ -157,18 +157,18 @@ const translations = {
     'nav.quote': 'Request a Quote',
 
     // Hero
-    'hero.badge': 'Digital Transformation in CPLP',
+    'hero.badge': 'Consulting and Digital Transformation in the CPLP Region',
     'hero.title': 'Digital transformation for the CPLP region',
-    'hero.subtitle': 'Connecting businesses through technology',
-    'hero.cta.primary': 'Learn More',
-    'hero.cta.secondary': 'Get in Touch',
+    'hero.subtitle': 'We design, build and implement the platforms that connect companies and institutions across Portugal, Angola and the CPLP.',
+    'hero.cta.primary': 'Talk to us',
+    'hero.cta.secondary': 'Discover the Academy',
     'hero.stats.countries': 'CPLP Countries',
     'hero.stats.million': 'Million',
     'hero.stats.people': 'people',
     'hero.stats.continents': 'Continents',
     'hero.stats.projectsDelivered': 'Projects delivered',
     'hero.stats.businessUnits': 'Business units',
-    'hero.stats.lusophone': 'Lusophone',
+    'hero.stats.headquarters': 'Portugal',
     'hero.scroll': 'Scroll to explore',
 
     // About

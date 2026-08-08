@@ -10,7 +10,7 @@ export const SITE_STATS: { number: string; labelKey: TranslationKeys }[] = [
   { number: "3", labelKey: "hero.stats.countries" },
   { number: "10+", labelKey: "hero.stats.projectsDelivered" },
   { number: "2", labelKey: "hero.stats.businessUnits" },
-  { number: "100%", labelKey: "hero.stats.lusophone" },
+  { number: "Porto", labelKey: "hero.stats.headquarters" },
 ];
 
 // Dados legais da empresa, usados no rodapé.

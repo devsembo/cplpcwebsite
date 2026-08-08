@@ -1,0 +1,39 @@
+/* ============================================================
+   CPLP CONNECT — Design tokens da marca (V1.0 · Agosto 2026)
+   Fonte de verdade: Brand Guidelines PDF. Não alterar valores
+   aqui sem atualizar o guide.
+   ============================================================ */
+
+:root {
+  /* Cores de marca */
+  --cplp-blue: #0554F5;        /* Azul CPLP — cor primária */
+  --cplp-green: #05C480;       /* Verde Crescimento — SÓ acentos */
+  --cplp-navy: #0B1533;        /* Navy — fundos escuros, títulos */
+
+  /* Neutros */
+  --cplp-ink: #1A2238;         /* Texto principal */
+  --cplp-grey: #5A6478;        /* Texto secundário */
+  --cplp-soft: #8A93A8;        /* Texto terciário, legendas */
+  --cplp-line: #E4E9F3;        /* Linhas, bordas */
+  --cplp-bg: #F5F8FC;          /* Fundo suave, cartões */
+  --cplp-white: #FFFFFF;
+
+  /* Derivados úteis */
+  --cplp-blue-hover: #0447CC;
+  --cplp-green-soft: rgba(5, 196, 128, 0.12);   /* fundos de badge verde */
+  --cplp-blue-soft: rgba(5, 84, 245, 0.08);     /* fundos de badge azul */
+  --cplp-navy-muted: #8E9AB3;                   /* texto secundário sobre navy */
+
+  /* Tipografia (Inter via next/font/google) */
+  --cplp-font: 'Inter', Arial, Helvetica, sans-serif;
+
+  /* Gradiente de marca (régua decorativa fina, nunca em texto) */
+  --cplp-rule: linear-gradient(90deg, var(--cplp-blue), var(--cplp-green));
+}
+
+/* Regras rápidas de aplicação:
+   - Texto sobre --cplp-blue ou --cplp-navy: sempre branco.
+   - --cplp-green nunca em texto corrido; apenas etiquetas bold ≥ 9px
+     ou elementos gráficos.
+   - --cplp-grey apenas sobre branco ou --cplp-bg.
+   - Proporção por página: ~55% claro · 20% navy · 15% azul · 10% verde. */

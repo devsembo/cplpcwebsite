@@ -80,25 +80,25 @@ const CookieConsent = () => {
     if (!isVisible) return null;
 
     return (
-        <div className="fixed bottom-0 left-0 right-0 z-50 animate-in slide-in-from-bottom duration-500">
+        <div className="fixed bottom-0 left-0 right-0 z-50 animate-in slide-in-from-bottom duration-300">
             <div className="mx-4 mb-4 md:mx-8 md:mb-6 max-w-2xl md:ml-auto">
-                <div className="bg-slate-950/90 backdrop-blur-2xl border border-cyan-400/20 rounded-2xl shadow-[0_0_60px_rgba(34,211,238,0.15)] overflow-hidden">
+                <div className="bg-white border border-cplp-line rounded-lg shadow-card-hover overflow-hidden">
 
                     {/* Header */}
                     <div className="p-5 pb-3">
                         <div className="flex items-center gap-3 mb-3">
-                            <div className="h-9 w-9 rounded-xl bg-linear-to-br from-cyan-400/20 to-emerald-400/20 flex items-center justify-center border border-cyan-400/30">
-                                <Cookie className="h-4 w-4 text-cyan-400" />
+                            <div className="h-9 w-9 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center">
+                                <Cookie className="h-4 w-4 text-cplp-blue" />
                             </div>
                             <div>
-                                <h3 className="text-sm font-semibold text-white">Preferências de Cookies</h3>
-                                <p className="text-xs text-slate-400">CPLP Connect respeita a sua privacidade</p>
+                                <h3 className="text-sm font-semibold text-cplp-navy">Preferências de Cookies</h3>
+                                <p className="text-xs text-cplp-grey">CPLP CONNECT respeita a sua privacidade</p>
                             </div>
                         </div>
-                        <p className="text-xs text-slate-300/70 leading-relaxed">
+                        <p className="text-xs text-cplp-grey leading-relaxed">
                             Utilizamos cookies para garantir o funcionamento do site e melhorar a sua experiência.
                             Consulte a nossa{' '}
-                            <Link href="/politica-privacidade" className="text-cyan-400 hover:text-cyan-300 underline underline-offset-2 transition-colors">
+                            <Link href="/politica-privacidade" className="text-cplp-blue hover:text-cplp-blue-hover underline underline-offset-2 transition-colors">
                                 Política de Privacidade
                             </Link>{' '}
                             para mais detalhes.
@@ -107,30 +107,30 @@ const CookieConsent = () => {
 
                     {/* Settings Panel */}
                     {showSettings && (
-                        <div className="px-5 pb-2 space-y-3 border-t border-cyan-400/10 pt-4">
+                        <div className="px-5 pb-2 space-y-3 border-t border-cplp-line pt-4">
                             {(Object.keys(COOKIE_DESCRIPTIONS) as Array<keyof CookiePreferences>).map((key) => {
                                 const { label, description, icon: Icon } = COOKIE_DESCRIPTIONS[key];
                                 const isEssential = key === 'essential';
                                 return (
                                     <div key={key} className="flex items-start gap-3 py-2">
-                                        <div className="h-8 w-8 rounded-lg bg-white/5 flex items-center justify-center shrink-0 border border-white/10">
-                                            <Icon className="h-4 w-4 text-cyan-400/80" />
+                                        <div className="h-8 w-8 rounded-md bg-cplp-bg flex items-center justify-center shrink-0 border border-cplp-line">
+                                            <Icon className="h-4 w-4 text-cplp-blue" />
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center justify-between gap-2">
-                                                <Label htmlFor={key} className="text-sm font-medium text-white cursor-pointer">
+                                                <Label htmlFor={key} className="text-sm font-medium text-cplp-navy cursor-pointer">
                                                     {label}
-                                                    {isEssential && <span className="ml-1.5 text-[10px] text-cyan-400/80 font-normal">(sempre ativo)</span>}
+                                                    {isEssential && <span className="ml-1.5 text-[10px] text-cplp-grey font-normal">(sempre ativo)</span>}
                                                 </Label>
                                                 <Switch
                                                     id={key}
                                                     checked={preferences[key]}
                                                     onCheckedChange={() => handleToggle(key)}
                                                     disabled={isEssential}
-                                                    className="data-[state=checked]:bg-cyan-500 shrink-0"
+                                                    className="data-[state=checked]:bg-cplp-blue shrink-0"
                                                 />
                                             </div>
-                                            <p className="text-[11px] text-slate-400 leading-relaxed mt-0.5">{description}</p>
+                                            <p className="text-[11px] text-cplp-grey leading-relaxed mt-0.5">{description}</p>
                                         </div>
                                     </div>
                                 );
@@ -142,7 +142,7 @@ const CookieConsent = () => {
                     <div className="p-4 pt-2 flex flex-col gap-2">
                         <button
                             onClick={() => setShowSettings(!showSettings)}
-                            className="flex items-center justify-center gap-1 text-xs text-cyan-400/70 hover:text-cyan-400 transition-colors py-1 cursor-pointer"
+                            className="flex items-center justify-center gap-1 text-xs text-cplp-grey hover:text-cplp-navy transition-colors py-1 cursor-pointer"
                         >
                             {showSettings ? <ChevronDown className="h-3 w-3" /> : <ChevronUp className="h-3 w-3" />}
                             {showSettings ? 'Ocultar preferências' : 'Personalizar preferências'}
@@ -151,21 +151,21 @@ const CookieConsent = () => {
                             <Button
                                 onClick={rejectNonEssential}
                                 variant="outline"
-                                className="flex-1 text-xs h-9 border-slate-700 text-slate-300 hover:bg-white/5 hover:text-white rounded-xl cursor-pointer transition-all"
+                                className="flex-1 text-xs h-9 border-cplp-line text-cplp-navy hover:bg-cplp-bg rounded-md cursor-pointer"
                             >
                                 Apenas Essenciais
                             </Button>
                             {showSettings ? (
                                 <Button
                                     onClick={savePreferences}
-                                    className="flex-1 text-xs h-9 bg-linear-to-r from-cyan-500/70 to-emerald-400/70 text-white font-semibold rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] cursor-pointer transition-all"
+                                    className="flex-1 text-xs h-9 bg-cplp-blue hover:bg-cplp-blue-hover text-white font-semibold rounded-md cursor-pointer"
                                 >
                                     Guardar Preferências
                                 </Button>
                             ) : (
                                 <Button
                                     onClick={acceptAll}
-                                    className="flex-1 text-xs h-9 bg-linear-to-r from-cyan-500/70 to-emerald-400/70 text-white font-semibold rounded-xl shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:shadow-[0_0_30px_rgba(34,211,238,0.5)] cursor-pointer transition-all"
+                                    className="flex-1 text-xs h-9 bg-cplp-blue hover:bg-cplp-blue-hover text-white font-semibold rounded-md cursor-pointer"
                                 >
                                     Aceitar Todos
                                 </Button>

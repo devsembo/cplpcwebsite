@@ -6,122 +6,57 @@
 
 
 /* ===========================================================
-   BASE – TUAS CORES ORIGINAIS CONVERTIDAS PARA O PADRÃO NOVO
+   BASE — paleta institucional CPLP CONNECT (ver
+   src/styles/brand-tokens.css para os valores hex de referência)
    =========================================================== */
 @layer base {
   :root {
-    --background: 222 47% 11%;
-    --foreground: 210 40% 98%;
+    --background: 214 54% 97%;       /* cplp-bg #F5F8FC */
+    --foreground: 224 37% 16%;       /* cplp-ink #1A2238 */
 
-    --card: 217 33% 17%;
-    --card-foreground: 210 40% 98%;
+    --card: 0 0% 100%;               /* branco */
+    --card-foreground: 224 37% 16%;  /* cplp-ink */
 
-    --popover: 217 33% 17%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 37% 16%;
 
-    --primary: 217 91% 60%;
+    --primary: 220 96% 49%;          /* cplp-blue #0554F5 */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 217 33% 22%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 214 40% 95%;        /* superfície clara sobre --background */
+    --secondary-foreground: 224 37% 16%;
 
-    --muted: 217 33% 22%;
-    --muted-foreground: 215 20% 65%;
+    --muted: 214 40% 95%;
+    --muted-foreground: 220 14% 41%; /* cplp-grey #5A6478 */
 
-    --accent: 142 76% 36%;
+    --accent: 159 95% 39%;           /* cplp-green #05C480 — só para acentos */
     --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84% 60%;
+    --destructive: 0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 217 33% 24%;
-    --input: 217 33% 24%;
-    --ring: 217 91% 60%;
+    --border: 220 38% 92%;           /* cplp-line #E4E9F3 */
+    --input: 220 38% 92%;
+    --ring: 220 96% 49%;             /* cplp-blue */
 
-    --radius: 0.75rem;
+    --radius: 0.625rem;              /* 10px — cantos pouco arredondados */
 
-    /* Gradientes */
-    --gradient-hero: linear-gradient(135deg, hsl(217, 91%, 60%) 0%, hsl(142, 76%, 36%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(217, 33%, 17%) 0%, hsl(142, 30%, 15%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(222, 47%, 11%) 0%, hsl(217, 33%, 17%) 100%);
-    --gradient-mesh:
-        radial-gradient(at 40% 20%, hsl(217, 91%, 25%) 0px, transparent 50%),
-        radial-gradient(at 80% 0%, hsl(142, 76%, 20%) 0px, transparent 50%),
-        radial-gradient(at 0% 50%, hsl(217, 91%, 15%) 0px, transparent 50%),
-        radial-gradient(at 80% 80%, hsl(142, 76%, 18%) 0px, transparent 50%),
-        radial-gradient(at 0% 100%, hsl(217, 91%, 18%) 0px, transparent 50%);
+    /* Sombra subtil de cartão institucional (sem glow) */
+    --shadow-card: 0 1px 2px rgba(11, 21, 51, 0.04), 0 4px 16px -4px rgba(11, 21, 51, 0.08);
+    --shadow-card-hover: 0 4px 12px rgba(11, 21, 51, 0.06), 0 12px 24px -8px rgba(11, 21, 51, 0.12);
 
-    /* Sombras */
-    --shadow-card: 0 4px 20px -4px hsla(217, 91%, 60%, 0.3);
-    --shadow-card-hover: 0 8px 30px -4px hsla(217, 91%, 60%, 0.5);
-    --shadow-glow: 0 0 60px hsla(217, 91%, 60%, 0.4);
-    --shadow-accent-glow: 0 0 60px hsla(142, 76%, 36%, 0.4);
+    /* Transições subtis apenas */
+    --transition-smooth: all 0.2s ease;
 
-    /* Transições */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-    /* Sidebar (Light) */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  /* ============================
-       DARK MODE ORIGINAL
-     ============================ */
-  .dark {
-    --background: 220 25% 8%;
-    --foreground: 220 15% 95%;
-
-    --card: 220 25% 10%;
-    --card-foreground: 220 15% 95%;
-
-    --popover: 220 25% 10%;
-    --popover-foreground: 220 15% 95%;
-
-    --primary: 220 90% 60%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 220 20% 15%;
-    --secondary-foreground: 220 15% 95%;
-
-    --muted: 220 20% 15%;
-    --muted-foreground: 220 10% 60%;
-
-    --accent: 160 100% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 220 20% 18%;
-    --input: 220 20% 18%;
-    --ring: 220 90% 60%;
-
-    /* Dark gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(220, 90%, 56%) 0%, hsl(160, 100%, 45%) 100%);
-    --gradient-card: linear-gradient(135deg, hsl(220, 25%, 12%) 0%, hsl(160, 20%, 12%) 100%);
-    --gradient-subtle: linear-gradient(180deg, hsl(220, 25%, 8%) 0%, hsl(220, 25%, 10%) 100%);
-
-    --shadow-card: 0 4px 20px -4px hsl(220, 90%, 56%, 0.2);
-    --shadow-card-hover: 0 8px 30px -4px hsl(220, 90%, 56%, 0.3);
-    --shadow-glow: 0 0 40px hsl(220, 90%, 56%, 0.25);
-
-    /* Sidebar (Dark) */
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
+    /* Sidebar */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 224 37% 16%;
+    --sidebar-primary: 220 96% 49%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-accent: 214 40% 95%;
+    --sidebar-accent-foreground: 224 37% 16%;
+    --sidebar-border: 220 38% 92%;
+    --sidebar-ring: 220 96% 49%;
   }
 }
 
@@ -141,52 +76,62 @@
 
 
 /* =====================================================
-   UTILITIES – preservadas do teu arquivo original
+   UTILITIES institucionais
    ===================================================== */
 @layer utilities {
-  .gradient-hero {
-    background: var(--gradient-hero);
-  }
-  .gradient-card {
-    background: var(--gradient-card);
-  }
-  .gradient-subtle {
-    background: var(--gradient-subtle);
-  }
-
   .shadow-card {
     box-shadow: var(--shadow-card);
   }
   .shadow-card-hover {
     box-shadow: var(--shadow-card-hover);
   }
-  .shadow-glow {
-    box-shadow: var(--shadow-glow);
-  }
-
   .transition-smooth {
     transition: var(--transition-smooth);
   }
-  .transition-bounce {
-    transition: var(--transition-bounce);
+  /* Régua fina de marca — o único "gradiente" permitido, nunca em texto */
+  .brand-rule {
+    background: var(--cplp-rule);
   }
 }
 
 
 /* =====================================================
-     THEME INLINE – necessário para Tailwind v4
+     THEME INLINE — necessário para Tailwind v4
    ===================================================== */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
   --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Tokens de marca CPLP CONNECT, expostos como utilitários Tailwind
+     (bg-cplp-blue, text-cplp-navy, border-cplp-line, etc.).
+     Valores hex definidos em src/styles/brand-tokens.css. */
+  --color-cplp-blue: var(--cplp-blue);
+  --color-cplp-blue-hover: var(--cplp-blue-hover);
+  --color-cplp-green: var(--cplp-green);
+  --color-cplp-navy: var(--cplp-navy);
+  --color-cplp-ink: var(--cplp-ink);
+  --color-cplp-grey: var(--cplp-grey);
+  --color-cplp-soft: var(--cplp-soft);
+  --color-cplp-line: var(--cplp-line);
+  --color-cplp-bg: var(--cplp-bg);
 }

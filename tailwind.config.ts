@@ -15,11 +15,20 @@ export default {
         },
         extend: {
             colors: {
-                // Seus cores CPLP com hexadecimais
+                // Cores oficiais da marca CPLP CONNECT.
+                // Nota: este ficheiro não está atualmente ativo — o projeto usa
+                // Tailwind v4 com tokens definidos em CSS (@theme inline em
+                // src/app/globals.css). Mantido correto por documentação/segurança
+                // caso um dia se adicione `@config "../tailwind.config.ts";`.
                 cplp: {
-                    blue: "#1EAEDB",
-                    darkblue: "#0EA5E9",
-                    green: "#10B981",
+                    blue: "#0554F5",
+                    green: "#05C480",
+                    navy: "#0B1533",
+                    ink: "#1A2238",
+                    grey: "#5A6478",
+                    soft: "#8A93A8",
+                    line: "#E4E9F3",
+                    bg: "#F5F8FC",
                 },
                 // O Mapeamento HSL (CRÍTICO)
                 border: "hsl(var(--border))",
@@ -56,19 +65,10 @@ export default {
                     foreground: "hsl(var(--card-foreground))",
                 },
             },
-            // ADIÇÃO: Gradientes Customizados
-            backgroundImage: {
-                'gradient-hero': 'var(--gradient-hero)',
-                'gradient-card': 'var(--gradient-card)',
-                'gradient-subtle': 'var(--gradient-subtle)',
-                'gradient-mesh': 'var(--gradient-mesh)',
-            },
-            // ADIÇÃO: Sombras Customizadas
+            // Sombras institucionais (subtis, sem glow)
             boxShadow: {
                 'card': 'var(--shadow-card)',
                 'card-hover': 'var(--shadow-card-hover)',
-                'glow': 'var(--shadow-glow)',
-                'accent-glow': 'var(--shadow-accent-glow)',
             },
             borderRadius: {
                 lg: "var(--radius)",
