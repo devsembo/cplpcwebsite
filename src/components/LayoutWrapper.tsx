@@ -3,7 +3,6 @@
 import Navbar from './Navbar';
 import Footer from './Footer';
 import { Toaster } from 'sonner';
-import CookieConsent from './CookieConsent';
 
 interface LayoutWrapperProps {
     children: React.ReactNode;
@@ -18,7 +17,6 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
                 <main className="flex-1">{children}</main>
             </div>
 
-            <CookieConsent />
             <Toaster />
             <Footer />
         </div>

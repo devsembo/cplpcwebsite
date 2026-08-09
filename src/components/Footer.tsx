@@ -79,6 +79,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     href="https://www.instagram.com/cplpconnect/"
                                     className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors"
                                 >
@@ -89,6 +90,7 @@ export default function Footer() {
                             <li>
                                 <Link
                                     target="_blank"
+                                    rel="noopener noreferrer"
                                     href="https://www.linkedin.com/company/cplp-connect/"
                                     className="flex items-center gap-2 text-white/60 hover:text-white text-sm transition-colors"
                                 >
