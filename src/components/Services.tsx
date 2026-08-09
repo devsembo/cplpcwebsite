@@ -2,36 +2,15 @@
 "use client";
 
 import React from 'react';
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { Layers, Smartphone, Cloud, Compass } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { SERVICE_AREAS } from "@/lib/service-areas";
 
 const Services = () => {
     const { t } = useLanguage();
-
-    const areas = [
-        {
-            icon: Layers,
-            title: t('services.items.web.title'),
-            description: t('services.items.web.description'),
-        },
-        {
-            icon: Smartphone,
-            title: t('services.items.mobile.title'),
-            description: t('services.items.mobile.description'),
-        },
-        {
-            icon: Cloud,
-            title: t('services.items.cloud.title'),
-            description: t('services.items.cloud.description'),
-        },
-        {
-            icon: Compass,
-            title: t('services.items.design.title'),
-            description: t('services.items.design.description'),
-        },
-    ];
 
     return (
         <section id="services" className="py-20 md:py-28 bg-white">
@@ -53,11 +32,11 @@ const Services = () => {
                     </motion.div>
 
                     <div className="grid sm:grid-cols-2 gap-5">
-                        {areas.map((area, index) => {
+                        {SERVICE_AREAS.map((area, index) => {
                             const Icon = area.icon;
                             return (
                                 <motion.div
-                                    key={area.title}
+                                    key={area.titleKey}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -68,15 +47,25 @@ const Services = () => {
                                             <Icon className="w-5 h-5 text-cplp-blue" />
                                         </div>
                                         <h3 className="text-lg font-bold text-cplp-navy mb-2">
-                                            {area.title}
+                                            {t(area.titleKey)}
                                         </h3>
                                         <p className="text-cplp-grey leading-relaxed">
-                                            {area.description}
+                                            {t(area.descriptionKey)}
                                         </p>
                                     </Card>
                                 </motion.div>
                             );
                         })}
+                    </div>
+
+                    <div className="mt-10">
+                        <Link
+                            href="/servicos"
+                            className="inline-flex items-center gap-2 text-sm font-semibold text-cplp-blue hover:text-cplp-blue-hover transition-colors"
+                        >
+                            Ver todos os serviços
+                            <ArrowRight className="w-4 h-4" />
+                        </Link>
                     </div>
                 </div>
             </div>

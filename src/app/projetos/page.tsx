@@ -1,157 +1,51 @@
-'use client';
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
-import { ArrowRight } from "lucide-react"; // Reintroduzindo ícones
-import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion"; // Adicionando motion para dar vida
+import { ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import PageHero from "@/components/PageHero";
+import ProjectsGrid from "@/components/ProjectsGrid";
 
-// Dados de exemplo para o grid (simplificados para o código)
-const projectData = [
-    {
-        id: 1,
-        country: "Moçambique",
-        year: "2025",
-        status: "Em Andamento",
-        statusColor: "bg-yellow-500",
-        title: "Sistema de Gestão Documental Consular",
-        description: "Implementação de uma plataforma digital para gestão e tramitação de processos para o consulado Geral de Moçambique no Porto.",
-        image: "https://images.unsplash.com/photo-1661956602153-23384936a1d3?w=500&auto=format&fit=crop&q=80",
-        link: "#"
-    },
-    {
-        id: 2,
-        country: "CPLP",
-        year: "2025",
-        status: "Em Andamento",
-        statusColor: "bg-yellow-500",
-        title: "TROKA - Plataforma de remessas Digitais",
-        description: "A TROKA é uma plataforma digital (MTO - Money Transfer Operator) com foco na Comunidade dos Países de Língua Portuguesa (CPLP).",
-        image: "/troka-logo.png",
-        link: "https://trokax.com"
-    },
-    // Adicione mais projetos aqui para preencher o grid
-];
+export const metadata: Metadata = {
+    title: "Projetos — CPLP CONNECT",
+    description:
+        "Plataformas que desenvolvemos para empresas e instituições do espaço CPLP: TROKA, CRM Bemvistos e outros projetos em curso.",
+};
 
-
-export default function Projects() {
-
-    // Animação para a entrada dos cartões
-    const cardVariants = {
-        hidden: { opacity: 0, y: 50 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-    };
-
-    const heroBackground = {
-        backgroundImage: "url('/project-background.jpg')", // Usar um fundo tech
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-    };
-
+export default function ProjectsPage() {
     return (
-        <div className="min-h-screen flex flex-col text-foreground">
+        <div className="min-h-screen flex flex-col">
+            <PageHero
+                title="Projetos"
+                description="Plataformas reais que desenvolvemos para empresas e instituições do espaço CPLP."
+            />
 
-            {/* Hero Section */}
-            <section className="relative py-32 md:py-48 overflow-hidden">
-                <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 via-fuchsia-500/10 to-emerald-500/10" />
-                <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(56,189,248,0.35),_transparent_60%),radial-gradient(circle_at_bottom,_rgba(244,63,94,0.25),_transparent_55%)] opacity-70" />
-
-                <div className="relative container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">
-                            Nossos <span className="bg-linear-to-r from-cyan-400 via-sky-400 to-emerald-400 bg-clip-text text-transparent">Projetos</span>
-                        </h1>
-                        <p className="text-xl text-slate-300/80">
-                            Conheça alguns dos nossos principais trabalhos realizados para instituições governamentais da comunidade CPLP.
-                        </p>
+            <section className="py-16 md:py-20 bg-cplp-bg">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-6xl mx-auto">
+                        <ProjectsGrid />
                     </div>
                 </div>
             </section>
 
-
-
-            {/* Projects Grid */}
-            <section className="py-20 bg-white/[0.03] backdrop-blur-sm">
-                <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-
-                        {projectData.map((project) => (
-                            <motion.div
-                                key={project.id}
-                                variants={cardVariants}
-                                initial="hidden"
-                                whileInView="visible"
-                                viewport={{ once: true, amount: 0.3 }}
-                                className="group"
-                            >
-                                {/* Card com estilo tech: fundo escuro, borda sutil, hover glow */}
-                                <Card className="overflow-hidden bg-white/5 border border-cyan-400/20 backdrop-blur-xl shadow-[0_0_30px_rgba(34,211,238,0.15)] hover:shadow-[0_0_40px_rgba(34,211,238,0.3)] transition-all duration-300">
-                                    <div className="h-56 overflow-hidden">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            width={500}
-                                            height={300}
-                                            className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                                        />
-                                    </div>
-                                    <CardContent className="p-6">
-                                        <div className="flex justify-between items-center mb-4">
-                                            {/* Tag do País */}
-                                            <span className="text-xs font-medium text-blue-300 bg-blue-900/40 py-1 px-3 rounded-full">
-                                                {project.country}
-                                            </span>
-                                            <span className="text-xs text-gray-400">{project.year}</span>
-                                        </div>
-                                        <h3 className="text-2xl font-semibold mb-3 text-white group-hover:text-cyan-400 transition-colors">
-                                            {project.title}
-                                        </h3>
-                                        <p className="text-slate-300/70 mb-4">
-                                            {project.description}
-                                        </p>
-
-                                        {/* Badge do Status (Em Andamento/Concluído) */}
-                                        <Badge variant="default" className={`${project.statusColor} text-xs font-bold text-black py-1 px-3 rounded`}>
-                                            {project.status}
-                                        </Badge>
-
-                                        {/* Link de Detalhes */}
-                                        {project.link !== '#' && (
-                                            <Link
-                                                href={project.link}
-                                                target="_blank"
-                                                className="mt-4 ml-5 text-cyan-400 font-medium inline-flex items-center gap-1 group-hover:gap-2 transition-all duration-300"
-                                            >
-                                                Ver detalhes do projeto <ArrowRight className="h-4 w-4" />
-                                            </Link>
-                                        )}
-                                    </CardContent>
-                                </Card>
-                            </motion.div>
-                        ))}
-                    </div>
-
-                </div>
-            </section>
-
-
-            {/* Contact CTA (Ajustado para cores fixas tech) */}
-            <section className="py-20 bg-linear-to-r from-cyan-500/10 to-emerald-500/10 text-white border-t border-cyan-400/10">
-                <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="max-w-3xl mx-auto text-center">
-                        <h2 className="text-3xl font-bold mb-6">Transforme sua Instituição com Soluções Inovadoras</h2>
-                        <p className="text-xl text-white/80 mb-8">
-                            Entre em contacto connosco para discutir as necessidades específicas da sua instituição e descobrir como podemos ajudar.
+            <section className="bg-cplp-blue py-20 md:py-24">
+                <div className="container mx-auto px-4">
+                    <div className="max-w-2xl mx-auto text-center">
+                        <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
+                            Tem um projeto em mente?
+                        </h2>
+                        <p className="text-white/80 mb-10">
+                            Fale com a nossa equipa e vamos perceber como podemos ajudar a
+                            construir a próxima plataforma da sua empresa.
                         </p>
-                        {/* Botão de destaque com cor cian */}
-                        <Button size="lg" className="bg-linear-to-r from-cyan-500/60 via-sky-500/60 to-emerald-400/60 text-white font-bold rounded-xl shadow-[0_0_40px_rgba(34,211,238,0.5)] hover:shadow-[0_0_60px_rgba(45,212,191,0.7)] hover:scale-[1.02] active:scale-[0.99] transition-all duration-200 cursor-pointer">
-                            <Link href="/contacto">Solicitar Reunião</Link>
+                        <Button asChild size="lg" className="bg-white hover:bg-white/90 text-cplp-blue rounded-md">
+                            <Link href="/contacto" className="flex items-center gap-2">
+                                Fale connosco
+                                <ArrowRight className="w-4 h-4" />
+                            </Link>
                         </Button>
                     </div>
                 </div>
             </section>
-
         </div>
     );
 }
