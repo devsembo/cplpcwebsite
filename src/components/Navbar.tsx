@@ -40,7 +40,7 @@ export default function Navbar() {
             <div className="container max-w-7xl mx-auto flex h-18 items-center justify-between px-4 sm:px-6 lg:px-8">
                 <Link href="/" className="flex items-center shrink-0" aria-label="CPLP CONNECT">
                     <Image
-                        src="/brand/svg/cplpconnect-lockup-h.svg"
+                        src="/brand/png/cplpconnect-lockup-h.png"
                         alt="CPLP CONNECT"
                         width={150}
                         height={52}

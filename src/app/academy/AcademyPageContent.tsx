@@ -81,7 +81,7 @@ export default function AcademyPageContent() {
                         className="flex justify-center mb-10"
                     >
                         <Image
-                            src="/brand/svg/academy-lockup-h-dark.svg"
+                            src="/brand/png/academy-lockup-h-dark.png"
                             alt="CPLP CONNECT Academy"
                             width={310}
                             height={90}

@@ -13,7 +13,7 @@ export default function Footer() {
                     <div className="max-w-xs">
                         <Link href="/" className="inline-block">
                             <Image
-                                src="/brand/svg/cplpconnect-lockup-h.svg"
+                                src="/brand/png/cplpconnect-lockup-h.png"
                                 alt="CPLP CONNECT"
                                 className="h-8 w-auto"
                                 height={52}
