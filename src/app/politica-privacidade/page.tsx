@@ -27,7 +27,7 @@ export default function PoliticaPrivacidade() {
                         <section>
                             <h2 className="text-lg font-bold text-cplp-navy mb-3">1. Introdução</h2>
                             <p>
-                                A CPLP CONNECT ("nós", "a nossa empresa") é uma consultora tecnológica
+                                A CPLP CONNECT (&ldquo;nós&rdquo;, &ldquo;a nossa empresa&rdquo;) é uma consultora tecnológica
                                 sediada no Porto, dedicada à transformação digital de empresas e
                                 instituições do espaço CPLP. Esta política explica que dados pessoais
                                 recolhemos através do site{" "}

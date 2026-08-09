@@ -1,16 +1,9 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
+import nextConfig from "eslint-config-next";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
+// `eslint-config-next` já exporta configuração flat nativa do ESLint 9
+// (ver node_modules/eslint-config-next/dist/index.js). Usar FlatCompat
+// aqui causava "TypeError: Converting circular structure to JSON" ao
+// tentar validar a config legada através do shim de compatibilidade.
+const eslintConfig = [...nextConfig];
 
 export default eslintConfig;
