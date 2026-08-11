@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import UnsubscribeButton from "./UnsubscribeButton";
 
 export const metadata: Metadata = {
-    title: "Cancelar Subscrição — CPLP CONNECT",
+    title: "Cancelar Subscrição",
     robots: { index: false, follow: false },
 };
 

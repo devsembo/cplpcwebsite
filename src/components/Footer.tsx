@@ -24,8 +24,8 @@ export default function Footer() {
             </div>
 
             <div className="container max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
-                    <div className="max-w-xs">
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-7 gap-10">
+                    <div className="col-span-2 sm:col-span-3 lg:col-span-2 max-w-xs">
                         <Link href="/" className="inline-block">
                             <Image
                                 src="/brand/png/cplpconnect-lockup-h.png"
@@ -43,29 +43,36 @@ export default function Footer() {
 
                     <div>
                         <h3 className="text-sm font-semibold uppercase tracking-wide text-white mb-4">
-                            Links Rápidos
+                            Empresa
                         </h3>
                         <ul className="space-y-2.5">
                             <li><Link href="/" className="text-white/60 hover:text-white text-sm transition-colors">Início</Link></li>
                             <li><Link href="/sobre" className="text-white/60 hover:text-white text-sm transition-colors">Sobre Nós</Link></li>
                             <li><Link href="/servicos" className="text-white/60 hover:text-white text-sm transition-colors">Serviços</Link></li>
                             <li><Link href="/projetos" className="text-white/60 hover:text-white text-sm transition-colors">Projetos</Link></li>
-                            <li><Link href="/academy" className="text-white/60 hover:text-white text-sm transition-colors">Academy</Link></li>
-                            <li><Link href="/blog" className="text-white/60 hover:text-white text-sm transition-colors">Blog</Link></li>
-                            <li><Link href="/carreiras" className="text-white/60 hover:text-white text-sm transition-colors">Carreiras</Link></li>
-                            <li><Link href="/contacto" className="text-white/60 hover:text-white text-sm transition-colors">Contacto</Link></li>
                         </ul>
                     </div>
 
                     <div>
                         <h3 className="text-sm font-semibold uppercase tracking-wide text-white mb-4">
-                            Serviços
+                            Recursos
                         </h3>
                         <ul className="space-y-2.5">
-                            <li><Link href="/servicos" className="text-white/60 hover:text-white text-sm transition-colors">Plataformas & Software</Link></li>
-                            <li><Link href="/servicos" className="text-white/60 hover:text-white text-sm transition-colors">Consultoria Digital</Link></li>
-                            <li><Link href="/servicos" className="text-white/60 hover:text-white text-sm transition-colors">Suporte Técnico</Link></li>
+                            <li><Link href="/academy" className="text-white/60 hover:text-white text-sm transition-colors">Academy</Link></li>
+                            <li><Link href="/blog" className="text-white/60 hover:text-white text-sm transition-colors">Blog</Link></li>
+                            <li><Link href="/carreiras" className="text-white/60 hover:text-white text-sm transition-colors">Carreiras</Link></li>
                             <li><Link href="/faqs" className="text-white/60 hover:text-white text-sm transition-colors">Perguntas Frequentes</Link></li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h3 className="text-sm font-semibold uppercase tracking-wide text-white mb-4">
+                            Legal
+                        </h3>
+                        <ul className="space-y-2.5">
+                            <li><Link href="/termos-de-servico" className="text-white/60 hover:text-white text-sm transition-colors">Termos de Serviço</Link></li>
+                            <li><Link href="/politica-privacidade" className="text-white/60 hover:text-white text-sm transition-colors">Política de Privacidade</Link></li>
+                            <li><Link href="/politica-cookies" className="text-white/60 hover:text-white text-sm transition-colors">Cookies</Link></li>
                         </ul>
                     </div>
 
@@ -123,14 +130,6 @@ export default function Footer() {
                         <p className="text-white/40 text-xs mt-1">
                             {COMPANY_INFO.legalName} · {COMPANY_INFO.nif} · {COMPANY_INFO.address}
                         </p>
-                    </div>
-                    <div className="flex gap-6">
-                        <Link href="/politica-privacidade" className="text-white/50 hover:text-white text-sm transition-colors">
-                            Política de Privacidade
-                        </Link>
-                        <Link href="/termos-de-servico" className="text-white/50 hover:text-white text-sm transition-colors">
-                            Termos de Serviço
-                        </Link>
                     </div>
                 </div>
             </div>

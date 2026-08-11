@@ -4,7 +4,7 @@ import { getSession } from "@/lib/session";
 import AdminSidebar from "./AdminSidebar";
 
 export const metadata: Metadata = {
-    title: "Admin — CPLP CONNECT",
+    title: "Admin",
     robots: { index: false, follow: false },
 };
 

@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { COMPANY_INFO } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Termos de Utilização — CPLP CONNECT",
+    title: "Termos de Utilização",
     description: "Termos de utilização do site cplpconnect.pt.",
+    alternates: { canonical: "/termos-de-servico" },
 };
 
 export default function TermosServico() {

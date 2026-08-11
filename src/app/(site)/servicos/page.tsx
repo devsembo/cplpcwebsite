@@ -7,9 +7,10 @@ import ServicosContent from "./ServicosContent";
 import { getPageHero } from "@/lib/data/page-hero";
 
 export const metadata: Metadata = {
-    title: "Serviços — CPLP CONNECT",
+    title: "Serviços",
     description:
         "Plataformas & Software à Medida, Apps Mobile, Cloud & Infraestrutura e Estratégia Digital & Design para empresas e instituições do espaço CPLP.",
+    alternates: { canonical: "/servicos" },
 };
 
 export default async function ServicosPage() {

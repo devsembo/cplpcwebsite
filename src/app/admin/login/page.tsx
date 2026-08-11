@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import LoginForm from "./LoginForm";
 
 export const metadata: Metadata = {
-    title: "Admin — CPLP CONNECT",
+    title: "Admin",
     robots: { index: false, follow: false },
 };
 

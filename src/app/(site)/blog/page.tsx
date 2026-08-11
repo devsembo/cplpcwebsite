@@ -6,9 +6,10 @@ import NewsletterForm from "@/components/NewsletterForm";
 import { getPublishedPosts } from "@/lib/data/blog";
 
 export const metadata: Metadata = {
-    title: "Blog — CPLP CONNECT",
+    title: "Blog",
     description:
         "Notícias, artigos e novidades da CPLP CONNECT sobre transformação digital no espaço CPLP.",
+    alternates: { canonical: "/blog" },
 };
 
 export default async function BlogPage() {

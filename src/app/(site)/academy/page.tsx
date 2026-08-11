@@ -3,9 +3,10 @@ import { getPageHero } from "@/lib/data/page-hero";
 import AcademyPageContent from "./AcademyPageContent";
 
 export const metadata: Metadata = {
-    title: "CPLP CONNECT Academy — Formação Corporativa com ADN Tecnológico",
+    title: "Academy — Formação Corporativa com ADN Tecnológico",
     description:
         "Corporate Training, Executive Education e Digital Transformation para empresas de Portugal, Angola e restante espaço CPLP. In-Company, Executive Program, Online & Híbrido e Corporate Exchange.",
+    alternates: { canonical: "/academy" },
 };
 
 export default async function AcademyPage() {

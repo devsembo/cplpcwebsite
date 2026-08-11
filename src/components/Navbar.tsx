@@ -24,12 +24,8 @@ export default function Navbar() {
 
     const navLinks = [
         { href: '/', label: t('nav.home') },
-        { href: '/sobre', label: t('nav.about') },
         { href: '/servicos', label: t('nav.services') },
-        { href: '/projetos', label: t('nav.projects') },
         { href: '/academy', label: 'Academy' },
-        { href: '/blog', label: t('nav.blog') },
-        { href: '/carreiras', label: t('nav.careers') },
         { href: '/contacto', label: t('nav.contact') },
     ];
 

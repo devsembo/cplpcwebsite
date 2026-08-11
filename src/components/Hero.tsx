@@ -84,7 +84,7 @@ const Hero = ({ imageUrl }: { imageUrl?: string | null }) => {
                             variant="outline"
                             className={
                                 hasImage
-                                    ? "border-white/30 text-white hover:bg-white/10 rounded-md text-base px-7"
+                                    ? "border-white/30 text-white bg-transparent rounded-md text-base px-7"
                                     : "border-cplp-line text-cplp-navy hover:bg-cplp-bg rounded-md text-base px-7"
                             }
                         >

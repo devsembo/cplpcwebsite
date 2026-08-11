@@ -8,9 +8,10 @@ import { getAllProjects } from "@/lib/data/projects";
 import { getPageHero } from "@/lib/data/page-hero";
 
 export const metadata: Metadata = {
-    title: "Projetos — CPLP CONNECT",
+    title: "Projetos",
     description:
         "Plataformas que desenvolvemos para empresas e instituições do espaço CPLP: TROKA, CRM Bemvistos e outros projetos em curso.",
+    alternates: { canonical: "/projetos" },
 };
 
 export default async function ProjectsPage() {

@@ -7,8 +7,9 @@ import type { Metadata } from "next";
 import { COMPANY_INFO } from "@/lib/constants";
 
 export const metadata: Metadata = {
-    title: "Política de Privacidade — CPLP CONNECT",
+    title: "Política de Privacidade",
     description: "Como a CPLP CONNECT recolhe, utiliza e protege os seus dados pessoais.",
+    alternates: { canonical: "/politica-privacidade" },
 };
 
 export default function PoliticaPrivacidade() {

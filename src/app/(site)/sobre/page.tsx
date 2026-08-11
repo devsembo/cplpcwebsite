@@ -3,9 +3,10 @@ import { getPageHero } from "@/lib/data/page-hero";
 import SobreContent from "./SobreContent";
 
 export const metadata: Metadata = {
-    title: "Sobre Nós — CPLP CONNECT",
+    title: "Sobre Nós",
     description:
         "Consultora tecnológica sediada no Porto, dedicada à transformação digital de empresas e instituições do espaço CPLP.",
+    alternates: { canonical: "/sobre" },
 };
 
 export default async function SobrePage() {

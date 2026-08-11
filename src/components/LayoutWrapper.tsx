@@ -2,6 +2,7 @@
 
 import Navbar from './Navbar';
 import Footer from './Footer';
+import CookieBanner from './CookieBanner';
 import { Toaster } from 'sonner';
 
 interface LayoutWrapperProps {
@@ -19,6 +20,7 @@ export default function LayoutWrapper({ children }: LayoutWrapperProps) {
 
             <Toaster />
             <Footer />
+            <CookieBanner />
         </div>
     );
 }
