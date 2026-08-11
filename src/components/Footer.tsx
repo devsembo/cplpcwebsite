@@ -4,10 +4,25 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Instagram, Linkedin } from 'lucide-react';
 import { COMPANY_INFO } from '@/lib/constants';
+import NewsletterForm from '@/components/NewsletterForm';
 
 export default function Footer() {
     return (
         <footer className="bg-cplp-navy text-white">
+            <div className="border-b border-white/10">
+                <div className="container max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 flex flex-col md:flex-row md:items-center md:justify-between gap-5">
+                    <div>
+                        <h3 className="text-lg font-bold text-white">Subscreva a nossa newsletter</h3>
+                        <p className="text-white/60 text-sm mt-1">
+                            Novidades sobre transformação digital no espaço CPLP, direto no seu email.
+                        </p>
+                    </div>
+                    <div className="w-full md:w-auto md:min-w-[360px]">
+                        <NewsletterForm variant="dark" />
+                    </div>
+                </div>
+            </div>
+
             <div className="container max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-10">
                     <div className="max-w-xs">
@@ -36,6 +51,7 @@ export default function Footer() {
                             <li><Link href="/servicos" className="text-white/60 hover:text-white text-sm transition-colors">Serviços</Link></li>
                             <li><Link href="/projetos" className="text-white/60 hover:text-white text-sm transition-colors">Projetos</Link></li>
                             <li><Link href="/academy" className="text-white/60 hover:text-white text-sm transition-colors">Academy</Link></li>
+                            <li><Link href="/blog" className="text-white/60 hover:text-white text-sm transition-colors">Blog</Link></li>
                             <li><Link href="/carreiras" className="text-white/60 hover:text-white text-sm transition-colors">Carreiras</Link></li>
                             <li><Link href="/contacto" className="text-white/60 hover:text-white text-sm transition-colors">Contacto</Link></li>
                         </ul>

@@ -3,10 +3,11 @@
 
 import React from "react";
 import { motion } from "framer-motion";
+import type { Project } from "@prisma/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import ProjectsGrid from "@/components/ProjectsGrid";
 
-const Projects = () => {
+const Projects = ({ projects }: { projects: Project[] }) => {
     const { t } = useLanguage();
 
     return (
@@ -28,7 +29,7 @@ const Projects = () => {
                         </h2>
                     </motion.div>
 
-                    <ProjectsGrid />
+                    <ProjectsGrid projects={projects} />
                 </div>
             </div>
         </section>

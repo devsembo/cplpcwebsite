@@ -4,15 +4,14 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { motion } from "framer-motion";
-import { PROJECTS, type Project } from "@/lib/projects";
+import type { Project } from "@prisma/client";
 
 // Motivo de pontos com as cores da marca, replicando o mark do logo.
-// TODO: substituir por um screenshot real do produto quando disponível
-// (ex.: /public/projects/troka.png), mantendo este motivo apenas como
-// fallback para projetos ainda sem imagem.
+// Usado como fallback para projetos sem imagem definida no admin.
 const dotPattern = (colorA: string, colorB: string) => ({
     backgroundColor: "#F5F8FC",
     backgroundImage: `radial-gradient(${colorA} 1.5px, transparent 1.5px), radial-gradient(${colorB} 1.5px, transparent 1.5px)`,
@@ -37,7 +36,7 @@ const ProjectPlaceholder = ({ project }: { project: Project }) => {
     return (
         <div
             className="w-full h-full flex items-center justify-center"
-            style={dotPattern("rgba(5,84,245,0.35)", "rgba(5,196,128,0.30)")}
+            style={dotPattern(project.accentFrom, project.accentTo)}
         >
             <span className="text-2xl md:text-3xl font-extrabold text-cplp-navy tracking-tight bg-white/85 px-4 py-2 rounded-md">
                 {project.title}
@@ -46,12 +45,12 @@ const ProjectPlaceholder = ({ project }: { project: Project }) => {
     );
 };
 
-const ProjectsGrid = () => {
+const ProjectsGrid = ({ projects }: { projects: Project[] }) => {
     return (
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {PROJECTS.map((project, index) => (
+            {projects.map((project, index) => (
                 <motion.div
-                    key={project.title}
+                    key={project.id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -65,7 +64,17 @@ const ProjectsGrid = () => {
                         }`}
                     >
                         <div className="relative h-48 overflow-hidden">
-                            <ProjectPlaceholder project={project} />
+                            {project.imageUrl ? (
+                                <Image
+                                    src={project.imageUrl}
+                                    alt={project.title}
+                                    fill
+                                    className="object-cover"
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                />
+                            ) : (
+                                <ProjectPlaceholder project={project} />
+                            )}
                         </div>
 
                         <div className="p-6">

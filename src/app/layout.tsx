@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "@/styles/brand-tokens.css";
 import "./globals.css";
-import LayoutWrapper from "@/components/LayoutWrapper";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 
 const inter = Inter({
@@ -76,13 +75,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} antialiased`}
       >
-        <LanguageProvider>
-          <LayoutWrapper>
-            <div className="flex-1">
-              {children}
-            </div>
-          </LayoutWrapper>
-        </LanguageProvider>
+        <LanguageProvider>{children}</LanguageProvider>
       </body>
     </html>
   );
