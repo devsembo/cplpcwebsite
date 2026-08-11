@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { blogPostSchema } from "@/lib/schemas/blog-post";
 import { slugify } from "@/lib/slugify";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage, deleteImage } from "@/lib/storage";
 import { sendMail } from "@/lib/mail";
 import { buildNewsletterEmail } from "@/lib/email-templates/newsletter";
 

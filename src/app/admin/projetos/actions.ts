@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { projectSchema } from "@/lib/schemas/project";
 import { slugify } from "@/lib/slugify";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage, deleteImage } from "@/lib/storage";
 
 export interface ProjectActionResult {
     error?: string;

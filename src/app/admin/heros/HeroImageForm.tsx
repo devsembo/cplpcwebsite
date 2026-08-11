@@ -7,7 +7,18 @@ import type { PageKey } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { validateImageFile } from "@/lib/validate-image";
 import { updatePageHeroImage, removePageHeroImage, type HeroActionResult } from "./actions";
+
+function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const error = validateImageFile(file);
+    if (error) {
+        toast.error(error);
+        e.target.value = "";
+    }
+}
 
 const PAGE_LABELS: Record<PageKey, string> = {
     home: "Início",
@@ -55,7 +66,7 @@ export default function HeroImageForm({ pageKey, imageUrl }: { pageKey: PageKey;
             </div>
 
             <form action={formAction} className="flex gap-2">
-                <Input type="file" name="image" accept="image/*" required className="rounded-md text-xs" />
+                <Input type="file" name="image" accept="image/*" onChange={handleImageChange} required className="rounded-md text-xs" />
                 <UploadButton />
             </form>
 

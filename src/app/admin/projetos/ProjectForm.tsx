@@ -14,7 +14,19 @@ import {
     DialogTitle,
     DialogFooter,
 } from "@/components/ui/dialog";
+import { toast } from "sonner";
+import { validateImageFile } from "@/lib/validate-image";
 import { createProject, updateProject, type ProjectActionResult } from "./actions";
+
+function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const error = validateImageFile(file);
+    if (error) {
+        toast.error(error);
+        e.target.value = "";
+    }
+}
 
 function SubmitButton({ label }: { label: string }) {
     const { pending } = useFormStatus();
@@ -133,7 +145,7 @@ export default function ProjectForm({
                             className="h-24 w-full object-cover rounded-md border border-cplp-line mb-2"
                         />
                     )}
-                    <Input id="image" name="image" type="file" accept="image/*" className="rounded-md" />
+                    <Input id="image" name="image" type="file" accept="image/*" onChange={handleImageChange} className="rounded-md" />
                     <p className="text-xs text-cplp-grey">
                         Opcional — sem imagem, o cartão mostra o padrão de cor gerado a partir das cores acima.
                     </p>

@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import type { PageKey } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
-import { uploadImage, deleteImage } from "@/lib/blob";
+import { uploadImage, deleteImage } from "@/lib/storage";
 
 export interface HeroActionResult {
     error?: string;

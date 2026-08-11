@@ -10,7 +10,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent } from "@/components/ui/card";
 import MarkdownRenderer from "@/components/MarkdownRenderer";
+import { toast } from "sonner";
+import { validateImageFile } from "@/lib/validate-image";
 import { createBlogPost, updateBlogPost, type BlogPostActionResult } from "./actions";
+
+function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const error = validateImageFile(file);
+    if (error) {
+        toast.error(error);
+        e.target.value = "";
+    }
+}
 
 function SubmitButton({ label }: { label: string }) {
     const { pending } = useFormStatus();
@@ -104,7 +116,7 @@ export default function BlogPostForm({ post }: { post?: BlogPost }) {
                                         className="h-32 w-full object-cover rounded-md border border-cplp-line mb-2"
                                     />
                                 )}
-                                <Input id="coverImage" name="coverImage" type="file" accept="image/*" className="rounded-md" />
+                                <Input id="coverImage" name="coverImage" type="file" accept="image/*" onChange={handleImageChange} className="rounded-md" />
                                 {post?.coverImageUrl && (
                                     <label className="flex items-center gap-2 text-sm text-cplp-grey mt-2">
                                         <input type="checkbox" name="removeCoverImage" className="rounded" />

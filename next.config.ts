@@ -1,7 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "10mb",
+    },
+  },
+
   images: {
     remotePatterns: [
       {
@@ -12,9 +17,9 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: '*.public.blob.vercel-storage.com',
+        hostname: 'hjrnglfgbdpjnvruwjec.supabase.co',
         port: '',
-        pathname: '/**',
+        pathname: '/storage/v1/object/public/**',
       },
     ],
   },
