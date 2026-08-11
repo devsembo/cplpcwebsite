@@ -25,50 +25,53 @@ import {
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-
-const formatos = [
-    {
-        icon: Building2,
-        title: "In-Company Angola",
-        description: "Formação ministrada nas instalações do cliente em Angola, adaptada à realidade e aos processos internos da empresa.",
-    },
-    {
-        icon: GraduationCap,
-        title: "Executive Program Portugal",
-        description: "Imersões executivas no Porto e em Lisboa, com formato intensivo para equipas de liderança e gestão.",
-    },
-    {
-        icon: Laptop,
-        title: "Online & Híbrido",
-        description: "Sessões ao vivo combinadas com uma plataforma digital de aprendizagem, para equipas distribuídas geograficamente.",
-    },
-    {
-        icon: Repeat,
-        title: "Corporate Exchange",
-        description: "Programas de intercâmbio de equipas entre Portugal e Angola, promovendo partilha de conhecimento entre mercados.",
-    },
-];
-
-const areas = [
-    { icon: Users, title: "Liderança & Gestão" },
-    { icon: Cpu, title: "Transformação Digital" },
-    { icon: Database, title: "Dados & IA" },
-    { icon: Shield, title: "Cibersegurança" },
-    { icon: ClipboardList, title: "Gestão de Projetos" },
-    { icon: Handshake, title: "Vendas & Negociação" },
-    { icon: Calculator, title: "Finanças para não-financeiros" },
-    { icon: Scale, title: "Compliance & Risco" },
-];
-
-const comoFunciona = [
-    { icon: Search, title: "Diagnóstico", description: "Levantamento das necessidades de formação e dos objetivos da empresa." },
-    { icon: PenTool, title: "Desenho do Programa", description: "Construção de um programa formativo à medida, com os formatos e áreas certas." },
-    { icon: GraduationCap, title: "Formação", description: "Execução do programa, em regime presencial, online ou híbrido." },
-    { icon: CheckCircle2, title: "Avaliação", description: "Avaliação de conhecimentos e resultados de aprendizagem dos participantes." },
-    { icon: QrCode, title: "Certificado", description: "Emissão de certificado com código único e verificação online por QR." },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function AcademyPageContent() {
+    const { t } = useLanguage();
+
+    const formatos = [
+        {
+            icon: Building2,
+            title: t("academy.formatos.incompany.title"),
+            description: t("academy.formatos.incompany.description"),
+        },
+        {
+            icon: GraduationCap,
+            title: t("academy.formatos.executive.title"),
+            description: t("academy.formatos.executive.description"),
+        },
+        {
+            icon: Laptop,
+            title: t("academy.formatos.online.title"),
+            description: t("academy.formatos.online.description"),
+        },
+        {
+            icon: Repeat,
+            title: t("academy.formatos.exchange.title"),
+            description: t("academy.formatos.exchange.description"),
+        },
+    ];
+
+    const areas = [
+        { icon: Users, title: t("academy.areas.leadership") },
+        { icon: Cpu, title: t("academy.areas.digital") },
+        { icon: Database, title: t("academy.areas.data") },
+        { icon: Shield, title: t("academy.areas.cyber") },
+        { icon: ClipboardList, title: t("academy.areas.projects") },
+        { icon: Handshake, title: t("academy.areas.sales") },
+        { icon: Calculator, title: t("academy.areas.finance") },
+        { icon: Scale, title: t("academy.areas.compliance") },
+    ];
+
+    const comoFunciona = [
+        { icon: Search, title: t("academy.how.diagnosis.title"), description: t("academy.how.diagnosis.description") },
+        { icon: PenTool, title: t("academy.how.design.title"), description: t("academy.how.design.description") },
+        { icon: GraduationCap, title: t("academy.how.training.title"), description: t("academy.how.training.description") },
+        { icon: CheckCircle2, title: t("academy.how.evaluation.title"), description: t("academy.how.evaluation.description") },
+        { icon: QrCode, title: t("academy.how.certificate.title"), description: t("academy.how.certificate.description") },
+    ];
+
     return (
         <div className="min-h-screen flex flex-col">
             {/* Hero */}
@@ -96,7 +99,7 @@ export default function AcademyPageContent() {
                         transition={{ duration: 0.5, delay: 0.05 }}
                         className="text-4xl md:text-6xl font-extrabold tracking-tight text-white mb-6"
                     >
-                        Formação corporativa com ADN tecnológico
+                        {t("academy.hero.title")}
                     </motion.h1>
 
                     <motion.p
@@ -105,8 +108,7 @@ export default function AcademyPageContent() {
                         transition={{ duration: 0.5, delay: 0.1 }}
                         className="text-lg md:text-xl text-white/70 max-w-3xl mx-auto"
                     >
-                        Corporate Training · Executive Education · Digital Transformation —
-                        programas desenhados para empresas de Portugal, Angola e restante CPLP.
+                        {t("academy.hero.subtitle")}
                     </motion.p>
 
                     <motion.div
@@ -117,7 +119,7 @@ export default function AcademyPageContent() {
                     >
                         <Button asChild size="lg" className="bg-cplp-blue hover:bg-cplp-blue-hover text-white rounded-md">
                             <Link href="/contacto" className="flex items-center gap-2">
-                                Fale connosco sobre um programa à medida
+                                {t("academy.hero.cta")}
                                 <ArrowRight className="w-4 h-4" />
                             </Link>
                         </Button>
@@ -136,9 +138,9 @@ export default function AcademyPageContent() {
                         className="text-center mb-14"
                     >
                         <span className="text-xs font-semibold uppercase tracking-wide text-cplp-blue">
-                            Como formamos
+                            {t("academy.formatos.tag")}
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">Quatro formatos</h2>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">{t("academy.formatos.title")}</h2>
                     </motion.div>
 
                     <div className="grid sm:grid-cols-2 gap-5">
@@ -177,9 +179,9 @@ export default function AcademyPageContent() {
                         className="text-center mb-14"
                     >
                         <span className="text-xs font-semibold uppercase tracking-wide text-cplp-blue">
-                            Currículo
+                            {t("academy.areas.tag")}
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">Áreas de formação</h2>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">{t("academy.areas.title")}</h2>
                     </motion.div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -217,9 +219,9 @@ export default function AcademyPageContent() {
                         className="text-center mb-14"
                     >
                         <span className="text-xs font-semibold uppercase tracking-wide text-cplp-blue">
-                            Metodologia
+                            {t("academy.how.tag")}
                         </span>
-                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">Como funciona</h2>
+                        <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mt-3">{t("academy.how.title")}</h2>
                     </motion.div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-5">
@@ -233,7 +235,7 @@ export default function AcademyPageContent() {
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
                                 >
-                                    <Card className="p-6 h-full border border-cplp-line bg-white shadow-none text-center rounded-lg">
+                                    <Card className="p-3 h-full  border border-cplp-line bg-white shadow-none text-center rounded-lg">
                                         <div className="text-xs font-bold text-cplp-blue mb-3">
                                             {String(index + 1).padStart(2, "0")}
                                         </div>
@@ -254,21 +256,20 @@ export default function AcademyPageContent() {
             <section className="py-20 md:py-24 bg-cplp-navy">
                 <div className="container max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                     <h2 className="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-4">
-                        Fale connosco sobre um programa à medida
+                        {t("academy.cta.title")}
                     </h2>
                     <p className="text-white/70 mb-10">
-                        Diga-nos os objetivos da sua empresa e desenhamos um programa de formação
-                        adequado à sua equipa, mercado e orçamento.
+                        {t("academy.cta.description")}
                     </p>
                     <Button asChild size="lg" className="bg-cplp-blue hover:bg-cplp-blue-hover text-white rounded-md">
                         <Link href="/contacto" className="flex items-center gap-2">
-                            Contactar a Academy
+                            {t("academy.cta.button")}
                             <ArrowRight className="w-4 h-4" />
                         </Link>
                     </Button>
 
                     <p className="text-xs text-white/40 mt-10">
-                        Entidade em processo de preparação para certificação DGERT.
+                        {t("academy.cta.dgert")}
                     </p>
                 </div>
             </section>
