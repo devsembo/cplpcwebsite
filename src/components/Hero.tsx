@@ -151,20 +151,7 @@ const Hero = ({ imageUrl }: { imageUrl?: string | null }) => {
                 >
                     {/* Conteúdo principal */}
                     <div className="text-center lg:text-left">
-                        <motion.div
-                            initial={{ opacity: 0, y: 10 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.5 }}
-                            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full mb-8 bg-white/10 border border-white/15 backdrop-blur-sm"
-                        >
-                            <span className="relative flex h-2 w-2">
-                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cplp-green opacity-75" />
-                                <span className="relative inline-flex rounded-full h-2 w-2 bg-cplp-green" />
-                            </span>
-                            <span className="text-xs font-semibold uppercase tracking-wide text-white">
-                                {t('hero.badge')}
-                            </span>
-                        </motion.div>
+
 
                         <motion.h1
                             initial={{ opacity: 0, y: 14 }}

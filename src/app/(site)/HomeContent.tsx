@@ -25,7 +25,7 @@ export default function HomeContent({
     return (
         <>
             <Hero imageUrl={heroImageUrl} />
-            <Partners />
+
             <Services />
             <Methodology />
             <Sectors />
