@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import PageHero from "@/components/PageHero";
 import { COMPANY_INFO } from "@/lib/constants";
 
 export const metadata: Metadata = {
@@ -10,15 +11,9 @@ export const metadata: Metadata = {
 export default function TermosServico() {
     return (
         <div className="min-h-screen bg-cplp-bg">
-            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pt-32 pb-20">
+            <PageHero title="Termos de Utilização" description="Última atualização: 9 de agosto de 2026" />
+            <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
                 <main className="bg-white border border-cplp-line rounded-lg px-6 sm:px-10 md:px-14 py-10 md:py-14">
-                    <h1 className="text-3xl sm:text-4xl font-extrabold text-cplp-navy tracking-tight mb-2">
-                        Termos de Utilização
-                    </h1>
-                    <p className="text-cplp-grey mb-10 text-sm">
-                        <strong className="text-cplp-ink">Última atualização:</strong> 9 de agosto de 2026
-                    </p>
-
                     <div className="space-y-9 text-cplp-ink leading-relaxed">
                         <section>
                             <h2 className="text-lg font-bold text-cplp-navy mb-3">1. Introdução</h2>

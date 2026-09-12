@@ -161,8 +161,8 @@ export default function AcademyPageContent({ heroImageUrl }: { heroImageUrl?: st
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
                                 >
                                     <Card className="p-8 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow rounded-lg">
-                                        <div className="w-11 h-11 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center mb-5">
-                                            <Icon className="w-5 h-5 text-cplp-blue" />
+                                        <div className="w-11 h-11 rounded-full border border-cplp-blue/25 flex items-center justify-center mb-5">
+                                            <Icon className="w-5 h-5 text-cplp-blue" strokeWidth={1.5} />
                                         </div>
                                         <h3 className="text-lg font-bold text-cplp-navy mb-2">{formato.title}</h3>
                                         <p className="text-cplp-grey leading-relaxed">{formato.description}</p>
@@ -202,8 +202,8 @@ export default function AcademyPageContent({ heroImageUrl }: { heroImageUrl?: st
                                     transition={{ duration: 0.35, delay: index * 0.05 }}
                                 >
                                     <Card className="p-6 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow text-center rounded-lg">
-                                        <div className="w-10 h-10 rounded-md bg-cplp-green/[0.1] flex items-center justify-center mb-4 mx-auto">
-                                            <Icon className="w-5 h-5 text-cplp-green" />
+                                        <div className="w-10 h-10 rounded-full border border-cplp-green/25 flex items-center justify-center mb-4 mx-auto">
+                                            <Icon className="w-5 h-5 text-cplp-green" strokeWidth={1.5} />
                                         </div>
                                         <h3 className="text-sm font-semibold text-cplp-navy">{area.title}</h3>
                                     </Card>
@@ -245,8 +245,8 @@ export default function AcademyPageContent({ heroImageUrl }: { heroImageUrl?: st
                                         <div className="text-xs font-bold text-cplp-blue mb-3">
                                             {String(index + 1).padStart(2, "0")}
                                         </div>
-                                        <div className="w-10 h-10 rounded-md bg-cplp-green/[0.1] flex items-center justify-center mb-4 mx-auto">
-                                            <Icon className="w-5 h-5 text-cplp-green" />
+                                        <div className="w-10 h-10 rounded-full border border-cplp-green/25 flex items-center justify-center mb-4 mx-auto">
+                                            <Icon className="w-5 h-5 text-cplp-green" strokeWidth={1.5} />
                                         </div>
                                         <h3 className="text-sm font-semibold text-cplp-navy mb-2">{step.title}</h3>
                                         <p className="text-xs text-cplp-grey leading-relaxed">{step.description}</p>

@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin/*
+
+# Host
+Host: https://cplpconnect.pt
+
+# Sitemaps
+Sitemap: https://cplpconnect.pt/sitemap.xml

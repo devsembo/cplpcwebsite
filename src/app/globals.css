@@ -92,6 +92,81 @@
   .brand-rule {
     background: var(--cplp-rule);
   }
+
+  /* Textura de grão subtil sobre gradientes escuros — dá profundidade sem
+     pesar a página (usada em Hero, ContactCTA, WhyUs). */
+  .bg-noise {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 160px 160px;
+  }
+
+  /* Estilo do conteúdo dos artigos do blog — partilhado entre o editor
+     visual (admin) e a página pública, para o WYSIWYG ser fiel ao publicado. */
+  .article-content h1 {
+    @apply text-3xl font-extrabold text-cplp-navy tracking-tight mt-8 mb-4;
+  }
+  .article-content h2 {
+    @apply text-2xl font-bold text-cplp-navy tracking-tight mt-8 mb-3;
+  }
+  .article-content h3 {
+    @apply text-xl font-bold text-cplp-navy tracking-tight mt-6 mb-2;
+  }
+  .article-content p {
+    @apply text-cplp-ink leading-relaxed mb-4;
+  }
+  .article-content a {
+    @apply text-cplp-blue underline underline-offset-2;
+  }
+  .article-content ul {
+    @apply list-disc list-inside space-y-1 mb-4 text-cplp-ink;
+  }
+  .article-content ol {
+    @apply list-decimal list-inside space-y-1 mb-4 text-cplp-ink;
+  }
+  .article-content blockquote {
+    @apply border-l-4 border-cplp-blue/30 pl-4 italic text-cplp-grey mb-4;
+  }
+  .article-content code {
+    @apply bg-cplp-bg text-cplp-navy px-1.5 py-0.5 rounded text-sm;
+  }
+  .article-content img {
+    @apply rounded-lg my-4 max-w-full;
+  }
+  .article-content p.is-editor-empty:first-child::before {
+    content: attr(data-placeholder);
+    float: left;
+    color: var(--cplp-grey);
+    pointer-events: none;
+    height: 0;
+  }
+
+  /* Faixa de logótipos com scroll infinito (ex: stack tecnológico) */
+  .marquee-track {
+    animation: marquee 28s linear infinite;
+  }
+  .marquee-track:hover {
+    animation-play-state: paused;
+  }
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Linha animada da rota Porto ↔ Luanda (Hero) — sugere dados a fluir. */
+  .route-dash {
+    stroke-dasharray: 7 9;
+    animation: route-flow 2.4s linear infinite;
+  }
+  @keyframes route-flow {
+    to {
+      stroke-dashoffset: -64;
+    }
+  }
 }
 
 

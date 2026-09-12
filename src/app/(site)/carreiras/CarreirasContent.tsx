@@ -115,8 +115,8 @@ export default function CarreirasContent({ heroImageUrl }: { heroImageUrl?: stri
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
                                 >
                                     <Card className="p-6 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow rounded-lg">
-                                        <div className="w-10 h-10 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center mb-4">
-                                            <Icon className="w-5 h-5 text-cplp-blue" />
+                                        <div className="w-10 h-10 rounded-full border border-cplp-blue/25 flex items-center justify-center mb-4">
+                                            <Icon className="w-5 h-5 text-cplp-blue" strokeWidth={1.5} />
                                         </div>
                                         <h3 className="text-base font-bold text-cplp-navy mb-2">{item.title}</h3>
                                         <p className="text-sm text-cplp-grey leading-relaxed">{item.description}</p>

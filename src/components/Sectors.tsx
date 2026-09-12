@@ -4,17 +4,13 @@
 import React from 'react';
 import { Landmark, Building2, GraduationCap, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import TiltCard from "@/components/TiltCard";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const Sectors = () => {
     const { t } = useLanguage();
 
     const sectors = [
-        {
-            icon: Landmark,
-            title: t('sectors.items.banking.title'),
-            description: t('sectors.items.banking.description'),
-        },
         {
             icon: Building2,
             title: t('sectors.items.public.title'),
@@ -29,6 +25,11 @@ const Sectors = () => {
             icon: Users,
             title: t('sectors.items.sme.title'),
             description: t('sectors.items.sme.description'),
+        },
+        {
+            icon: Landmark,
+            title: t('sectors.items.banking.title'),
+            description: t('sectors.items.banking.description'),
         },
     ];
 
@@ -61,17 +62,20 @@ const Sectors = () => {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
-                                    className="bg-white border border-cplp-line rounded-lg p-6"
                                 >
-                                    <div className="w-10 h-10 rounded-md bg-cplp-green/[0.1] flex items-center justify-center mb-4">
-                                        <Icon className="w-5 h-5 text-cplp-green" />
-                                    </div>
-                                    <h3 className="text-base font-bold text-cplp-navy mb-2">
-                                        {sector.title}
-                                    </h3>
-                                    <p className="text-sm text-cplp-grey leading-relaxed">
-                                        {sector.description}
-                                    </p>
+                                    <TiltCard intensity={6} className="h-full">
+                                        <div className="h-full rounded-lg p-6 border bg-white border-cplp-line">
+                                            <div className="w-10 h-10 rounded-full border border-cplp-green/25 flex items-center justify-center mb-4">
+                                                <Icon className="w-5 h-5 text-cplp-green" strokeWidth={1.5} />
+                                            </div>
+                                            <h3 className="text-base font-bold mb-2 text-cplp-navy">
+                                                {sector.title}
+                                            </h3>
+                                            <p className="text-sm leading-relaxed text-cplp-grey">
+                                                {sector.description}
+                                            </p>
+                                        </div>
+                                    </TiltCard>
                                 </motion.div>
                             );
                         })}

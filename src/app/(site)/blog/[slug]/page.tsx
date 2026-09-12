@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import MarkdownRenderer from "@/components/MarkdownRenderer";
+import BlogContent from "@/components/BlogContent";
+import { Badge } from "@/components/ui/badge";
+import PageHero from "@/components/PageHero";
 import { getPublishedPostBySlug } from "@/lib/data/blog";
 
 export async function generateMetadata({
@@ -76,29 +78,38 @@ export default async function BlogPostPage({
         },
     };
 
+    const publishedLabel = post.publishedAt
+        ? new Date(post.publishedAt).toLocaleDateString("pt-PT", {
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+          }) + (post.authorName ? ` · ${post.authorName}` : "")
+        : undefined;
+
     return (
         <div className="min-h-screen flex flex-col">
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            <article className="pt-32 pb-20 md:pt-40 md:pb-24 bg-white">
+            <PageHero title={post.title} description={publishedLabel} />
+            <article className="py-16 md:py-20 bg-white">
                 <div className="container mx-auto px-4">
                     <div className="max-w-3xl mx-auto">
-                        {post.publishedAt && (
-                            <p className="text-sm text-cplp-grey mb-3">
-                                {new Date(post.publishedAt).toLocaleDateString("pt-PT", {
-                                    day: "2-digit",
-                                    month: "long",
-                                    year: "numeric",
-                                })}
-                                {post.authorName && ` · ${post.authorName}`}
-                            </p>
+                        {(post.category || post.tags.length > 0) && (
+                            <div className="flex flex-wrap gap-2 mb-6">
+                                {post.category && (
+                                    <Badge className="bg-cplp-blue/10 text-cplp-blue border-cplp-blue/20">
+                                        {post.category}
+                                    </Badge>
+                                )}
+                                {post.tags.map((tag) => (
+                                    <Badge key={tag} variant="outline" className="text-cplp-grey border-cplp-line">
+                                        {tag}
+                                    </Badge>
+                                ))}
+                            </div>
                         )}
-
-                        <h1 className="text-3xl md:text-4xl font-extrabold text-cplp-navy tracking-tight mb-8">
-                            {post.title}
-                        </h1>
 
                         {post.coverImageUrl && (
                             <div className=" p-5 mx-auto justify-center  items-center flex rounded-lg overflow-hidden mb-10">
@@ -106,7 +117,7 @@ export default async function BlogPostPage({
                             </div>
                         )}
 
-                        <MarkdownRenderer content={post.content} />
+                        <BlogContent content={post.content} format={post.contentFormat} />
                     </div>
                 </div>
             </article>

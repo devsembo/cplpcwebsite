@@ -6,6 +6,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import TiltCard from "@/components/TiltCard";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { SERVICE_AREAS } from "@/lib/service-areas";
 
@@ -31,7 +32,7 @@ const Services = () => {
                         </h2>
                     </motion.div>
 
-                    <div className="grid sm:grid-cols-2 gap-5">
+                    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                         {SERVICE_AREAS.map((area, index) => {
                             const Icon = area.icon;
                             return (
@@ -42,17 +43,19 @@ const Services = () => {
                                     viewport={{ once: true }}
                                     transition={{ duration: 0.4, delay: index * 0.08 }}
                                 >
-                                    <Card className="p-8 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow rounded-lg">
-                                        <div className="w-11 h-11 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center mb-5">
-                                            <Icon className="w-5 h-5 text-cplp-blue" />
-                                        </div>
-                                        <h3 className="text-lg font-bold text-cplp-navy mb-2">
-                                            {t(area.titleKey)}
-                                        </h3>
-                                        <p className="text-cplp-grey leading-relaxed">
-                                            {t(area.descriptionKey)}
-                                        </p>
-                                    </Card>
+                                    <TiltCard intensity={5} className="h-full">
+                                        <Card className="p-8 h-full border border-cplp-line bg-white shadow-none hover:shadow-card transition-shadow rounded-lg">
+                                            <div className="w-11 h-11 rounded-full border border-cplp-blue/25 flex items-center justify-center mb-5">
+                                                <Icon className="w-5 h-5 text-cplp-blue" strokeWidth={1.5} />
+                                            </div>
+                                            <h3 className="text-lg font-bold mb-2 text-cplp-navy">
+                                                {t(area.titleKey)}
+                                            </h3>
+                                            <p className="leading-relaxed text-cplp-grey">
+                                                {t(area.descriptionKey)}
+                                            </p>
+                                        </Card>
+                                    </TiltCard>
                                 </motion.div>
                             );
                         })}

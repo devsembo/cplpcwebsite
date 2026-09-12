@@ -9,14 +9,6 @@ import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 import PageHero from "@/components/PageHero";
 
-const team = [
-    { name: "Anderson Pedro", role: "Co-Founder" },
-    { name: "Emanuel Macaia", role: "Strategic Director" },
-    { name: "Aldemir Gunza", role: "Business Developer" },
-    { name: "Bruno Ribas", role: "Diretor de Operações & Projetos (COO)" },
-    { name: "Leocádio Estrela", role: "Chief Technology Officer (CTO)" },
-];
-
 const timeline = [
     {
         year: "2024",
@@ -34,15 +26,6 @@ const timeline = [
         description: "Continuamos a crescer com projetos entregues em Portugal e Angola, e uma equipa dedicada à transformação digital do espaço CPLP.",
     },
 ];
-
-const initials = (name: string) =>
-    name
-        .split(" ")
-        .filter(Boolean)
-        .slice(0, 2)
-        .map((part) => part[0])
-        .join("")
-        .toUpperCase();
 
 export default function SobreContent({ heroImageUrl }: { heroImageUrl?: string | null }) {
     const { t } = useLanguage();
@@ -93,8 +76,8 @@ export default function SobreContent({ heroImageUrl }: { heroImageUrl?: string |
                                         transition={{ duration: 0.4, delay: index * 0.08 }}
                                     >
                                         <Card className="p-6 h-full border border-cplp-line bg-white shadow-none rounded-lg">
-                                            <div className="w-10 h-10 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center mb-4">
-                                                <Icon className="w-5 h-5 text-cplp-blue" />
+                                            <div className="w-10 h-10 rounded-full border border-cplp-blue/25 flex items-center justify-center mb-4">
+                                                <Icon className="w-5 h-5 text-cplp-blue" strokeWidth={1.5} />
                                             </div>
                                             <h3 className="text-base font-bold text-cplp-navy mb-2">{value.title}</h3>
                                             <p className="text-sm text-cplp-grey leading-relaxed">{value.description}</p>
@@ -138,52 +121,6 @@ export default function SobreContent({ heroImageUrl }: { heroImageUrl?: string |
                                         <h3 className="text-lg font-bold text-cplp-navy mb-1">{item.title}</h3>
                                         <p className="text-cplp-grey leading-relaxed">{item.description}</p>
                                     </div>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            {/* Equipa */}
-            <section className="py-16 md:py-20 bg-cplp-bg">
-                <div className="container mx-auto px-4">
-                    <div className="max-w-6xl mx-auto">
-                        <motion.div
-                            className="text-center max-w-2xl mx-auto mb-14"
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.5 }}
-                        >
-                            <h2 className="text-3xl md:text-5xl font-extrabold text-cplp-navy tracking-tight mb-4">
-                                Nossa Equipa
-                            </h2>
-                            <p className="text-cplp-grey">
-                                Os profissionais que fazem da CPLP CONNECT uma consultora de confiança.
-                            </p>
-                        </motion.div>
-
-                        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6">
-                            {team.map((member, index) => (
-                                <motion.div
-                                    key={member.name}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    whileInView={{ opacity: 1, y: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.4, delay: index * 0.06 }}
-                                    className="text-center"
-                                >
-                                    {/* TODO: substituir por fotografia real da equipa */}
-                                    <div
-                                        className="w-20 h-20 rounded-full mx-auto mb-3 flex items-center justify-center text-white font-bold text-lg"
-                                        style={{ background: "linear-gradient(135deg, #0554F5 0%, #05C480 100%)" }}
-                                        aria-hidden="true"
-                                    >
-                                        {initials(member.name)}
-                                    </div>
-                                    <h3 className="text-sm font-semibold text-cplp-navy">{member.name}</h3>
-                                    <p className="text-xs text-cplp-grey mt-0.5">{member.role}</p>
                                 </motion.div>
                             ))}
                         </div>

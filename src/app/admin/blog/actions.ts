@@ -33,8 +33,12 @@ function parseFormData(formData: FormData) {
         title: formData.get("title"),
         excerpt: formData.get("excerpt"),
         content: formData.get("content"),
+        contentFormat: formData.get("contentFormat") || "html",
         authorName: formData.get("authorName") || undefined,
+        category: formData.get("category") || undefined,
+        tags: formData.get("tags") ?? "",
         published: formData.get("published") === "on",
+        scheduledAt: formData.get("scheduledAt") || undefined,
     });
 }
 
@@ -64,13 +68,14 @@ export async function createBlogPost(
     }
 
     const slug = await uniqueSlug(parsed.data.title);
+    const { scheduledAt, ...data } = parsed.data;
 
     const post = await prisma.blogPost.create({
         data: {
-            ...parsed.data,
+            ...data,
             slug,
             coverImageUrl,
-            publishedAt: parsed.data.published ? new Date() : null,
+            publishedAt: parsed.data.published ? scheduledAt ?? new Date() : null,
         },
     });
 
@@ -114,14 +119,20 @@ export async function updateBlogPost(
     const slug =
         parsed.data.title === existing.title ? existing.slug : await uniqueSlug(parsed.data.title, id);
 
-    const wasPublished = existing.published;
-    const publishedAt =
-        parsed.data.published && !wasPublished ? new Date() : existing.publishedAt;
+    const { scheduledAt, ...data } = parsed.data;
+    let publishedAt = existing.publishedAt;
+    if (parsed.data.published) {
+        if (scheduledAt) {
+            publishedAt = scheduledAt;
+        } else if (!existing.published) {
+            publishedAt = new Date();
+        }
+    }
 
     await prisma.blogPost.update({
         where: { id },
         data: {
-            ...parsed.data,
+            ...data,
             slug,
             publishedAt,
             ...(coverImageUrl !== undefined ? { coverImageUrl } : {}),

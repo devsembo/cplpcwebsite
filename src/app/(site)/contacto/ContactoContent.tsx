@@ -82,8 +82,8 @@ export default function ContactoContent({ heroImageUrl }: { heroImageUrl?: strin
                             <motion.div variants={itemVariants}>
                                 <Card className="border border-cplp-line bg-white shadow-none rounded-lg">
                                     <CardContent className="flex items-start gap-4 p-5">
-                                        <div className="h-10 w-10 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center shrink-0">
-                                            <MapPin className="h-5 w-5 text-cplp-blue" />
+                                        <div className="h-10 w-10 rounded-full border border-cplp-blue/25 flex items-center justify-center shrink-0">
+                                            <MapPin className="h-5 w-5 text-cplp-blue" strokeWidth={1.5} />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-cplp-navy mb-0.5">Localização</h3>
@@ -96,12 +96,12 @@ export default function ContactoContent({ heroImageUrl }: { heroImageUrl?: strin
                             <motion.div variants={itemVariants}>
                                 <Card className="border border-cplp-line bg-white shadow-none rounded-lg">
                                     <CardContent className="flex items-start gap-4 p-5">
-                                        <div className="h-10 w-10 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center shrink-0">
-                                            <Phone className="h-5 w-5 text-cplp-blue" />
+                                        <div className="h-10 w-10 rounded-full border border-cplp-blue/25 flex items-center justify-center shrink-0">
+                                            <Phone className="h-5 w-5 text-cplp-blue" strokeWidth={1.5} />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-cplp-navy mb-0.5">Telefone</h3>
-                                            <p className="text-sm text-cplp-grey">+351 935 254 355</p>
+                                            <p className="text-sm text-cplp-grey">+351  934 373 461</p>
                                         </div>
                                     </CardContent>
                                 </Card>
@@ -110,8 +110,8 @@ export default function ContactoContent({ heroImageUrl }: { heroImageUrl?: strin
                             <motion.div variants={itemVariants}>
                                 <Card className="border border-cplp-line bg-white shadow-none rounded-lg">
                                     <CardContent className="flex items-start gap-4 p-5">
-                                        <div className="h-10 w-10 rounded-md bg-cplp-blue/[0.08] flex items-center justify-center shrink-0">
-                                            <Mail className="h-5 w-5 text-cplp-blue" />
+                                        <div className="h-10 w-10 rounded-full border border-cplp-blue/25 flex items-center justify-center shrink-0">
+                                            <Mail className="h-5 w-5 text-cplp-blue" strokeWidth={1.5} />
                                         </div>
                                         <div>
                                             <h3 className="font-semibold text-cplp-navy mb-0.5">Email</h3>

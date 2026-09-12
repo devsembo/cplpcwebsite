@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import Link from "next/link";
 import type { BlogPost } from "@prisma/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import {
     Table,
     TableHeader,
@@ -23,15 +24,52 @@ import {
     AlertDialogCancel,
     AlertDialogAction,
 } from "@/components/ui/alert-dialog";
-import { Plus, Pencil, Trash2, Send } from "lucide-react";
+import { Plus, Pencil, Trash2, Send, Search } from "lucide-react";
 import { toast } from "sonner";
+import { cn } from "@/lib/utils";
 import { deleteBlogPost, sendNewsletterForPost } from "./actions";
+
+type StatusFilter = "all" | "published" | "scheduled" | "draft";
+
+function getStatus(post: BlogPost): "published" | "scheduled" | "draft" {
+    if (!post.published) return "draft";
+    if (post.publishedAt && post.publishedAt > new Date()) return "scheduled";
+    return "published";
+}
+
+const STATUS_LABEL: Record<ReturnType<typeof getStatus>, string> = {
+    published: "Publicado",
+    scheduled: "Agendado",
+    draft: "Rascunho",
+};
+
+const STATUS_FILTERS: { value: StatusFilter; label: string }[] = [
+    { value: "all", label: "Todos" },
+    { value: "published", label: "Publicados" },
+    { value: "scheduled", label: "Agendados" },
+    { value: "draft", label: "Rascunhos" },
+];
 
 export default function BlogPostsTable({ posts }: { posts: BlogPost[] }) {
     const [deleteTarget, setDeleteTarget] = useState<BlogPost | null>(null);
     const [sendTarget, setSendTarget] = useState<BlogPost | null>(null);
     const [isPending, startTransition] = useTransition();
     const [isSending, startSend] = useTransition();
+    const [search, setSearch] = useState("");
+    const [statusFilter, setStatusFilter] = useState<StatusFilter>("all");
+
+    const filteredPosts = useMemo(() => {
+        const query = search.trim().toLowerCase();
+        return posts.filter((post) => {
+            const matchesSearch =
+                !query ||
+                post.title.toLowerCase().includes(query) ||
+                post.category?.toLowerCase().includes(query) ||
+                post.tags.some((tag) => tag.toLowerCase().includes(query));
+            const matchesStatus = statusFilter === "all" || getStatus(post) === statusFilter;
+            return matchesSearch && matchesStatus;
+        });
+    }, [posts, search, statusFilter]);
 
     const handleDelete = () => {
         if (!deleteTarget) return;
@@ -69,6 +107,35 @@ export default function BlogPostsTable({ posts }: { posts: BlogPost[] }) {
                 </Button>
             </div>
 
+            <div className="flex flex-col sm:flex-row gap-3 mb-4">
+                <div className="relative flex-1 max-w-sm">
+                    <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cplp-grey" />
+                    <Input
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        placeholder="Procurar por título, categoria ou tag..."
+                        className="rounded-md pl-9"
+                    />
+                </div>
+                <div className="flex gap-1.5 flex-wrap">
+                    {STATUS_FILTERS.map((filter) => (
+                        <button
+                            key={filter.value}
+                            type="button"
+                            onClick={() => setStatusFilter(filter.value)}
+                            className={cn(
+                                "text-sm font-medium px-3 py-1.5 rounded-md border transition-colors cursor-pointer",
+                                statusFilter === filter.value
+                                    ? "bg-cplp-blue text-white border-cplp-blue"
+                                    : "bg-white text-cplp-grey border-cplp-line hover:bg-cplp-bg",
+                            )}
+                        >
+                            {filter.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
             <div className="bg-white border border-cplp-line rounded-lg overflow-hidden">
                 <Table>
                     <TableHeader>
@@ -81,16 +148,33 @@ export default function BlogPostsTable({ posts }: { posts: BlogPost[] }) {
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {posts.map((post) => (
+                        {filteredPosts.map((post) => {
+                            const status = getStatus(post);
+                            return (
                             <TableRow key={post.id}>
-                                <TableCell className="font-medium text-cplp-navy">{post.title}</TableCell>
+                                <TableCell className="font-medium text-cplp-navy">
+                                    {post.title}
+                                    {(post.category || post.tags.length > 0) && (
+                                        <p className="text-xs font-normal text-cplp-grey mt-0.5">
+                                            {[post.category, ...post.tags].filter(Boolean).join(" · ")}
+                                        </p>
+                                    )}
+                                </TableCell>
                                 <TableCell>
-                                    <Badge variant={post.published ? "default" : "outline"}>
-                                        {post.published ? "Publicado" : "Rascunho"}
+                                    <Badge
+                                        variant={status === "draft" ? "outline" : "default"}
+                                        className={status === "scheduled" ? "bg-cplp-green hover:bg-cplp-green" : undefined}
+                                    >
+                                        {STATUS_LABEL[status]}
                                     </Badge>
                                 </TableCell>
                                 <TableCell className="text-cplp-grey">
-                                    {post.publishedAt ? new Date(post.publishedAt).toLocaleDateString("pt-PT") : "—"}
+                                    {post.publishedAt
+                                        ? new Date(post.publishedAt).toLocaleString("pt-PT", {
+                                              dateStyle: "short",
+                                              timeStyle: status === "scheduled" ? "short" : undefined,
+                                          })
+                                        : "—"}
                                 </TableCell>
                                 <TableCell className="text-cplp-grey">
                                     {post.newsletterSentAt ? (
@@ -100,7 +184,7 @@ export default function BlogPostsTable({ posts }: { posts: BlogPost[] }) {
                                     )}
                                 </TableCell>
                                 <TableCell className="text-right space-x-2">
-                                    {post.published && !post.newsletterSentAt && (
+                                    {status === "published" && !post.newsletterSentAt && (
                                         <Button variant="ghost" size="sm" onClick={() => setSendTarget(post)} title="Enviar Newsletter">
                                             <Send className="w-4 h-4 text-cplp-blue" />
                                         </Button>
@@ -115,11 +199,12 @@ export default function BlogPostsTable({ posts }: { posts: BlogPost[] }) {
                                     </Button>
                                 </TableCell>
                             </TableRow>
-                        ))}
-                        {posts.length === 0 && (
+                            );
+                        })}
+                        {filteredPosts.length === 0 && (
                             <TableRow>
                                 <TableCell colSpan={5} className="text-center text-cplp-grey py-8">
-                                    Sem posts ainda.
+                                    {posts.length === 0 ? "Sem posts ainda." : "Nenhum post corresponde à pesquisa."}
                                 </TableCell>
                             </TableRow>
                         )}

@@ -6,7 +6,8 @@ export function getAllPosts() {
 
 export function getPublishedPosts() {
     return prisma.blogPost.findMany({
-        where: { published: true },
+        // published=true com publishedAt no futuro = agendado, ainda não visível.
+        where: { published: true, publishedAt: { lte: new Date() } },
         orderBy: { publishedAt: "desc" },
     });
 }
@@ -16,5 +17,7 @@ export function getPostBySlug(slug: string) {
 }
 
 export function getPublishedPostBySlug(slug: string) {
-    return prisma.blogPost.findFirst({ where: { slug, published: true } });
+    return prisma.blogPost.findFirst({
+        where: { slug, published: true, publishedAt: { lte: new Date() } },
+    });
 }

@@ -9,7 +9,7 @@ import { getPageHero } from "@/lib/data/page-hero";
 export const metadata: Metadata = {
     title: "Serviços",
     description:
-        "Plataformas & Software à Medida, Apps Mobile, Cloud & Infraestrutura e Estratégia Digital & Design para empresas e instituições do espaço CPLP.",
+        "Sites institucionais e plataformas web, apps mobile, core banking & soluções financeiras, cloud & infraestrutura e estratégia digital & design para empresas, instituições e bancos do espaço CPLP.",
     alternates: { canonical: "/servicos" },
 };
 

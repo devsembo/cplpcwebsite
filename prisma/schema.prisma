@@ -54,8 +54,15 @@ model BlogPost {
   title            String
   excerpt          String
   content          String
+  // "markdown" (posts antigos, escritos à mão) ou "html" (editor visual).
+  contentFormat    String    @default("markdown")
   coverImageUrl    String?
+  category         String?
+  tags             String[]  @default([])
   published        Boolean   @default(false)
+  // Também usado para agendamento: se published=true e publishedAt está no
+  // futuro, o post fica "Agendado" e só aparece no site quando essa data chegar
+  // (ver getPublishedPosts em src/lib/data/blog.ts).
   publishedAt      DateTime?
   authorName       String?
   newsletterSentAt DateTime?

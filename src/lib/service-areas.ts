@@ -1,7 +1,8 @@
-import { Layers, Smartphone, Cloud, Compass, type LucideIcon } from "lucide-react";
+import { Landmark, Layers, Smartphone, Cloud, Compass, type LucideIcon } from "lucide-react";
 import type { TranslationKeys } from "@/contexts/LanguageContext";
 
 export interface ServiceArea {
+  slug: string;
   icon: LucideIcon;
   titleKey: TranslationKeys;
   descriptionKey: TranslationKeys;
@@ -9,20 +10,27 @@ export interface ServiceArea {
   details: string[];
 }
 
-// Fonte única das 4 áreas de atuação — usada na homepage (Services.tsx)
-// e na página /servicos, para nunca haver dados divergentes entre as duas.
+// Fonte única das áreas de atuação — usada na homepage (Services.tsx),
+// no dropdown do Navbar e na página /servicos (âncoras por slug), para
+// nunca haver dados divergentes entre elas.
+//
+// Nota: nenhuma área é "a especialidade" — a CPLP CONNECT desenvolve desde
+// sites institucionais e apps até soluções financeiras para bancos, por
+// isso as 5 áreas são apresentadas em pé de igualdade (sem destaque).
 export const SERVICE_AREAS: ServiceArea[] = [
   {
+    slug: "web",
     icon: Layers,
     titleKey: "services.items.web.title",
     descriptionKey: "services.items.web.description",
     details: [
-      "Plataformas web e portais institucionais",
+      "Sites institucionais e plataformas web",
       "Sistemas internos de gestão e workflow",
       "Integrações com sistemas já existentes na empresa",
     ],
   },
   {
+    slug: "mobile",
     icon: Smartphone,
     titleKey: "services.items.mobile.title",
     descriptionKey: "services.items.mobile.description",
@@ -33,6 +41,18 @@ export const SERVICE_AREAS: ServiceArea[] = [
     ],
   },
   {
+    slug: "banking",
+    icon: Landmark,
+    titleKey: "services.items.banking.title",
+    descriptionKey: "services.items.banking.description",
+    details: [
+      "Core banking e sistemas de gestão financeira",
+      "Mobile banking, pagamentos e carteiras digitais",
+      "Segurança, compliance e integração com a banca central",
+    ],
+  },
+  {
+    slug: "cloud",
     icon: Cloud,
     titleKey: "services.items.cloud.title",
     descriptionKey: "services.items.cloud.description",
@@ -43,6 +63,7 @@ export const SERVICE_AREAS: ServiceArea[] = [
     ],
   },
   {
+    slug: "design",
     icon: Compass,
     titleKey: "services.items.design.title",
     descriptionKey: "services.items.design.description",

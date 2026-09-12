@@ -14,7 +14,7 @@ export const SITE_STATS: { number: string; labelKey: TranslationKeys }[] = [
 ];
 
 // NIF ainda por atribuir/confirmar. TODO: substituir por o NIF real.
-export const NIF_PLACEHOLDER = "NIF a preencher";
+export const NIF_PLACEHOLDER = "518 600 203";
 
 // Dados legais da empresa, usados no rodapé.
 export const COMPANY_INFO = {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getAllProjects } from "@/lib/data/projects";
 import { getPageHero } from "@/lib/data/page-hero";
+import { getPublishedPosts } from "@/lib/data/blog";
 import HomeContent from "./HomeContent";
 
 export const metadata: Metadata = {
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Home() {
-    const [projects, heroImageUrl] = await Promise.all([getAllProjects(), getPageHero("home")]);
-    return <HomeContent projects={projects} heroImageUrl={heroImageUrl} />;
+    const [projects, heroImageUrl, posts] = await Promise.all([
+        getAllProjects(),
+        getPageHero("home"),
+        getPublishedPosts(),
+    ]);
+    return <HomeContent projects={projects} heroImageUrl={heroImageUrl} posts={posts.slice(0, 3)} />;
 }
