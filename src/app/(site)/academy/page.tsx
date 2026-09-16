@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getPageHero } from "@/lib/data/page-hero";
+import { getPublishedCourses } from "@/lib/data/courses";
 import AcademyPageContent from "./AcademyPageContent";
 
 export const metadata: Metadata = {
@@ -10,6 +11,9 @@ export const metadata: Metadata = {
 };
 
 export default async function AcademyPage() {
-    const heroImageUrl = await getPageHero("academy");
-    return <AcademyPageContent heroImageUrl={heroImageUrl} />;
+    const [heroImageUrl, courses] = await Promise.all([
+        getPageHero("academy"),
+        getPublishedCourses(),
+    ]);
+    return <AcademyPageContent heroImageUrl={heroImageUrl} courses={courses} />;
 }

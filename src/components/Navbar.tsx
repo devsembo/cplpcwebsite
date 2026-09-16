@@ -18,8 +18,10 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import Link from 'next/link';
 import Image from 'next/image';
+import type { Service } from '@prisma/client';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { SERVICE_AREAS } from '@/lib/service-areas';
+import { getServiceIcon } from '@/lib/service-icons';
+import { pickLocale } from '@/lib/i18n-content';
 
 type NavItem = { href: string; label: string; description?: string; icon?: LucideIcon };
 type NavLink = { type: 'link'; href: string; label: string };
@@ -33,7 +35,7 @@ type NavDropdown = {
 };
 type NavEntry = NavLink | NavDropdown;
 
-export default function Navbar() {
+export default function Navbar({ services }: { services: Service[] }) {
     const [isOpen, setIsOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -74,11 +76,11 @@ export default function Navbar() {
             label: t('nav.services'),
             blurb: t('nav.services.blurb'),
             width: 600,
-            items: SERVICE_AREAS.map((area) => ({
-                href: `/servicos/${area.slug}`,
-                label: t(area.titleKey),
-                description: t(area.descriptionKey),
-                icon: area.icon,
+            items: services.map((service) => ({
+                href: `/servicos/${service.slug}`,
+                label: pickLocale(language, service.title, service.titleEn),
+                description: pickLocale(language, service.description, service.descriptionEn),
+                icon: getServiceIcon(service.icon),
             })),
             footerLink: { href: '/servicos', label: t('nav.viewAllServices') },
         },

@@ -8,8 +8,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import TiltCard from "@/components/TiltCard";
 import PageHero from "@/components/PageHero";
+import type { Service } from "@prisma/client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { SERVICE_AREAS } from "@/lib/service-areas";
+import ServiceIcon from "@/components/ServiceIcon";
+import { pickLocale, pickLocaleList } from "@/lib/i18n-content";
 
 const PROCESS_STEPS = [
     { icon: Search, titleKey: "methodology.steps.diagnosis.title" },
@@ -18,15 +20,21 @@ const PROCESS_STEPS = [
     { icon: LifeBuoy, titleKey: "methodology.steps.support.title" },
 ] as const;
 
-export default function ServiceDetailContent({ slug }: { slug: string }) {
-    const { t } = useLanguage();
-    const area = SERVICE_AREAS.find((a) => a.slug === slug) ?? SERVICE_AREAS[0];
-    const Icon = area.icon;
-    const relatedAreas = SERVICE_AREAS.filter((a) => a.slug !== area.slug);
+export default function ServiceDetailContent({
+    service,
+    relatedServices,
+}: {
+    service: Service;
+    relatedServices: Service[];
+}) {
+    const { t, language } = useLanguage();
+    const title = pickLocale(language, service.title, service.titleEn);
+    const description = pickLocale(language, service.description, service.descriptionEn);
+    const details = pickLocaleList(language, service.details, service.detailsEn);
 
     return (
         <div className="min-h-screen flex flex-col">
-            <PageHero title={t(area.titleKey)} description={t(area.descriptionKey)} />
+            <PageHero title={title} description={description} />
 
             <section className="py-12 bg-white border-b border-cplp-line">
                 <div className="container mx-auto px-4">
@@ -52,7 +60,7 @@ export default function ServiceDetailContent({ slug }: { slug: string }) {
                             transition={{ duration: 0.5 }}
                         >
                             <div className="w-14 h-14 rounded-full border border-cplp-blue/25 flex items-center justify-center shrink-0">
-                                <Icon className="w-6 h-6 text-cplp-blue" strokeWidth={1.5} />
+                                <ServiceIcon name={service.icon} className="w-6 h-6 text-cplp-blue" />
                             </div>
                             <h2 className="text-2xl md:text-3xl font-extrabold text-cplp-navy tracking-tight">
                                 {t("servicedetail.features.title")}
@@ -60,7 +68,7 @@ export default function ServiceDetailContent({ slug }: { slug: string }) {
                         </motion.div>
 
                         <div className="grid sm:grid-cols-2 gap-5">
-                            {area.details.map((detail, index) => (
+                            {details.map((detail, index) => (
                                 <motion.div
                                     key={detail}
                                     initial={{ opacity: 0, y: 20 }}
@@ -143,11 +151,9 @@ export default function ServiceDetailContent({ slug }: { slug: string }) {
                         </motion.div>
 
                         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                            {relatedAreas.map((related, index) => {
-                                const RelatedIcon = related.icon;
-                                return (
+                            {relatedServices.map((related, index) => (
                                     <motion.div
-                                        key={related.slug}
+                                        key={related.id}
                                         initial={{ opacity: 0, y: 20 }}
                                         whileInView={{ opacity: 1, y: 0 }}
                                         viewport={{ once: true }}
@@ -158,15 +164,14 @@ export default function ServiceDetailContent({ slug }: { slug: string }) {
                                             className="group block h-full bg-white border border-cplp-line rounded-lg p-5 hover:shadow-card transition-shadow"
                                         >
                                             <div className="w-9 h-9 rounded-full border border-cplp-blue/25 flex items-center justify-center mb-3">
-                                                <RelatedIcon className="w-4 h-4 text-cplp-blue" strokeWidth={1.5} />
+                                                <ServiceIcon name={related.icon} className="w-4 h-4 text-cplp-blue" />
                                             </div>
                                             <h3 className="text-sm font-bold text-cplp-navy group-hover:text-cplp-blue transition-colors">
-                                                {t(related.titleKey)}
+                                                {pickLocale(language, related.title, related.titleEn)}
                                             </h3>
                                         </Link>
                                     </motion.div>
-                                );
-                            })}
+                            ))}
                         </div>
                     </div>
                 </div>

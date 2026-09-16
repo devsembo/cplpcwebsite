@@ -1,23 +1,16 @@
 "use client";
 
 import React from "react";
+import type { Partner } from "@prisma/client";
 import { motion } from "framer-motion";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-// Grelha simples com o nome de cada parceiro — substituir "logo" por um
-// caminho de imagem (ex: "/partners/banco-sol.svg") assim que os logótipos
-// estiverem disponíveis; o layout do cartão já está preparado para isso.
-const PARTNERS = [
-    { name: "Banco Sol", logo: null },
-    { name: "ANJE Portugal", logo: null },
-    { name: "Mirex Angola", logo: null },
-    { name: "TROKA", logo: null },
-    { name: "Bemvistos", logo: null },
-    { name: "Consulado de Moçambique no Porto", logo: null },
-] as const;
-
-const Partners = () => {
+// Os parceiros são geridos no admin (/admin/parceiros). Cada cartão mostra o
+// logótipo quando existe e, caso contrário, o nome do parceiro.
+const Partners = ({ partners }: { partners: Partner[] }) => {
     const { t } = useLanguage();
+
+    if (partners.length === 0) return null;
 
     return (
         <section className="py-20 md:py-28 bg-white">
@@ -40,20 +33,44 @@ const Partners = () => {
                     </motion.div>
 
                     <div className="grid grid-cols-2 sm:grid-cols-3 gap-5">
-                        {PARTNERS.map((partner, index) => (
-                            <motion.div
-                                key={partner.name}
-                                initial={{ opacity: 0, y: 20 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.4, delay: index * 0.06 }}
-                                className="flex items-center justify-center h-28 rounded-lg border border-cplp-line bg-white hover:shadow-card transition-shadow px-4"
-                            >
+                        {partners.map((partner, index) => {
+                            const content = partner.logoUrl ? (
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img
+                                    src={partner.logoUrl}
+                                    alt={partner.name}
+                                    className="max-h-14 max-w-[80%] object-contain"
+                                />
+                            ) : (
                                 <span className="text-center text-sm font-semibold text-cplp-navy leading-snug">
                                     {partner.name}
                                 </span>
-                            </motion.div>
-                        ))}
+                            );
+
+                            return (
+                                <motion.div
+                                    key={partner.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: Math.min(index, 5) * 0.06 }}
+                                    className="flex items-center justify-center h-28 rounded-lg border border-cplp-line bg-white hover:shadow-card transition-shadow px-4"
+                                >
+                                    {partner.websiteUrl ? (
+                                        <a
+                                            href={partner.websiteUrl}
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            className="flex items-center justify-center w-full h-full"
+                                        >
+                                            {content}
+                                        </a>
+                                    ) : (
+                                        content
+                                    )}
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </div>

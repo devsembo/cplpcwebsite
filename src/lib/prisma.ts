@@ -6,9 +6,11 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 function createPrismaClient() {
-    const connectionString = process.env.POSTGRES_URL;
+    // Em produção (Vercel + Supabase) a variável injetada é POSTGRES_URL;
+    // em desenvolvimento o .env.local usa DATABASE_URL.
+    const connectionString = process.env.POSTGRES_URL ?? process.env.DATABASE_URL;
     if (!connectionString) {
-        throw new Error("POSTGRES_URL não está definida.");
+        throw new Error("POSTGRES_URL / DATABASE_URL não estão definidas.");
     }
     const adapter = new PrismaPg({ connectionString });
     return new PrismaClient({ adapter });

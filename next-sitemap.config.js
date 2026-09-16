@@ -13,32 +13,61 @@ const config = {
     robotsTxtOptions: {
         policies: [{ userAgent: "*", allow: "/", disallow: ["/admin", "/admin/*"] }],
     },
-    // /blog/[slug] é uma rota dinâmica (server-rendered on demand) — o
-    // next-sitemap só descobre rotas estáticas a partir do output do build,
-    // por isso os posts publicados têm de ser adicionados aqui manualmente.
+    // As páginas de detalhe (blog, cursos, vagas, serviços) são rotas dinâmicas
+    // renderizadas a pedido — o next-sitemap só descobre rotas estáticas a partir
+    // do output do build, por isso são adicionadas aqui a partir da base de dados.
     additionalPaths: async () => {
-        if (!process.env.POSTGRES_URL) return [];
+        const connectionString =
+            process.env.POSTGRES_URL_NON_POOLING ??
+            process.env.POSTGRES_URL ??
+            process.env.DATABASE_URL;
+        if (!connectionString) return [];
 
         try {
             const { PrismaClient } = await import("@prisma/client");
             const { PrismaPg } = await import("@prisma/adapter-pg");
-            const adapter = new PrismaPg({ connectionString: process.env.POSTGRES_URL });
+            const adapter = new PrismaPg({ connectionString });
             const prisma = new PrismaClient({ adapter });
 
-            const posts = await prisma.blogPost.findMany({
-                where: { published: true },
-                select: { slug: true, updatedAt: true },
-            });
+            const now = new Date();
+            const [posts, courses, jobs, services] = await Promise.all([
+                prisma.blogPost.findMany({
+                    where: { published: true },
+                    select: { slug: true, updatedAt: true },
+                }),
+                prisma.course.findMany({
+                    where: { published: true },
+                    select: { slug: true, updatedAt: true },
+                }),
+                prisma.jobOpening.findMany({
+                    where: {
+                        published: true,
+                        OR: [{ applyDeadline: null }, { applyDeadline: { gte: now } }],
+                    },
+                    select: { slug: true, updatedAt: true },
+                }),
+                prisma.service.findMany({
+                    where: { published: true },
+                    select: { slug: true, updatedAt: true },
+                }),
+            ]);
             await prisma.$disconnect();
 
-            return posts.map((post) => ({
-                loc: `/blog/${post.slug}`,
-                lastmod: post.updatedAt.toISOString(),
+            const toPath = (prefix, priority) => (item) => ({
+                loc: `${prefix}/${item.slug}`,
+                lastmod: item.updatedAt.toISOString(),
                 changefreq: "monthly",
-                priority: 0.6,
-            }));
+                priority,
+            });
+
+            return [
+                ...posts.map(toPath("/blog", 0.6)),
+                ...courses.map(toPath("/academy", 0.8)),
+                ...jobs.map(toPath("/carreiras", 0.7)),
+                ...services.map(toPath("/servicos", 0.9)),
+            ];
         } catch (error) {
-            console.warn("[next-sitemap] Não foi possível carregar os posts do blog:", error.message);
+            console.warn("[next-sitemap] Não foi possível carregar conteúdo da base de dados:", error.message);
             return [];
         }
     },

@@ -1,20 +1,21 @@
 "use client";
-import { useState } from "react";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
+
+import type { JobOpening } from "@prisma/client";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
-import { Checkbox } from "@/components/ui/checkbox";
 import { Rocket, GraduationCap, Users, Clock, CheckCircle2 } from "lucide-react";
-import { toast } from "sonner";
 import { motion } from "framer-motion";
-import { api } from "@/services/api";
 import PageHero from "@/components/PageHero";
+import OpeningsSection from "@/components/careers/OpeningsSection";
+import JobApplicationForm from "@/components/careers/JobApplicationForm";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export default function CarreirasContent({ heroImageUrl }: { heroImageUrl?: string | null }) {
+export default function CarreirasContent({
+    heroImageUrl,
+    jobs,
+}: {
+    heroImageUrl?: string | null;
+    jobs: JobOpening[];
+}) {
     const { t } = useLanguage();
 
     const whyUs = [
@@ -33,57 +34,11 @@ export default function CarreirasContent({ heroImageUrl }: { heroImageUrl?: stri
         t("careers.benefits.item6"),
     ];
 
-    const [formData, setFormData] = useState({
-        name: "",
-        email: "",
-        phone: "",
-        area: "",
-        cvLink: "",
-        message: "",
-    });
-    const [consent, setConsent] = useState(false);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-
-        if (!consent) {
-            toast.error(t("careers.form.consentError"));
-            return;
-        }
-
-        setIsSubmitting(true);
-
-        try {
-            await api.post("/public/contact", {
-                name: formData.name,
-                email: formData.email,
-                phone: formData.phone,
-                organization: formData.area,
-                subject: "Candidatura Espontânea — Careers",
-                message: `CV / LinkedIn / Portefólio: ${formData.cvLink}\n\n${formData.message}`,
-                consent: true,
-            });
-            toast.success(t("careers.form.successTitle"), {
-                description: t("careers.form.successDescription"),
-            });
-            setFormData({ name: "", email: "", phone: "", area: "", cvLink: "", message: "" });
-            setConsent(false);
-        } catch {
-            toast.error(t("careers.form.errorDescription"));
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
-
     return (
         <div className="min-h-screen flex flex-col">
             <PageHero title={t("careers.hero.title")} description={t("careers.hero.description")} imageUrl={heroImageUrl} />
+
+            <OpeningsSection jobs={jobs} />
 
             {/* Porque trabalhar connosco */}
             <section className="py-16 md:py-20 bg-cplp-bg border-t border-cplp-line">
@@ -197,114 +152,7 @@ export default function CarreirasContent({ heroImageUrl }: { heroImageUrl?: stri
                         <Card className="border border-cplp-line bg-white shadow-none rounded-lg">
                             <CardContent className="p-6 md:p-10">
                                 <h3 className="text-xl font-bold text-cplp-navy mb-8">{t("careers.form.formTitle")}</h3>
-
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="name" className="text-cplp-navy">{t("careers.form.name")}</Label>
-                                            <Input
-                                                id="name"
-                                                name="name"
-                                                value={formData.name}
-                                                onChange={handleChange}
-                                                placeholder={t("careers.form.namePlaceholder")}
-                                                required
-                                                className="border-cplp-line rounded-md"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="email" className="text-cplp-navy">{t("careers.form.email")}</Label>
-                                            <Input
-                                                id="email"
-                                                name="email"
-                                                type="email"
-                                                value={formData.email}
-                                                onChange={handleChange}
-                                                placeholder={t("careers.form.emailPlaceholder")}
-                                                required
-                                                className="border-cplp-line rounded-md"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="phone" className="text-cplp-navy">{t("careers.form.phone")}</Label>
-                                            <Input
-                                                id="phone"
-                                                name="phone"
-                                                value={formData.phone}
-                                                onChange={handleChange}
-                                                placeholder={t("careers.form.phonePlaceholder")}
-                                                className="border-cplp-line rounded-md"
-                                            />
-                                        </div>
-
-                                        <div className="space-y-2">
-                                            <Label htmlFor="area" className="text-cplp-navy">{t("careers.form.area")}</Label>
-                                            <Input
-                                                id="area"
-                                                name="area"
-                                                value={formData.area}
-                                                onChange={handleChange}
-                                                placeholder={t("careers.form.areaPlaceholder")}
-                                                required
-                                                className="border-cplp-line rounded-md"
-                                            />
-                                        </div>
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="cvLink" className="text-cplp-navy">{t("careers.form.cv")}</Label>
-                                        <Input
-                                            id="cvLink"
-                                            name="cvLink"
-                                            type="url"
-                                            value={formData.cvLink}
-                                            onChange={handleChange}
-                                            placeholder={t("careers.form.cvPlaceholder")}
-                                            required
-                                            className="border-cplp-line rounded-md"
-                                        />
-                                    </div>
-
-                                    <div className="space-y-2">
-                                        <Label htmlFor="message" className="text-cplp-navy">{t("careers.form.message")}</Label>
-                                        <Textarea
-                                            id="message"
-                                            name="message"
-                                            value={formData.message}
-                                            onChange={handleChange}
-                                            placeholder={t("careers.form.messagePlaceholder")}
-                                            className="h-32 border-cplp-line rounded-md"
-                                        />
-                                    </div>
-
-                                    <div className="flex items-start gap-3">
-                                        <Checkbox
-                                            id="consent"
-                                            checked={consent}
-                                            onCheckedChange={(checked) => setConsent(checked === true)}
-                                            required
-                                            className="mt-0.5"
-                                        />
-                                        <Label htmlFor="consent" className="text-sm text-cplp-grey font-normal leading-relaxed cursor-pointer">
-                                            {t("careers.form.consentPrefix")}{" "}
-                                            <Link href="/politica-privacidade" className="text-cplp-blue hover:text-cplp-blue-hover underline underline-offset-2">
-                                                {t("careers.form.consentLink")}
-                                            </Link>{" "}
-                                            {t("careers.form.consentSuffix")}
-                                        </Label>
-                                    </div>
-
-                                    <Button
-                                        type="submit"
-                                        size="lg"
-                                        className="w-full bg-cplp-blue hover:bg-cplp-blue-hover text-white rounded-md"
-                                        disabled={isSubmitting}
-                                    >
-                                        {isSubmitting ? t("careers.form.submitting") : t("careers.form.submit")}
-                                    </Button>
-                                </form>
+                                <JobApplicationForm />
                             </CardContent>
                         </Card>
                     </motion.div>

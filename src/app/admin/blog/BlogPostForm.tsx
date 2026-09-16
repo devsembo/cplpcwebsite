@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Card, CardContent } from "@/components/ui/card";
-import RichTextEditor from "./RichTextEditor";
+import RichTextEditor from "@/components/admin/RichTextEditor";
 import { toast } from "sonner";
 import { validateImageFile } from "@/lib/validate-image";
 import { createBlogPost, updateBlogPost, type BlogPostActionResult } from "./actions";
@@ -147,6 +147,7 @@ export default function BlogPostForm({ post }: { post?: BlogPost }) {
                         <RichTextEditor
                             initialContent={initialEditorContent}
                             onChangeHtml={setContent}
+                            placeholder="Escreve o conteúdo do artigo..."
                         />
                     </div>
                 </div>

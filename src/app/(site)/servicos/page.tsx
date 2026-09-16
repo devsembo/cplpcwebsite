@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import PageHero from "@/components/PageHero";
 import ServicosContent from "./ServicosContent";
 import { getPageHero } from "@/lib/data/page-hero";
+import { getPublishedServices } from "@/lib/data/site-content";
 
 export const metadata: Metadata = {
     title: "Serviços",
@@ -14,7 +15,10 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicosPage() {
-    const heroImageUrl = await getPageHero("servicos");
+    const [heroImageUrl, services] = await Promise.all([
+        getPageHero("servicos"),
+        getPublishedServices(),
+    ]);
     return (
         <div className="min-h-screen flex flex-col">
             <PageHero
@@ -23,7 +27,7 @@ export default async function ServicosPage() {
                 imageUrl={heroImageUrl}
             />
 
-            <ServicosContent />
+            <ServicosContent services={services} />
 
             <section className="bg-cplp-blue py-20 md:py-24">
                 <div className="container mx-auto px-4">

@@ -48,16 +48,18 @@ function ToolbarButton({
 export default function RichTextEditor({
     initialContent,
     onChangeHtml,
+    placeholder = "Escreve o conteúdo...",
 }: {
     initialContent?: string;
     onChangeHtml: (html: string) => void;
+    placeholder?: string;
 }) {
     const editor = useEditor({
         immediatelyRender: false,
         extensions: [
             StarterKit,
             Link.configure({ openOnClick: false, HTMLAttributes: { class: "text-cplp-blue underline" } }),
-            Placeholder.configure({ placeholder: "Escreve o conteúdo do artigo..." }),
+            Placeholder.configure({ placeholder }),
         ],
         content: initialContent || "",
         editorProps: {

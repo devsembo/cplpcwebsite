@@ -7,11 +7,15 @@ import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import TiltCard from "@/components/TiltCard";
+import type { Service } from "@prisma/client";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { SERVICE_AREAS } from "@/lib/service-areas";
+import { getServiceIcon } from "@/lib/service-icons";
+import { pickLocale } from "@/lib/i18n-content";
 
-const Services = () => {
-    const { t } = useLanguage();
+const Services = ({ services }: { services: Service[] }) => {
+    const { t, language } = useLanguage();
+
+    if (services.length === 0) return null;
 
     return (
         <section id="services" className="py-20 md:py-28 bg-white">
@@ -33,11 +37,11 @@ const Services = () => {
                     </motion.div>
 
                     <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                        {SERVICE_AREAS.map((area, index) => {
-                            const Icon = area.icon;
+                        {services.map((service, index) => {
+                            const Icon = getServiceIcon(service.icon);
                             return (
                                 <motion.div
-                                    key={area.titleKey}
+                                    key={service.id}
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
@@ -49,10 +53,10 @@ const Services = () => {
                                                 <Icon className="w-5 h-5 text-cplp-blue" strokeWidth={1.5} />
                                             </div>
                                             <h3 className="text-lg font-bold mb-2 text-cplp-navy">
-                                                {t(area.titleKey)}
+                                                {pickLocale(language, service.title, service.titleEn)}
                                             </h3>
                                             <p className="leading-relaxed text-cplp-grey">
-                                                {t(area.descriptionKey)}
+                                                {pickLocale(language, service.description, service.descriptionEn)}
                                             </p>
                                         </Card>
                                     </TiltCard>
@@ -66,7 +70,7 @@ const Services = () => {
                             href="/servicos"
                             className="inline-flex items-center gap-2 text-sm font-semibold text-cplp-blue hover:text-cplp-blue-hover transition-colors"
                         >
-                            Ver todos os serviços
+                            {t('nav.viewAllServices')}
                             <ArrowRight className="w-4 h-4" />
                         </Link>
                     </div>

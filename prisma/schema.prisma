@@ -77,3 +77,303 @@ model NewsletterSubscriber {
   unsubscribeToken String   @unique @default(cuid())
   subscribedAt     DateTime @default(now())
 }
+
+// ---------------------------------------------------------------------------
+// Academy — cursos e inscrições
+// ---------------------------------------------------------------------------
+
+enum CourseFormat {
+  in_company
+  executive
+  online
+  exchange
+}
+
+enum EnrollmentStatus {
+  nova
+  contactada
+  confirmada
+  cancelada
+}
+
+model Course {
+  id          String       @id @default(cuid())
+  slug        String       @unique
+  title       String
+  summary     String
+  // HTML produzido pelo editor visual do admin (mesmo editor do blog).
+  description String
+  format      CourseFormat
+  area        String
+  level       String?
+  // Campos livres apresentados como "ficha" do curso (ex: "16 horas").
+  durationLabel  String?
+  scheduleLabel  String?
+  priceLabel     String?
+  location       String?
+  language       String?
+  startDate      DateTime?
+  seats          Int?
+  // O que o participante leva do curso / pré-requisitos, um item por linha.
+  highlights     String[] @default([])
+  requirements   String[] @default([])
+  targetAudience String?
+  // Se preenchido, o botão de inscrição aponta para este URL externo em vez
+  // do formulário interno (ex: Eventbrite).
+  registrationUrl String?
+  imageUrl        String?
+  tags            String[] @default([])
+  published       Boolean  @default(false)
+  featured        Boolean  @default(false)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  enrollments CourseEnrollment[]
+  sessions    CourseSession[]
+}
+
+// Uma "turma": execução concreta de um curso, com formador, datas e vagas
+// próprias. Um Course pode ter várias sessões ao longo do tempo.
+enum SessionStatus {
+  planeada
+  a_decorrer
+  concluida
+}
+
+model CourseSession {
+  id             String        @id @default(cuid())
+  courseId       String
+  course         Course        @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  // Código curto da turma, ex: "LID-2026-01".
+  code           String        @unique
+  instructorName String?
+  location       String?
+  startDate      DateTime?
+  endDate        DateTime?
+  seats          Int?
+  status         SessionStatus @default(planeada)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+
+  enrollments CourseEnrollment[]
+
+  @@index([courseId])
+}
+
+// Empresa cliente formalizada (com contrato). Uma inscrição pode referir uma
+// empresa em texto livre (campo `company`, vindo do formulário público) antes
+// de ser associada aqui pela equipa pedagógica.
+model Company {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  sector          String?
+  contractLabel   String?
+  seatsContracted Int?
+  accountManager  String?
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  enrollments CourseEnrollment[]
+}
+
+// Estado pedagógico de um formando confirmado (progresso/nota/horas).
+enum TrainingStatus {
+  nao_iniciado
+  em_curso
+  concluido
+  reprovado
+}
+
+// Elegibilidade e emissão do certificado de um formando.
+enum CertificateStatus {
+  nao_elegivel
+  elegivel
+  emitido
+}
+
+model CourseEnrollment {
+  id        String           @id @default(cuid())
+  courseId  String
+  course    Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  name      String
+  email     String
+  phone     String?
+  // Nome da empresa tal como submetido no formulário público (texto livre).
+  company   String?
+  role      String?
+  message   String?
+  status    EnrollmentStatus @default(nova)
+  notes     String?
+  createdAt DateTime         @default(now())
+
+  // A partir daqui, campos preenchidos pela equipa pedagógica quando a
+  // inscrição é confirmada e passa a ser gerida como "formando".
+  sessionId String?
+  session   CourseSession? @relation(fields: [sessionId], references: [id], onDelete: SetNull)
+
+  clientCompanyId String?
+  clientCompany   Company? @relation(fields: [clientCompanyId], references: [id], onDelete: SetNull)
+
+  progress       Int            @default(0)
+  grade          Float?
+  hoursCompleted Int            @default(0)
+  trainingStatus TrainingStatus @default(nao_iniciado)
+  lastActivityAt DateTime?
+
+  certificateStatus   CertificateStatus @default(nao_elegivel)
+  certificateCode     String?           @unique
+  certificateIssuedAt DateTime?
+
+  @@index([courseId])
+  @@index([status])
+  @@index([sessionId])
+  @@index([clientCompanyId])
+}
+
+// Registo de emails reais enviados pela equipa pedagógica a formandos/turmas/empresas.
+model StaffNotification {
+  id              String   @id @default(cuid())
+  subject         String
+  message         String
+  audienceLabel   String
+  recipientEmails String[]
+  successCount    Int      @default(0)
+  failureCount    Int      @default(0)
+  createdBy       String?
+  sentAt          DateTime @default(now())
+}
+
+// ---------------------------------------------------------------------------
+// Carreiras — vagas e candidaturas
+// ---------------------------------------------------------------------------
+
+enum JobType {
+  full_time
+  part_time
+  estagio
+  freelance
+}
+
+enum JobMode {
+  presencial
+  hibrido
+  remoto
+}
+
+enum ApplicationStatus {
+  nova
+  em_analise
+  entrevista
+  aceite
+  rejeitada
+}
+
+model JobOpening {
+  id               String    @id @default(cuid())
+  slug             String    @unique
+  title            String
+  department       String?
+  location         String
+  type             JobType   @default(full_time)
+  mode             JobMode   @default(presencial)
+  seniority        String?
+  summary          String
+  // HTML produzido pelo editor visual do admin.
+  description      String
+  responsibilities String[]  @default([])
+  requirements     String[]  @default([])
+  benefits         String[]  @default([])
+  applyDeadline    DateTime?
+  published        Boolean   @default(false)
+  order            Int       @default(0)
+  createdAt        DateTime  @default(now())
+  updatedAt        DateTime  @updatedAt
+
+  applications JobApplication[]
+}
+
+model JobApplication {
+  id        String            @id @default(cuid())
+  // Nulo = candidatura espontânea (sem vaga associada). Se a vaga for
+  // eliminada, a candidatura fica como espontânea em vez de desaparecer.
+  jobId     String?
+  job       JobOpening?       @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  name      String
+  email     String
+  phone     String?
+  area      String?
+  cvUrl     String
+  message   String?
+  status    ApplicationStatus @default(nova)
+  notes     String?
+  createdAt DateTime          @default(now())
+
+  @@index([jobId])
+  @@index([status])
+}
+
+// ---------------------------------------------------------------------------
+// Conteúdo institucional editável
+// ---------------------------------------------------------------------------
+
+// Áreas de serviço mostradas na homepage, no menu e em /servicos.
+// Os campos *En são opcionais: quando vazios, o site em inglês mostra o texto
+// em português (ver pickLocale em src/lib/i18n-content.ts).
+model Service {
+  id              String   @id @default(cuid())
+  slug            String   @unique
+  // Nome do ícone lucide (ver SERVICE_ICONS em src/lib/service-icons.ts).
+  icon            String   @default("Layers")
+  title           String
+  description     String
+  details         String[] @default([])
+  titleEn         String?
+  descriptionEn   String?
+  detailsEn       String[] @default([])
+  metaTitle       String?
+  metaDescription String?
+  published       Boolean  @default(true)
+  order           Int      @default(0)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Faq {
+  id         String   @id @default(cuid())
+  question   String
+  answer     String
+  questionEn String?
+  answerEn   String?
+  category   String?
+  published  Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Partner {
+  id         String   @id @default(cuid())
+  name       String
+  logoUrl    String?
+  websiteUrl String?
+  published  Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  authorName String
+  role       String?
+  company    String?
+  quote      String
+  quoteEn    String?
+  avatarUrl  String?
+  published  Boolean  @default(true)
+  order      Int      @default(0)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}

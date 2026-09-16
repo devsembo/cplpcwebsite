@@ -23,11 +23,19 @@ import {
     QrCode,
     ArrowRight,
 } from "lucide-react";
+import type { Course } from "@prisma/client";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import CoursesSection from "@/components/academy/CoursesSection";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export default function AcademyPageContent({ heroImageUrl }: { heroImageUrl?: string | null }) {
+export default function AcademyPageContent({
+    heroImageUrl,
+    courses,
+}: {
+    heroImageUrl?: string | null;
+    courses: Course[];
+}) {
     const { t } = useLanguage();
 
     const formatos = [
@@ -132,6 +140,8 @@ export default function AcademyPageContent({ heroImageUrl }: { heroImageUrl?: st
                     </motion.div>
                 </div>
             </section>
+
+            <CoursesSection courses={courses} />
 
             {/* Quatro formatos */}
             <section className="py-20 md:py-24 bg-white">

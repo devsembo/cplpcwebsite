@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getPageHero } from "@/lib/data/page-hero";
+import { getPublishedFaqs } from "@/lib/data/site-content";
 import FaqsContent from "./FaqsContent";
 
 export const metadata: Metadata = {
@@ -10,6 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default async function FaqsPage() {
-    const heroImageUrl = await getPageHero("faqs");
-    return <FaqsContent heroImageUrl={heroImageUrl} />;
+    const [heroImageUrl, faqs] = await Promise.all([getPageHero("faqs"), getPublishedFaqs()]);
+    return <FaqsContent heroImageUrl={heroImageUrl} faqs={faqs} />;
 }

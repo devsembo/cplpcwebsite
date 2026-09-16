@@ -11,6 +11,11 @@ export default defineConfig({
     seed: "tsx prisma/seed.ts",
   },
   datasource: {
-    url: process.env.POSTGRES_URL_NON_POOLING ?? process.env.POSTGRES_URL,
+    // Vercel/Supabase injeta POSTGRES_URL*; em local o .env.local usa DIRECT_URL/DATABASE_URL.
+    url:
+      process.env.POSTGRES_URL_NON_POOLING ??
+      process.env.POSTGRES_URL ??
+      process.env.DIRECT_URL ??
+      process.env.DATABASE_URL,
   },
 });
