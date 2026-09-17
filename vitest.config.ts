@@ -14,7 +14,7 @@ const serverOnlyStub = path.join(path.dirname(require.resolve("server-only")), "
 export default defineConfig({
     test: {
         environment: "node",
-        include: ["src/**/*.test.ts"],
+        include: ["src/**/*.test.ts", "*.test.ts"],
     },
     resolve: {
         alias: {
