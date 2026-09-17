@@ -2,7 +2,7 @@ import { describe, expect, it, afterEach } from "vitest";
 import { prisma } from "./prisma";
 import { createFormandoAuthToken, consumeFormandoAuthToken } from "./formando-tokens";
 
-const testEmail = "vitest-tokens@teste.cplpconnect.pt";
+const testEmail = `vitest-tokens-${Math.random().toString(36).slice(2)}@teste.cplpconnect.pt`;
 
 afterEach(async () => {
     await prisma.formandoAuthToken.deleteMany({ where: { email: testEmail } });
@@ -20,8 +20,11 @@ describe("formando auth tokens", () => {
 
     it("rejeita um token expirado", async () => {
         const token = await createFormandoAuthToken(testEmail, "reset");
-        await prisma.formandoAuthToken.update({
-            where: { token },
+        // O token guardado na BD está hasheado, por isso não podemos usar o
+        // valor em texto simples como filtro de "where" — atualizamos pelo
+        // email, que é único neste teste.
+        await prisma.formandoAuthToken.updateMany({
+            where: { email: testEmail },
             data: { expiresAt: new Date(Date.now() - 1000) },
         });
         const result = await consumeFormandoAuthToken(token);
