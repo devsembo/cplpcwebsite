@@ -31,23 +31,25 @@ export async function formandoLoginAction(
         return { error: "Email ou password inválidos.", email: rawEmail };
     }
 
-    if (await isFormandoLoginLocked(parsed.data.email)) {
+    const email = parsed.data.email.toLowerCase();
+
+    if (await isFormandoLoginLocked(email)) {
         return { error: "Demasiadas tentativas falhadas. Tenta novamente dentro de 15 minutos.", email: rawEmail };
     }
 
-    const account = await prisma.formandoAccount.findUnique({ where: { email: parsed.data.email.toLowerCase() } });
+    const account = await prisma.formandoAccount.findUnique({ where: { email } });
     if (!account) {
-        await recordFailedFormandoLoginAttempt(parsed.data.email);
+        await recordFailedFormandoLoginAttempt(email);
         return { error: "Credenciais incorretas.", email: rawEmail };
     }
 
     const valid = await verifyPassword(parsed.data.password, account.passwordHash);
     if (!valid) {
-        await recordFailedFormandoLoginAttempt(parsed.data.email);
+        await recordFailedFormandoLoginAttempt(email);
         return { error: "Credenciais incorretas.", email: rawEmail };
     }
 
-    await clearFormandoLoginAttempts(parsed.data.email);
+    await clearFormandoLoginAttempts(email);
     await prisma.formandoAccount.update({ where: { id: account.id }, data: { lastLoginAt: new Date() } });
     await setFormandoSessionCookie({ sub: account.id, email: account.email });
     redirect("/portal");
