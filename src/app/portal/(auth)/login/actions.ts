@@ -5,6 +5,11 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { verifyPassword } from "@/lib/password";
 import { setFormandoSessionCookie } from "@/lib/formando-session";
+import {
+    isFormandoLoginLocked,
+    recordFailedFormandoLoginAttempt,
+    clearFormandoLoginAttempts,
+} from "@/lib/formando-login-rate-limit";
 
 const schema = z.object({
     email: z.string().trim().email(),
@@ -26,16 +31,23 @@ export async function formandoLoginAction(
         return { error: "Email ou password inválidos.", email: rawEmail };
     }
 
+    if (await isFormandoLoginLocked(parsed.data.email)) {
+        return { error: "Demasiadas tentativas falhadas. Tenta novamente dentro de 15 minutos.", email: rawEmail };
+    }
+
     const account = await prisma.formandoAccount.findUnique({ where: { email: parsed.data.email.toLowerCase() } });
     if (!account) {
+        await recordFailedFormandoLoginAttempt(parsed.data.email);
         return { error: "Credenciais incorretas.", email: rawEmail };
     }
 
     const valid = await verifyPassword(parsed.data.password, account.passwordHash);
     if (!valid) {
+        await recordFailedFormandoLoginAttempt(parsed.data.email);
         return { error: "Credenciais incorretas.", email: rawEmail };
     }
 
+    await clearFormandoLoginAttempts(parsed.data.email);
     await prisma.formandoAccount.update({ where: { id: account.id }, data: { lastLoginAt: new Date() } });
     await setFormandoSessionCookie({ sub: account.id, email: account.email });
     redirect("/portal");

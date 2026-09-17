@@ -417,3 +417,12 @@ model AdminLoginAttempt {
 
   @@index([email, createdAt])
 }
+
+// Histórico de tentativas de login falhadas do formando, para bloqueio temporário.
+model FormandoLoginAttempt {
+  id        String   @id @default(cuid())
+  email     String
+  createdAt DateTime @default(now())
+
+  @@index([email, createdAt])
+}
