@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { sendMail } from "@/lib/mail";
 import { getSession } from "@/lib/session";
+import { requireAdminSession } from "@/lib/admin-guard";
 
 export interface NotificationActionResult {
     error?: string;
@@ -16,6 +17,8 @@ export async function sendBulkNotification(
     _prevState: NotificationActionResult,
     formData: FormData
 ): Promise<NotificationActionResult> {
+    await requireAdminSession();
+
     const audienceType = String(formData.get("audienceType") ?? "");
     const audienceId = String(formData.get("audienceId") ?? "");
     const subject = String(formData.get("subject") ?? "").trim();

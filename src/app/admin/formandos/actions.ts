@@ -4,7 +4,7 @@ import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { nextCertificateCode } from "@/lib/certificate";
 import { sendMail } from "@/lib/mail";
-import { getSession } from "@/lib/session";
+import { requireAdminSession } from "@/lib/admin-guard";
 import type { TrainingStatus, CertificateStatus } from "@prisma/client";
 
 export interface FormandoActionResult {
@@ -105,6 +105,8 @@ export async function sendFormandoMessage(
     id: string,
     input: { subject: string; message: string }
 ): Promise<FormandoActionResult> {
+    const session = await requireAdminSession();
+
     if (input.subject.trim().length < 3 || input.message.trim().length < 5) {
         return { error: "Preenche o assunto e a mensagem." };
     }
@@ -112,7 +114,6 @@ export async function sendFormandoMessage(
     const formando = await prisma.courseEnrollment.findUnique({ where: { id } });
     if (!formando) return { error: "Formando não encontrado." };
 
-    const session = await getSession();
     let failed = false;
     try {
         await sendMail({
@@ -133,7 +134,7 @@ export async function sendFormandoMessage(
             recipientEmails: [formando.email],
             successCount: failed ? 0 : 1,
             failureCount: failed ? 1 : 0,
-            createdBy: session?.email,
+            createdBy: session.email,
         },
     });
 
