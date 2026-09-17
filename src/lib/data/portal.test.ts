@@ -1,6 +1,6 @@
 import { describe, expect, it, afterEach } from "vitest";
 import { prisma } from "@/lib/prisma";
-import { getFormandoEnrollments, getFormandoSummary, getFormandoCertificates } from "./portal";
+import { getFormandoEnrollments, getFormandoSummary, getFormandoCertificates, getCourseForFormando } from "./portal";
 
 const suffix = Math.random().toString(36).slice(2);
 const emailA = `vitest-portal-a-${suffix}@teste.cplpconnect.pt`;
@@ -71,5 +71,17 @@ describe("dados do portal", () => {
         expect(crossedCase).toHaveLength(1);
         expect(crossedCase[0].email).toBe(emailB);
         expect(crossedCase[0].email).not.toBe(emailA);
+    });
+
+    it("devolve apenas a própria inscrição do formando quando partilha o curso com outro", async () => {
+        await seed();
+        const resultA = await getCourseForFormando(courseId, emailA);
+        expect(resultA?.enrollment?.email).toBe(emailA);
+        expect(resultA?.enrollment?.email).not.toBe(emailB);
+
+        const resultB = await getCourseForFormando(courseId, emailB);
+        expect(resultB?.enrollment?.email).toBe(emailB);
+        expect(resultB?.enrollment?.email).not.toBe(emailA);
+        expect(resultB?.enrollment?.id).not.toBe(resultA?.enrollment?.id);
     });
 });
