@@ -2,7 +2,8 @@
 
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/prisma";
-import { nextCertificateCode } from "@/lib/certificate";
+import { issueCertificateForEnrollment, certificateVerificationUrl } from "@/lib/certificate";
+import { formandoCertificadoEmitidoEmail } from "@/lib/email-templates/formando-certificado-emitido";
 import { sendMail } from "@/lib/mail";
 import { requireAdminSession } from "@/lib/admin-guard";
 import type { TrainingStatus, CertificateStatus } from "@prisma/client";
@@ -81,18 +82,31 @@ export async function assignFormandoSessionAndCompany(
 }
 
 export async function issueCertificate(id: string): Promise<FormandoActionResult> {
-    const existing = await prisma.courseEnrollment.findUnique({ where: { id } });
+    await requireAdminSession();
+    const existing = await prisma.courseEnrollment.findUnique({
+        where: { id },
+        include: { course: { select: { title: true } } },
+    });
     if (!existing) return { error: "Formando não encontrado." };
     if (existing.certificateStatus === "emitido") return { success: true };
     if (existing.certificateStatus !== "elegivel") {
         return { error: "Este formando ainda não é elegível para certificado." };
     }
 
-    const code = await nextCertificateCode();
-    await prisma.courseEnrollment.update({
-        where: { id },
-        data: { certificateStatus: "emitido", certificateCode: code, certificateIssuedAt: new Date() },
-    });
+    const result = await issueCertificateForEnrollment(id);
+    if (!result) return { error: "Este formando ainda não é elegível para certificado." };
+
+    try {
+        const email = formandoCertificadoEmitidoEmail({
+            name: existing.name,
+            courseTitle: existing.course.title,
+            code: result.code,
+            verificationUrl: certificateVerificationUrl(result.code),
+        });
+        await sendMail({ to: existing.email, subject: email.subject, html: email.html });
+    } catch (error) {
+        console.error("Falha ao enviar email de certificado emitido:", error);
+    }
 
     revalidatePath("/admin/formandos");
     revalidatePath(`/admin/formandos/${id}`);
@@ -144,15 +158,27 @@ export async function sendFormandoMessage(
 }
 
 export async function issueAllEligibleCertificates(): Promise<number> {
-    const eligible = await prisma.courseEnrollment.findMany({ where: { certificateStatus: "elegivel" } });
+    await requireAdminSession();
+    const eligible = await prisma.courseEnrollment.findMany({
+        where: { certificateStatus: "elegivel" },
+        include: { course: { select: { title: true } } },
+    });
     let issued = 0;
     for (const enrollment of eligible) {
-        const code = await nextCertificateCode();
-        await prisma.courseEnrollment.update({
-            where: { id: enrollment.id },
-            data: { certificateStatus: "emitido", certificateCode: code, certificateIssuedAt: new Date() },
-        });
+        const result = await issueCertificateForEnrollment(enrollment.id);
+        if (!result) continue;
         issued += 1;
+        try {
+            const email = formandoCertificadoEmitidoEmail({
+                name: enrollment.name,
+                courseTitle: enrollment.course.title,
+                code: result.code,
+                verificationUrl: certificateVerificationUrl(result.code),
+            });
+            await sendMail({ to: enrollment.email, subject: email.subject, html: email.html });
+        } catch (error) {
+            console.error("Falha ao enviar email de certificado emitido:", error);
+        }
     }
     revalidatePath("/admin/formandos");
     revalidatePath("/admin/certificados");
