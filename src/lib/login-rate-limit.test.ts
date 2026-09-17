@@ -2,7 +2,7 @@ import { describe, expect, it, afterEach } from "vitest";
 import { prisma } from "./prisma";
 import { isLoginLocked, recordFailedLoginAttempt, clearLoginAttempts } from "./login-rate-limit";
 
-const testEmail = "vitest-rate-limit@teste.cplpconnect.pt";
+const testEmail = `vitest-rate-limit-${Math.random().toString(36).slice(2)}@teste.cplpconnect.pt`;
 
 afterEach(async () => {
     await prisma.adminLoginAttempt.deleteMany({ where: { email: testEmail } });
