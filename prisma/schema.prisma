@@ -377,3 +377,43 @@ model Testimonial {
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
+
+// ---------------------------------------------------------------------------
+// Portal do formando — conta própria, ligada a CourseEnrollment por email
+// ---------------------------------------------------------------------------
+
+model FormandoAccount {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  createdAt    DateTime  @default(now())
+  lastLoginAt  DateTime?
+}
+
+enum FormandoAuthPurpose {
+  setup
+  reset
+}
+
+// Token de uso único para definir/repor password (enviado por email).
+model FormandoAuthToken {
+  id        String              @id @default(cuid())
+  email     String
+  token     String              @unique
+  purpose   FormandoAuthPurpose
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime            @default(now())
+
+  @@index([email])
+}
+
+// Histórico de tentativas de login falhadas do admin, para bloqueio temporário.
+model AdminLoginAttempt {
+  id        String   @id @default(cuid())
+  email     String
+  createdAt DateTime @default(now())
+
+  @@index([email, createdAt])
+}
