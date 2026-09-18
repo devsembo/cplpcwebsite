@@ -11,7 +11,10 @@ model AdminUser {
   email        String   @unique
   passwordHash String
   name         String
+  active       Boolean  @default(true)
   createdAt    DateTime @default(now())
+
+  sessions AdminSession[]
 }
 
 model Project {
@@ -425,4 +428,37 @@ model FormandoLoginAttempt {
   createdAt DateTime @default(now())
 
   @@index([email, createdAt])
+}
+
+// ---------------------------------------------------------------------------
+// Sessões e reset de password do admin — usadas pelo BackOffice em
+// academy.cplpconnect.pt (repositório separado, cplpAcademy/academy), que se
+// liga a esta mesma base de dados via Cloudflare Hyperdrive. Nenhum código
+// deste repositório (cplpcwebsite) consome estas duas tabelas.
+// ---------------------------------------------------------------------------
+
+model AdminSession {
+  id        String    @id @default(cuid())
+  adminId   String
+  admin     AdminUser @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  createdAt DateTime  @default(now())
+  expiresAt DateTime
+
+  @@index([adminId])
+}
+
+enum AdminAuthPurpose {
+  reset
+}
+
+model AdminAuthToken {
+  id        String           @id @default(cuid())
+  email     String
+  token     String           @unique
+  purpose   AdminAuthPurpose
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  @@index([email])
 }
