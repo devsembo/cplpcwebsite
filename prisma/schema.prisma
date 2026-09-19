@@ -120,6 +120,7 @@ model Course {
   // O que o participante leva do curso / pré-requisitos, um item por linha.
   highlights     String[] @default([])
   requirements   String[] @default([])
+  syllabus       String[] @default([])
   targetAudience String?
   // Se preenchido, o botão de inscrição aponta para este URL externo em vez
   // do formulário interno (ex: Eventbrite).
