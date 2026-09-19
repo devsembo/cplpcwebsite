@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { getPublishedCourseBySlug, getPublishedCourses } from "@/lib/data/courses";
 import CourseDetailContent from "./CourseDetailContent";
 
+// Rede de segurança: ver o mesmo comentário em ../page.tsx.
+export const revalidate = 60;
+
 export async function generateMetadata({
     params,
 }: {
