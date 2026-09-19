@@ -392,6 +392,8 @@ model FormandoAccount {
   name         String
   createdAt    DateTime  @default(now())
   lastLoginAt  DateTime?
+
+  sessions FormandoSession[]
 }
 
 enum FormandoAuthPurpose {
@@ -431,10 +433,11 @@ model FormandoLoginAttempt {
 }
 
 // ---------------------------------------------------------------------------
-// Sessões e reset de password do admin — usadas pelo BackOffice em
-// academy.cplpconnect.pt (repositório separado, cplpAcademy/academy), que se
-// liga a esta mesma base de dados via Cloudflare Hyperdrive. Nenhum código
-// deste repositório (cplpcwebsite) consome estas duas tabelas.
+// Sessões do admin e do formando, e reset de password do admin — usadas pelo
+// BackOffice/painel em academy.cplpconnect.pt (repositório separado,
+// cplpAcademy/academy), que se liga a esta mesma base de dados via Cloudflare
+// Hyperdrive. Nenhum código deste repositório (cplpcwebsite) consome estas
+// tabelas.
 // ---------------------------------------------------------------------------
 
 model AdminSession {
@@ -461,4 +464,14 @@ model AdminAuthToken {
   createdAt DateTime         @default(now())
 
   @@index([email])
+}
+
+model FormandoSession {
+  id         String          @id @default(cuid())
+  formandoId String
+  formando   FormandoAccount @relation(fields: [formandoId], references: [id], onDelete: Cascade)
+  createdAt  DateTime        @default(now())
+  expiresAt  DateTime
+
+  @@index([formandoId])
 }
