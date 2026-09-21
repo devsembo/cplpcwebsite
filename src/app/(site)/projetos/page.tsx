@@ -7,6 +7,13 @@ import ProjectsGrid from "@/components/ProjectsGrid";
 import { getAllProjects } from "@/lib/data/projects";
 import { getPageHero } from "@/lib/data/page-hero";
 
+// Rede de segurança: esta página é estática e só é revalidada sob pedido
+// (revalidatePath nas actions do admin). Se essa revalidação alguma vez falhar
+// em atingir o processo certo em produção (ex: conteúdo editado noutro ambiente
+// que partilha a base de dados), a página nunca fica desatualizada por mais de
+// 1 minuto.
+export const revalidate = 60;
+
 export const metadata: Metadata = {
     title: "Projetos",
     description:
