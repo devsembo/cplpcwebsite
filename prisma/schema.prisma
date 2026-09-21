@@ -393,6 +393,7 @@ model FormandoAccount {
   name         String
   createdAt    DateTime  @default(now())
   lastLoginAt  DateTime?
+  isCompanyManager Boolean @default(false)
 
   sessions FormandoSession[]
 }
