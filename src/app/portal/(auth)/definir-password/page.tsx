@@ -1,7 +1,4 @@
-import type { Metadata } from "next";
-import SetPasswordForm from "./SetPasswordForm";
-
-export const metadata: Metadata = { title: "Definir password — Portal do Formando" };
+import { redirect } from "next/navigation";
 
 export default async function DefinirPasswordPage({
     searchParams,
@@ -9,15 +6,6 @@ export default async function DefinirPasswordPage({
     searchParams: Promise<{ token?: string }>;
 }) {
     const { token } = await searchParams;
-
-    if (!token) {
-        return <p className="text-center text-cplp-grey">Link inválido.</p>;
-    }
-
-    return (
-        <>
-            <h1 className="text-xl font-bold text-cplp-navy mb-6 text-center">Define a tua password</h1>
-            <SetPasswordForm token={token} />
-        </>
-    );
+    const suffix = token ? `?token=${encodeURIComponent(token)}` : "";
+    redirect(`${process.env.ACADEMY_URL}/definir-password${suffix}`);
 }
